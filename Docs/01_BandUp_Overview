@@ -1,0 +1,379 @@
+=========================================================
+BandUp
+Tổng quan sản phẩm (Product Overview)
+=========================================================
+
+Mục đích tài liệu
+---------------------------------------------------------
+
+Đây là tài liệu mô tả tổng quan về sản phẩm BandUp.
+
+Tài liệu này trả lời các câu hỏi:
+
+- BandUp là gì?
+- Vì sao dự án được xây dựng?
+- Sản phẩm hướng đến ai?
+- BandUp giải quyết vấn đề gì?
+- Điểm khác biệt của BandUp là gì?
+- Mục tiêu phát triển trong tương lai là gì?
+
+Tài liệu này không mô tả chi tiết kỹ thuật.
+
+Các nội dung như kiến trúc hệ thống, cơ sở dữ liệu, API, AI Prompt, triển khai hạ tầng... sẽ được trình bày trong các tài liệu kỹ thuật riêng.
+
+
+=========================================================
+1. Tầm nhìn sản phẩm
+=========================================================
+
+BandUp là nền tảng AI hỗ trợ luyện IELTS Writing Task 2 theo hướng đồng hành lâu dài cùng người học.
+
+Mục tiêu của BandUp không chỉ là chấm điểm bài viết bằng AI, mà còn giúp người học:
+
+- Hiểu rõ điểm mạnh và điểm yếu.
+- Nhận biết các lỗi thường gặp.
+- Theo dõi quá trình tiến bộ theo thời gian.
+- Biết nên luyện tập nội dung gì tiếp theo.
+
+Trong tương lai, BandUp hướng tới việc trở thành một công cụ hỗ trợ cho từng cá nhân, đồng thời tạo nên 1 cộng đồng cùng học Ielts để giúp đỡ lẫn nhau thông qua Forum, Kênh chat.
+
+
+=========================================================
+2. Định vị sản phẩm
+=========================================================
+
+BandUp được định vị là:
+-MVP:
+	+ AI Writing Coach.
+	+ Trợ lý luyện IELTS Writing cá nhân.
+	+ Nền tảng theo dõi quá trình học viết.
+-Tương lai:
+	+ Là facebook cho giới học Ielts
+
+BandUp không được định vị là:
+
+- Công cụ chấm điểm IELTS chính thức.
+- Phần mềm thay thế giám khảo IELTS.
+- Công cụ chỉ sửa lỗi ngữ pháp.
+- Chatbot trả lời mọi câu hỏi.
+
+Điểm khác biệt của BandUp nằm ở việc giúp người học cải thiện kỹ năng viết trong dài hạn thay vì chỉ trả về một mức điểm.
+
+
+=========================================================
+3. Đối tượng người dùng
+=========================================================
+
+3.1 Người dùng chính
+
+- Sinh viên đại học.
+- Người tự học IELTS.
+- Người có mục tiêu Band 6.0 - 7.5.
+- Người không có điều kiện học tại các trung tâm lớn.
+
+3.2 Người dùng mở rộng
+
+- Người đang học tại trung tâm.
+- Người cần luyện viết thường xuyên.
+- Cộng đồng học Ielts cùng chia sẻ tài liệu
+
+3.3 Định hướng tương lai
+
+- Giáo viên IELTS.
+- Trung tâm ngoại ngữ.
+- Trường học.
+
+
+=========================================================
+4. Những vấn đề hiện nay
+=========================================================
+
+Qua khảo sát các công cụ hiện có và quá trình tự học IELTS, có thể thấy người học thường gặp các khó khăn sau:
+
+- Chi phí chữa bài viết khá cao.
+- Không biết mình sai ở đâu.
+- Không biết vì sao bị mất điểm.
+- Lặp lại cùng một lỗi trong nhiều bài viết.
+- Không có nơi lưu lại lịch sử lỗi cá nhân.
+- Không theo dõi được sự tiến bộ.
+- Không biết nên luyện tập nội dung gì tiếp theo.
+- Dễ mất động lực vì không nhìn thấy sự cải thiện.
+
+Đây là những vấn đề BandUp hướng tới giải quyết.
+
+
+=========================================================
+5. Giải pháp của BandUp
+=========================================================
+
+BandUp xây dựng một quy trình luyện viết hoàn chỉnh.
+
+Người học
+
+↓
+
+Nhận đề Writing
+
+↓
+
+Viết bài
+
+↓
+
+AI chấm bài
+
+↓
+
+Phân tích lỗi
+
+↓
+
+Lưu lỗi cá nhân
+
+↓
+
+Theo dõi tiến bộ
+
+↓
+
+Đề xuất bài luyện tiếp theo
+
+↓
+
+Luyện tập lại
+
+Thay vì chỉ nhận một mức điểm, người học sẽ có một lộ trình cải thiện rõ ràng sau mỗi bài viết.
+
+
+=========================================================
+6. Giá trị cốt lõi
+=========================================================
+
+BandUp mang lại giá trị thông qua việc kết hợp nhiều chức năng thành một trải nghiệm học tập thống nhất.
+
+Các giá trị chính gồm:
+
+- Chấm bài bằng AI.
+- Phân tích lỗi chi tiết.
+- Theo dõi tiến bộ.
+- Lưu lịch sử bài viết.
+- Gợi ý bài mẫu.
+- Gợi ý từ vựng phù hợp.
+- Đề xuất kế hoạch luyện tập.
+
+Các giá trị phụ (phát triển trong tương lai) gồm:
+- Công cụ hỗ trợ học kiến thức mới (học từ mới, ngữ pháp mới,...).
+- Forum/NewsFeed cho mọi người chia sẻ kiến thức, thông tin.
+- Tạo lớp học để giáo viên quản lý học sinh tốt hơn.
+
+=========================================================
+7. Điểm khác biệt so với các công cụ hiện nay
+=========================================================
+
+Phần lớn các công cụ hiện nay chỉ tập trung vào việc chấm bài.
+
+Quy trình thông thường:
+
+Viết bài
+
+↓
+
+AI chấm
+
+↓
+
+Kết thúc.
+
+BandUp hướng tới quy trình:
+
+Viết bài
+
+↓
+
+AI chấm
+
+↓
+
+Giải thích
+
+↓
+
+Lưu lỗi
+
+↓
+
+Theo dõi tiến bộ
+
+↓
+
+Đề xuất luyện tập
+
+↓
+
+Làm lại
+
+↓
+
+So sánh kết quả
+
+Mục tiêu cuối cùng là giúp người học tiến bộ sau nhiều lần luyện
+tập, thay vì chỉ biết điểm của từng bài riêng lẻ.
+
+
+=========================================================
+8. Mô hình kinh doanh
+=========================================================
+
+BandUp dự kiến dùng BandUp credit làm tiền tệ chung trong hệ thống.
+10 Bandup credit = 1 lần chấm
+Gói miễn phí:
+- Được cấp 1 lượng credit giới hạn đủ để chấm bài và trải nghiệm tính năng cơ bản.
+- Chức năng cơ bản.
+
+Gói trả phí (Plus - 50k vnđ (1 tháng) hoặc 550k vnd (1 năm)):
+- Cung cấp 1 lượng đủ lớn để dùng khá thoải mái trong 1 tháng (khoảng 400 credit) hoặc 1 năm (5000 credit).
+- Báo cáo đầy đủ.
+- Theo dõi tiến bộ.
+- Mistake Bank.
+- Model Essay.
+- Các tính năng AI nâng cao.
+
+Gói gia hạn (tính theo credit):
+- 10 credit = 1k5 vnđ
+
+Trong tương lai có thể mở rộng sang:
+- Gói Plus.
+- Gói giáo viên.
+- Gói trung tâm.
+
+
+=========================================================
+9. Phạm vi sản phẩm
+=========================================================
+
+Phiên bản đầu tiên tập trung vào:
+
+- Đăng ký và đăng nhập.
+- Writing Room.
+- AI Grading.
+- Lịch sử bài viết.
+- Mistake Bank.
+- Progress Dashboard.
+- Subscription.
+
+Các chức năng dự kiến phát triển sau:
+
+- Teacher Classroom.
+- Vocabulary Learning.
+- Flashcards.
+- Ứng dụng di động.
+
+
+=========================================================
+10. Những nội dung chưa nằm trong MVP
+=========================================================
+
+Để tập trung vào chất lượng sản phẩm cốt lõi, phiên bản đầu tiên
+sẽ chưa phát triển:
+
+- Speaking.
+- Listening.
+- Reading.
+- AI Voice.
+- Diễn đàn.
+- Gamification.
+- Flashcards.
+- Giáo viên quản lý lớp học.
+
+Các chức năng này sẽ được xem xét sau khi sản phẩm đã có người
+dùng ổn định.
+
+
+=========================================================
+11. Nguyên tắc phát triển sản phẩm
+=========================================================
+
+BandUp được xây dựng dựa trên các nguyên tắc sau:
+
+- Luôn đặt việc học lên trước.
+- Mọi chức năng đều phải giúp người học tiến bộ.
+- Đơn giản nhưng hiệu quả.
+- Trải nghiệm người dùng được ưu tiên.
+- Phản hồi phải nhất quán.
+- Không hứa hẹn những điều AI không thể đảm bảo.
+- Luôn minh bạch về giới hạn của hệ thống.
+
+
+=========================================================
+12. Chỉ số đánh giá thành công
+=========================================================
+
+Sản phẩm được đánh giá thành công dựa trên:
+
+Về người dùng
+
+- Số lượng người đăng ký.
+- Số lượng người dùng hoạt động.
+- Tỷ lệ quay lại.
+
+Về học tập
+
+- Số bài viết hoàn thành.
+- Mức cải thiện điểm số.
+- Số lỗi lặp lại giảm theo thời gian.
+
+Về kinh doanh
+
+- Số lượng người dùng trả phí.
+- Doanh thu.
+- Chi phí AI trên mỗi bài viết.
+
+
+=========================================================
+13. Định hướng phát triển
+=========================================================
+
+BandUp sẽ phát triển theo từng giai đoạn.
+
+Giai đoạn 1
+
+Xây dựng AI Writing Coach ổn định.
+
+Giai đoạn 2
+
+Hoàn thiện trải nghiệm học tập.
+
+Giai đoạn 3
+
+Triển khai hệ thống trả phí.
+
+Giai đoạn 4 - Sau bản MVP
+
+Phát triển Teacher Classroom.
+
+Giai đoạn 5
+
+Mở rộng thành hệ sinh thái học tiếng Anh ứng dụng AI.
+
+
+=========================================================
+14. Triết lý sản phẩm
+=========================================================
+
+BandUp được xây dựng dựa trên một quan điểm đơn giản:
+
+Người học không tiến bộ chỉ vì biết điểm số.
+
+Người học tiến bộ khi:
+
+- Hiểu mình sai ở đâu.
+- Biết cách sửa lỗi.
+- Luyện tập đúng trọng tâm.
+- Theo dõi được sự cải thiện của bản thân.
+
+Mọi quyết định phát triển sản phẩm đều phải hướng tới mục tiêu
+đó.
+
+=========================================================
+Kết thúc tài liệu
+=========================================================

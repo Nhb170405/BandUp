@@ -1,0 +1,1247 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\usepackage{geometry}
+\geometry{top=2.15cm,bottom=2.15cm,left=2.2cm,right=2.2cm}
+\usepackage{xcolor}
+\definecolor{BandBlue}{HTML}{17365D}
+\definecolor{BandMidBlue}{HTML}{1F4E78}
+\definecolor{BandLight}{HTML}{F3F7FA}
+\definecolor{BandGray}{HTML}{5F6B76}
+\definecolor{BandGreen}{HTML}{2E7D32}
+\definecolor{BandOrange}{HTML}{B85C00}
+\definecolor{BandRed}{HTML}{A61B1B}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Large\bfseries\color{BandBlue}}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{BandMidBlue}}{\thesubsection}{0.55em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{BandGray}}{\thesubsubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.35em}{0.55em}
+\titlespacing*{\subsection}{0pt}{1em}{0.4em}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small BandUp - Operations}
+\fancyhead[R]{\sffamily\small Phiên bản 1.0}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{15pt}
+\usepackage{setspace}
+\setstretch{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.42em}
+\usepackage{microtype}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.45em,itemsep=0.2em,topsep=0.3em}
+\setlist[enumerate]{leftmargin=1.65em,itemsep=0.25em,topsep=0.3em}
+\usepackage{longtable,booktabs,array,tabularx}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\tabcolsep}{5pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage[most]{tcolorbox}
+\newtcolorbox{flowbox}[1][]{
+  enhanced,
+  breakable,
+  colback=BandLight,
+  colframe=BandMidBlue,
+  boxrule=0.6pt,
+  arc=2mm,
+  left=3mm,right=3mm,top=2mm,bottom=2mm,
+  fontupper=\sffamily,
+  #1
+}
+\newtcolorbox{warningbox}[1][]{
+  enhanced,
+  breakable,
+  colback=orange!5,
+  colframe=BandOrange,
+  boxrule=0.7pt,
+  arc=2mm,
+  left=3mm,right=3mm,top=2mm,bottom=2mm,
+  #1
+}
+\newtcolorbox{criticalbox}[1][]{
+  enhanced,
+  breakable,
+  colback=red!4,
+  colframe=BandRed,
+  boxrule=0.7pt,
+  arc=2mm,
+  left=3mm,right=3mm,top=2mm,bottom=2mm,
+  #1
+}
+\newtcolorbox{successbox}[1][]{
+  enhanced,
+  breakable,
+  colback=green!4,
+  colframe=BandGreen,
+  boxrule=0.7pt,
+  arc=2mm,
+  left=3mm,right=3mm,top=2mm,bottom=2mm,
+  #1
+}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=BandBlue,
+  urlcolor=BandMidBlue,
+  citecolor=BandBlue,
+  pdftitle={BandUp - 06 Operations},
+  pdfauthor={BandUp Project}
+}
+\usepackage{xurl}
+\urlstyle{same}
+\usepackage{bookmark}
+\usepackage{amsmath,amssymb}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\arrow}{\ensuremath{\rightarrow}}
+\emergencystretch=3em
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.3cm}
+{\sffamily\fontsize{34}{40}\selectfont\bfseries\color{BandBlue} BANDUP\par}
+\vspace{0.55cm}
+{\sffamily\fontsize{22}{28}\selectfont\bfseries 06 - OPERATIONS\par}
+\vspace{0.25cm}
+{\sffamily\large Triển khai, vận hành, giám sát và xử lý sự cố\par}
+\vfill
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{>{\sffamily\bfseries}r l}
+Phiên bản: & 1.0 \\
+Trạng thái: & Baseline \\
+Phạm vi: & Staging, Production và Early Operations \\
+Hạ tầng ban đầu: & VPS + Docker Compose \\
+Đối tượng: & Solo developer / nhóm vận hành nhỏ
+\end{tabular}
+\end{center}
+\vspace{1.2cm}
+{\sffamily\itshape BandUp - AI Writing Coach cho IELTS Writing Task 2\par}
+\vspace*{1.1cm}
+\end{titlepage}
+
+\section*{Thông tin tài liệu}
+\addcontentsline{toc}{section}{Thông tin tài liệu}
+\begin{longtable}{L{0.28\textwidth}L{0.66\textwidth}}
+\toprule
+\textbf{Thuộc tính} & \textbf{Nội dung} \\
+\midrule
+Tên tài liệu & 06\_Operations \\
+Phiên bản & 1.0 \\
+Mục đích & Quy định cách triển khai, vận hành, giám sát, sao lưu, khôi phục và xử lý sự cố cho BandUp sau khi hệ thống được đưa lên VPS. \\
+Đối tượng sử dụng & Product Owner, developer, DevOps/operations, admin có quyền vận hành, người xử lý support và incident. \\
+Tài liệu đầu vào & 01\_Product\_Overview, 02\_Product\_Requirements, 03\_UI\_UX\_Design, 04\_System\_Design và 05\_Development\_Roadmap. \\
+Phạm vi triển khai & Development, Staging, Production; Web, API, Worker, Database, Hangfire, OpenAI, payOS và storage. \\
+Ngoài phạm vi & Chi tiết code, test case cấp thấp, thiết kế UI và hợp đồng pháp lý chính thức. \\
+\bottomrule
+\end{longtable}
+
+\begin{flowbox}
+\textbf{Câu hỏi trung tâm:} Sau khi BandUp được đưa lên VPS, làm thế nào để hệ thống chạy ổn định, bảo mật, không mất dữ liệu, không phát sinh chi phí AI bất thường và có thể khôi phục khi xảy ra sự cố?
+\end{flowbox}
+
+\tableofcontents
+\clearpage
+
+\section{Mục đích và phạm vi}
+
+Tài liệu Operations chuyển thiết kế kỹ thuật thành quy trình vận hành có thể thực thi. Nội dung bao gồm:
+
+\begin{itemize}
+  \item Mô hình môi trường Development, Staging và Production.
+  \item Kiến trúc triển khai trên VPS, Docker Compose và reverse proxy.
+  \item Quản lý domain, HTTPS, configuration và secret.
+  \item CI/CD, release, migration, smoke test và rollback.
+  \item Logging, monitoring, metrics và alerting.
+  \item Vận hành Hangfire, OpenAI, BandUp Credit và payOS.
+  \item Backup, restore, data retention và account deletion.
+  \item Security operations, access control và patch management.
+  \item Incident response, runbook và postmortem.
+  \item Checklist go-live và lịch bảo trì định kỳ.
+\end{itemize}
+
+Tài liệu không thay thế System Design, Test Plan hoặc tài liệu pháp lý. Khi chính sách pháp luật, điều khoản của nhà cung cấp hoặc mô hình hạ tầng thay đổi, phần liên quan phải được rà soát và cập nhật.
+
+\section{Mục tiêu vận hành}
+
+\begin{longtable}{L{0.08\textwidth}L{0.84\textwidth}}
+\toprule
+\textbf{ID} & \textbf{Mục tiêu} \\
+\midrule
+OPS-01 & Triển khai và cập nhật ứng dụng mà không làm mất dữ liệu. \\
+OPS-02 & Có thể rollback application khi release mới gây lỗi. \\
+OPS-03 & User không mất bài viết đã autosave trong điều kiện vận hành bình thường. \\
+OPS-04 & Credit không bị cộng sai, trừ sai hoặc xử lý trùng. \\
+OPS-05 & Payment không được cộng credit hai lần khi webhook được gửi lặp. \\
+OPS-06 & AI lỗi không làm user mất credit. \\
+OPS-07 & Phát hiện sớm chi phí OpenAI tăng bất thường. \\
+OPS-08 & Phát hiện queue nghẽn, worker dừng hoặc job bị kẹt. \\
+OPS-09 & Có ít nhất một bản backup nằm ngoài VPS chính. \\
+OPS-10 & Quy trình restore phải được kiểm thử định kỳ. \\
+OPS-11 & Secret không nằm trong source code, frontend hoặc log. \\
+OPS-12 & Admin action nhạy cảm phải có audit. \\
+OPS-13 & Dữ liệu hết thời hạn được xóa tự động theo retention policy. \\
+OPS-14 & Có runbook cho các sự cố phổ biến và nghiêm trọng. \\
+OPS-15 & Hệ thống có thể được vận hành bởi một người trong giai đoạn đầu nhưng vẫn có khả năng truy vết. \\
+\bottomrule
+\end{longtable}
+
+\section{Nguyên tắc vận hành}
+
+\subsection{Tự động hóa thao tác lặp lại}
+
+Các công việc nên được tự động hóa tối đa:
+
+\begin{itemize}
+  \item Build, lint và automated test.
+  \item Build Docker image và deploy Staging.
+  \item Database backup và kiểm tra trạng thái backup.
+  \item Log cleanup, draft cleanup và attachment cleanup.
+  \item Payment reconciliation và credit reconciliation.
+  \item Tổng hợp usage/cost và kiểm tra budget.
+  \item Health check và alerting.
+\end{itemize}
+
+\subsection{Không thử nghiệm trực tiếp trên Production}
+
+\begin{flowbox}
+Development \arrow Pull Request \arrow CI \arrow Staging \arrow Smoke Test \arrow Phê duyệt \arrow Production
+\end{flowbox}
+
+Production không được dùng để thử migration, prompt mới, payment flow mới hoặc dependency mới chưa được kiểm tra trên Staging.
+
+\subsection{Backup chỉ có giá trị khi restore được}
+
+Một file backup tồn tại không đồng nghĩa hệ thống có thể phục hồi. Restore test phải kiểm tra ít nhất: user, submission, assessment, payment, credit ledger và migration state.
+
+\subsection{Truy vết là yêu cầu bắt buộc}
+
+Mỗi sự cố quan trọng phải xác định được các thông tin khi phù hợp:
+
+\begin{itemize}
+  \item Trace ID, User ID, Submission ID, Payment Order ID và Job ID.
+  \item Phiên bản application, environment và thời điểm.
+  \item Admin đã thao tác, lý do và giá trị trước/sau.
+\end{itemize}
+
+\subsection{Ưu tiên phục hồi luồng cốt lõi}
+
+\begin{flowbox}
+Authentication \arrow Writing Draft \arrow Submission \arrow AI Grading \arrow Credit \arrow Payment \arrow Result \arrow Progress/Analytics
+\end{flowbox}
+
+Khi hạ tầng bị giới hạn, có thể tạm dừng analytics, email hoặc aggregation để giữ luồng viết, chấm, credit và payment an toàn.
+
+\section{Mô hình môi trường}
+
+\begin{longtable}{L{0.18\textwidth}L{0.27\textwidth}L{0.24\textwidth}L{0.23\textwidth}}
+\toprule
+\textbf{Môi trường} & \textbf{Mục đích} & \textbf{Dữ liệu} & \textbf{Dịch vụ ngoài} \\
+\midrule
+Development & Phát triển local, debug, unit/integration test & Dữ liệu giả hoặc seed & OpenAI key dev giới hạn; fake payment; local storage \\
+Staging & Kiểm thử gần Production và smoke test release & Dữ liệu test riêng & Google callback riêng; payOS test; OpenAI key riêng \\
+Production & Phục vụ user thật và payment thật & Dữ liệu thật & Production credentials, domain chính và backup thật \\
+\bottomrule
+\end{longtable}
+
+\subsection{Development}
+
+Môi trường local chạy bằng Docker Compose hoặc các process riêng:
+
+\begin{itemize}
+  \item React Web, ASP.NET Core API và BandUp Worker.
+  \item Cùng loại database với Production.
+  \item Hangfire persistent storage.
+  \item Local Object Storage và Development Email Sender.
+  \item OpenAI key dev có budget thấp và dữ liệu test.
+\end{itemize}
+
+Không sử dụng payment production trong Development.
+
+\subsection{Staging}
+
+Staging phải gần Production ở các yếu tố ảnh hưởng hành vi:
+
+\begin{itemize}
+  \item Docker image cùng build artifact với release candidate.
+  \item Cùng loại database, reverse proxy, HTTPS và migration flow.
+  \item Google OAuth client/callback riêng.
+  \item payOS test/sandbox hoặc quy trình test được kiểm soát.
+  \item Không sao chép essay hoặc thông tin cá nhân Production sang Staging nếu chưa anonymize.
+\end{itemize}
+
+\subsection{Production}
+
+Production sử dụng credentials, domain, database, storage và support channel riêng. Không dùng user test hoặc seed payment giả trong Production.
+
+\section{Kiến trúc triển khai VPS}
+
+\subsection{Topology ban đầu}
+
+\begin{flowbox}
+Internet
+
+\arrow Caddy hoặc Nginx
+
+\arrow BandUp Web / BandUp API / Admin Portal
+
+\arrow PostgreSQL hoặc database đã chốt
+
+\arrow Hangfire persistent storage
+
+BandUp Worker xử lý: grading, notification, payment reconciliation, cleanup và data deletion.
+\end{flowbox}
+
+\subsection{Docker Compose services}
+
+\begin{longtable}{L{0.25\textwidth}L{0.30\textwidth}L{0.37\textwidth}}
+\toprule
+\textbf{Service} & \textbf{Vai trò} & \textbf{Yêu cầu vận hành} \\
+\midrule
+reverse-proxy & HTTPS, routing, security header, access log & Chỉ mở port 80/443; cấu hình redirect HTTPS \\
+bandup-web & Static web bundle & Stateless; có thể thay image không ảnh hưởng dữ liệu \\
+bandup-api & HTTP API, auth, business logic & Health check; không chạy job dài trong request \\
+bandup-worker & Hangfire Server và recurring jobs & Có restart policy; worker count cấu hình được \\
+database & Dữ liệu nghiệp vụ và Hangfire storage & Persistent volume, backup, không public Internet \\
+\bottomrule
+\end{longtable}
+
+Các service có thể bổ sung khi cần: Redis, monitoring agent, log collector và external object storage gateway.
+
+\subsection{Persistent volumes}
+
+Cần persist:
+
+\begin{itemize}
+  \item Database data.
+  \item ASP.NET Data Protection key ring.
+  \item File storage nếu dùng VPS volume.
+  \item Reverse proxy certificate/configuration khi cần.
+  \item Backup staging area tạm thời.
+\end{itemize}
+
+\begin{criticalbox}
+Không lưu dữ liệu dài hạn trong filesystem nội bộ của container nếu không mount volume. Container có thể bị xóa và tạo lại trong quá trình deploy.
+\end{criticalbox}
+
+\section{Domain, DNS và HTTPS}
+
+Đề xuất same-origin:
+
+\begin{flowbox}
+\code{https://bandup.vn}
+
+\code{https://bandup.vn/api/...}
+
+\code{https://bandup.vn/admin}
+\end{flowbox}
+
+Lợi ích: cookie dễ cấu hình, giảm CORS, Google Login đơn giản hơn và CSRF rõ ràng hơn.
+
+Reverse proxy chịu trách nhiệm:
+
+\begin{itemize}
+  \item HTTPS termination và redirect HTTP sang HTTPS.
+  \item Routing đến Web/API.
+  \item Request size limit và timeout hợp lý.
+  \item Security headers và compression phù hợp.
+  \item Access log đã hạn chế dữ liệu nhạy cảm.
+\end{itemize}
+
+Production bắt buộc HTTPS. Database, Hangfire Dashboard và internal metrics không được public trực tiếp.
+
+\section{Quản lý configuration và secret}
+
+\subsection{Nhóm secret}
+
+\begin{itemize}
+  \item Database connection string.
+  \item Google Client Secret.
+  \item OpenAI API key.
+  \item payOS credentials và webhook checksum/signature key.
+  \item Email và object storage credentials.
+  \item Encryption key hoặc signing key nội bộ nếu có.
+\end{itemize}
+
+Secret không được commit, gửi xuống frontend, hiển thị trong Admin Portal hoặc ghi vào log.
+
+\subsection{Cách lưu}
+
+Giai đoạn VPS có thể dùng:
+
+\begin{itemize}
+  \item Environment variables.
+  \item Docker secrets nếu phù hợp.
+  \item File \code{.env} chỉ tồn tại trên server, không commit và được giới hạn permission.
+  \item Secret manager khi chuyển sang cloud/managed infrastructure.
+\end{itemize}
+
+\subsection{Business settings}
+
+Các setting có thể lưu trong database và quản lý theo permission:
+
+\begin{itemize}
+  \item \code{MaxEssayWords}, \code{MinEssayWords}.
+  \item \code{CreditCostPerGrading}.
+  \item \code{AiGradingEnabled}, \code{FreeGradingEnabled}.
+  \item \code{DailyAiBudgetLimit}, \code{MaxConcurrentAiJobs}.
+  \item \code{MaintenanceMode}.
+\end{itemize}
+
+Secret và business setting phải được tách biệt.
+
+\subsection{Secret rotation}
+
+Phải có runbook thay OpenAI key, Google secret, payOS credential và database password. Việc thay secret không được yêu cầu chỉnh source code; có thể cần restart service có kiểm soát.
+
+\section{CI/CD}
+
+\subsection{Pull Request pipeline}
+
+\begin{flowbox}
+Restore Dependencies \arrow Build Backend \arrow Build Frontend \arrow Lint \arrow Unit Test \arrow Integration Test \arrow Migration Check \arrow Docker Build
+\end{flowbox}
+
+Không merge khi pipeline thất bại.
+
+\subsection{Staging deployment}
+
+\begin{enumerate}
+  \item Build image có version và push vào registry.
+  \item Backup Staging nếu migration có rủi ro.
+  \item Apply migration.
+  \item Deploy Web/API/Worker.
+  \item Chạy readiness check và smoke test.
+  \item Ghi lại release candidate và kết quả test.
+\end{enumerate}
+
+\subsection{Production deployment}
+
+\begin{enumerate}
+  \item Tạo release tag và release notes.
+  \item Build artifact/image cố định.
+  \item Backup Production database.
+  \item Apply migration tương thích ngược.
+  \item Deploy services theo thứ tự an toàn.
+  \item Chạy readiness và smoke test.
+  \item Theo dõi error rate, queue, payment và AI metrics sau release.
+\end{enumerate}
+
+Không dùng tag \code{latest} làm nguồn duy nhất. Dùng version cụ thể như \code{bandup-api:1.0.3}.
+
+\section{Release management}
+
+Mỗi release phải ghi:
+
+\begin{itemize}
+  \item Version, ngày phát hành và người triển khai.
+  \item Thay đổi chức năng và bug fix.
+  \item Migration/configuration mới.
+  \item Risk và rollback procedure.
+  \item Kết quả smoke test và trạng thái theo dõi sau deploy.
+\end{itemize}
+
+Có thể sử dụng Semantic Versioning: \code{MAJOR.MINOR.PATCH}.
+
+\begin{longtable}{L{0.20\textwidth}L{0.34\textwidth}L{0.38\textwidth}}
+\toprule
+\textbf{Loại release} & \textbf{Ví dụ} & \textbf{Yêu cầu} \\
+\midrule
+Patch & Fix UI, validation, lỗi nhỏ & CI, Staging smoke test, rollback image \\
+Minor & Tính năng mới tương thích & Integration/E2E test, migration review \\
+Major/Risk cao & Auth, payment, credit, grading schema, retention & Kế hoạch rollout, backup, rollback và theo dõi tăng cường \\
+\bottomrule
+\end{longtable}
+
+\section{Rollback}
+
+\subsection{Application rollback}
+
+Deploy lại image version trước nếu application release gây lỗi nhưng schema vẫn tương thích.
+
+\subsection{Database rollback}
+
+Ưu tiên Expand-and-Contract:
+
+\begin{flowbox}
+Thêm cột/bảng mới \arrow Deploy code hỗ trợ cũ và mới \arrow Chuyển dữ liệu \arrow Xác minh \arrow Xóa cấu trúc cũ ở release sau
+\end{flowbox}
+
+Không xóa cột cũ ngay trong cùng release nếu code cũ cần cột đó để rollback.
+
+\subsection{Điều kiện rollback}
+
+Rollback khi có một trong các tình huống:
+
+\begin{itemize}
+  \item Login lỗi diện rộng.
+  \item User không truy cập được draft hoặc submission.
+  \item Payment/credit bị xử lý sai.
+  \item Error rate tăng mạnh hoặc database lock nghiêm trọng.
+  \item AI call tăng bất thường do lỗi release.
+  \item Migration làm hỏng hoặc mất dữ liệu.
+\end{itemize}
+
+\section{Database migration}
+
+\begin{itemize}
+  \item Migration nằm trong source control.
+  \item Không chỉnh schema Production thủ công nếu không có change record.
+  \item Backup trước migration quan trọng.
+  \item Chạy thử migration trên Staging với dữ liệu đủ lớn.
+  \item Đánh giá lock, duration và khả năng tương thích ngược.
+  \item Không seed user/payment/submission giả vào Production.
+\end{itemize}
+
+Có thể seed Roles, Permissions, Error Taxonomies, App Settings và Credit Packages mặc định.
+
+Migration log nên có version, release, thời điểm, trạng thái và người triển khai.
+
+\section{Health checks}
+
+\begin{longtable}{L{0.22\textwidth}L{0.30\textwidth}L{0.40\textwidth}}
+\toprule
+\textbf{Endpoint} & \textbf{Mục đích} & \textbf{Kiểm tra} \\
+\midrule
+\code{/health/live} & Process còn sống & Không cần gọi database hoặc dịch vụ ngoài \\
+\code{/health/ready} & Có thể nhận traffic & Database, Hangfire storage, configuration bắt buộc, storage nếu là dependency cứng \\
+\bottomrule
+\end{longtable}
+
+Không gọi OpenAI hoặc payOS trong mọi health check vì làm tăng phụ thuộc, quota và cảnh báo giả. Thay vào đó, theo dõi chúng bằng metrics/probe riêng có tần suất thấp.
+
+\section{Logging}
+
+\subsection{Structured fields}
+
+Log nên chứa khi phù hợp:
+
+\begin{flowbox}
+Timestamp - Level - TraceId - UserId - SubmissionId - PaymentOrderId - JobId - Module - EventName - ElapsedMs - ApplicationVersion - Environment
+\end{flowbox}
+
+\subsection{Dữ liệu không được log}
+
+\begin{itemize}
+  \item Cookie, Google token, API key và password.
+  \item payOS secret hoặc database credential.
+  \item Toàn bộ essay và raw AI prompt/response theo mặc định.
+  \item Dữ liệu cá nhân không cần thiết cho chẩn đoán.
+\end{itemize}
+
+\subsection{Log level}
+
+\begin{longtable}{L{0.20\textwidth}L{0.72\textwidth}}
+\toprule
+\textbf{Level} & \textbf{Cách dùng} \\
+\midrule
+Information & Hoạt động bình thường quan trọng: submission accepted, job completed, payment confirmed \\
+Warning & Bất thường có thể tự phục hồi: retry, queue chậm, webhook đến trễ \\
+Error & Request/job thất bại cần điều tra \\
+Critical & Nguy cơ mất dịch vụ, dữ liệu, tiền hoặc secret \\
+\bottomrule
+\end{longtable}
+
+\section{Audit logging}
+
+Audit dùng để trả lời ai đã làm gì, với tài nguyên nào và vì sao. Các hành động bắt buộc audit:
+
+\begin{itemize}
+  \item Thay đổi role/permission, suspend user và revoke session.
+  \item Điều chỉnh/refund credit và xử lý payment/refund.
+  \item Publish/unpublish prompt và chỉnh taxonomy.
+  \item Thay đổi App Settings, budget, maintenance hoặc kill switch.
+  \item Truy cập nội dung essay của user cho mục đích hỗ trợ.
+\end{itemize}
+
+Audit record đề xuất:
+
+\begin{flowbox}
+ActorUserId - Action - ResourceType - ResourceId - Reason - OldValue - NewValue - IpAddress - UserAgent - CreatedAt
+\end{flowbox}
+
+Admin thông thường không được sửa hoặc xóa audit log.
+
+\section{Metrics và dashboards}
+
+\subsection{API metrics}
+
+Request count, latency, error rate, status distribution và active requests.
+
+\subsection{Database metrics}
+
+Connection count, slow query, lock, database size, disk usage và backup status.
+
+\subsection{Hangfire metrics}
+
+Enqueued, Processing, Scheduled, Failed, Retry count, queue waiting time, processing duration và worker count.
+
+\subsection{OpenAI metrics}
+
+Calls, success/failure, input/output token, cost, latency, retry, structured-output validation failure và cost per essay.
+
+\subsection{Payment/Credit metrics}
+
+Payment created/paid/failed/expired, webhook error, reconciliation failure, credit grant failure, refund, reservation quá hạn và ledger mismatch.
+
+\subsection{Product metrics}
+
+New user, active user, submission, completed grading, result viewed, payment conversion, support ticket và account deletion.
+
+\subsection{Dashboard tối thiểu}
+
+\begin{longtable}{L{0.24\textwidth}L{0.68\textwidth}}
+\toprule
+\textbf{Dashboard} & \textbf{Nội dung} \\
+\midrule
+System & Availability, error rate, CPU, RAM, disk, database và queue \\
+AI & Calls, token, cost, latency, retry, budget và failure reason \\
+Payment & Success, pending, webhook error, credit grant và refund \\
+Product & User, submission, retention, conversion và cost per active user \\
+\bottomrule
+\end{longtable}
+
+Dashboard phải giúp trả lời: hệ thống đang có vấn đề ở đâu và có cần hành động ngay không?
+
+\section{Alerting}
+
+\begin{longtable}{L{0.45\textwidth}L{0.18\textwidth}L{0.27\textwidth}}
+\toprule
+\textbf{Cảnh báo} & \textbf{Mức độ} & \textbf{Hành động ban đầu} \\
+\midrule
+API hoặc database không hoạt động & Critical & Maintenance/containment, kiểm tra hạ tầng \\
+Payment paid nhưng credit không cộng & Critical & Tạm dừng payment grant nếu diện rộng, reconciliation \\
+Credit ledger mất cân bằng & Critical & Khóa adjustment tự động, điều tra transaction \\
+Disk gần đầy & High/Critical & Cleanup log, mở rộng disk, bảo vệ database \\
+AI cost vượt budget & High & Giảm concurrency, tắt free grading hoặc kill switch \\
+AI failure rate tăng mạnh & High & Circuit breaker, kiểm tra provider/key \\
+Queue waiting quá lâu & High & Kiểm tra worker, provider và database \\
+Backup thất bại & High & Chạy lại, xác minh offsite target \\
+Webhook payOS lỗi liên tục & High & Kiểm tra signature/config, reconciliation \\
+Support ticket tồn lâu & Warning & Phân công và xử lý backlog \\
+\bottomrule
+\end{longtable}
+
+Kênh cảnh báo ban đầu: email và in-app admin notification; có thể bổ sung Telegram/Slack/Discord.
+
+\section{Vận hành Hangfire}
+
+\subsection{Queues và concurrency}
+
+\begin{longtable}{L{0.24\textwidth}L{0.22\textwidth}L{0.46\textwidth}}
+\toprule
+\textbf{Queue} & \textbf{Concurrency ban đầu} & \textbf{Loại job} \\
+\midrule
+grading & 2-3 & OpenAI grading và corrective retry \\
+notifications & 1-2 & In-app notification và email \\
+payments & 1 & Reconciliation và payment recovery \\
+maintenance & 1 & Cleanup, aggregation và data deletion \\
+\bottomrule
+\end{longtable}
+
+Concurrency là configuration, không hard-code. Tăng worker phải dựa trên OpenAI rate limit, cost, database load và queue latency.
+
+\subsection{Dashboard}
+
+Hangfire Dashboard phải:
+
+\begin{itemize}
+  \item Không public; chỉ Operations/Super Admin.
+  \item Có thể giới hạn IP.
+  \item Không chứa essay hoặc secret trong job arguments.
+  \item Job chỉ nhận Resource ID như \code{SubmissionId}.
+\end{itemize}
+
+\subsection{Recovery jobs}
+
+Recurring job kiểm tra:
+
+\begin{itemize}
+  \item Submission \code{QUEUED} quá lâu nhưng chưa có job.
+  \item Submission \code{PROCESSING} nhưng worker/job không còn active.
+  \item Payment \code{PENDING} quá thời gian.
+  \item Data deletion hoặc cleanup job chưa hoàn thành.
+\end{itemize}
+
+\subsection{Retry}
+
+Hangfire không retry mù tất cả exception. Grading service phân loại:
+
+\begin{longtable}{L{0.42\textwidth}L{0.22\textwidth}L{0.26\textwidth}}
+\toprule
+\textbf{Lỗi} & \textbf{Retry} & \textbf{Xử lý} \\
+\midrule
+Timeout, network, 429, 5xx & Có & Backoff và giới hạn attempt \\
+Structured output sai & Có giới hạn & Corrective retry \\
+400 do request sai & Không & Fail và cảnh báo cấu hình \\
+401/403 do key/quyền & Không & Critical alert \\
+Budget exceeded / grading disabled & Không & Giữ hoặc release credit theo policy \\
+\bottomrule
+\end{longtable}
+
+\section{Vận hành OpenAI}
+
+\subsection{Budget controls}
+
+Các setting bắt buộc:
+
+\begin{itemize}
+  \item \code{DailyAiBudgetLimit} và monthly warning.
+  \item \code{MaxConcurrentAiJobs}.
+  \item \code{MaxEssayWords} và \code{CreditCostPerGrading}.
+  \item \code{AiGradingEnabled}, \code{FreeGradingEnabled}.
+\end{itemize}
+
+\begin{longtable}{L{0.20\textwidth}L{0.72\textwidth}}
+\toprule
+\textbf{Ngưỡng} & \textbf{Hành động đề xuất} \\
+\midrule
+70\% budget & Warning và kiểm tra xu hướng \\
+90\% budget & High alert, xem xét giảm concurrency/tắt free grading \\
+100\% budget & Hard limit theo policy; ưu tiên bảo vệ paid user hoặc tạm dừng grading \\
+\bottomrule
+\end{longtable}
+
+\subsection{Provider incident}
+
+\begin{flowbox}
+Failure tăng \arrow Circuit Breaker OPEN \arrow Job reschedule/queue \arrow Credit vẫn RESERVED \arrow Thông báo user/admin \arrow HALF-OPEN test \arrow Phục hồi hoặc tiếp tục dừng
+\end{flowbox}
+
+Nếu sự cố kéo dài, có thể tắt grading, release reservation phù hợp và đăng thông báo hệ thống.
+
+\subsection{Prompt deployment}
+
+\begin{flowbox}
+Tạo Prompt Version \arrow Benchmark \arrow Test Staging \arrow Activate \arrow Theo dõi \arrow Rollback Prompt nếu cần
+\end{flowbox}
+
+Không ghi đè prompt production mà không có version và audit.
+
+\subsection{AI quality monitoring}
+
+Theo dõi JSON validity, điểm bất thường, feedback rỗng, output quá dài, error code lạ, quality dispute và re-grade rate.
+
+\section{Vận hành BandUp Credit}
+
+\subsection{Ledger là nguồn dữ liệu chính}
+
+Không sửa trực tiếp balance. Mọi thay đổi phải tạo Credit Transaction:
+
+\begin{flowbox}
+PURCHASE - BONUS - RESERVE - CONSUME - RELEASE - REFUND - ADMIN\_ADJUSTMENT - EXPIRATION
+\end{flowbox}
+
+\subsection{Credit reconciliation}
+
+Recurring job kiểm tra:
+
+\begin{itemize}
+  \item Wallet balance bằng tổng ledger hợp lệ.
+  \item Reservation quá hạn.
+  \item Submission completed nhưng chưa consume.
+  \item Submission failed nhưng chưa release.
+  \item Payment paid nhưng chưa grant credit.
+  \item Transaction hoặc grant bị trùng.
+\end{itemize}
+
+\subsection{Admin adjustment}
+
+Admin cần permission, reason, reference và audit. Admin gọi Credit Service tạo transaction; không sửa cột balance bằng SQL hoặc form trực tiếp.
+
+\section{Vận hành payOS}
+
+\subsection{Webhook processing}
+
+Webhook handler phải:
+
+\begin{enumerate}
+  \item Xác minh signature/checksum.
+  \item Kiểm tra order, amount và trạng thái.
+  \item Kiểm tra idempotency.
+  \item Lưu webhook event.
+  \item Chuyển payment state.
+  \item Gọi Credit Service để grant đúng một lần.
+\end{enumerate}
+
+Không cộng credit dựa trên return URL, frontend báo thành công hoặc screenshot.
+
+\subsection{Payment reconciliation}
+
+Job định kỳ kiểm tra order pending quá lâu, webhook chưa tới và payment paid nhưng credit chưa được cộng. Backend chủ động truy vấn lại provider khi cần.
+
+\subsection{Refund}
+
+MVP có thể tự động refund credit qua ledger; refund tiền ngân hàng do admin xử lý thủ công hoặc theo khả năng provider. Payment gốc không bị xóa và mọi refund phải có record/audit.
+
+\section{Support operations}
+
+\subsection{Priority}
+
+\begin{longtable}{L{0.14\textwidth}L{0.48\textwidth}L{0.28\textwidth}}
+\toprule
+\textbf{Priority} & \textbf{Ví dụ} & \textbf{Mục tiêu nội bộ} \\
+\midrule
+P0 & Sai tiền/credit diện rộng, mất dữ liệu & Xử lý ngay \\
+P1 & Payment chưa nhận credit, không chấm được diện rộng & Trong ngày \\
+P2 & Lỗi đơn lẻ, kết quả thiếu, vấn đề tài khoản & Trong 1 ngày làm việc \\
+P3 & Góp ý và yêu cầu tính năng & Theo backlog \\
+\bottomrule
+\end{longtable}
+
+\subsection{Workflow}
+
+\begin{flowbox}
+OPEN \arrow IN\_REVIEW \arrow WAITING\_FOR\_USER \arrow RESOLVED \arrow CLOSED
+\end{flowbox}
+
+Admin có thể reply, request information, re-grade, refund credit, assign hoặc close. Không chỉnh sửa assessment tùy ý.
+
+\section{Backup strategy}
+
+\subsection{Database}
+
+Đề xuất ban đầu:
+
+\begin{itemize}
+  \item Full backup hằng ngày.
+  \item Rolling retention 30 ngày.
+  \item Ít nhất một bản ngoài VPS chính.
+  \item Mã hóa khi truyền/lưu nếu phù hợp.
+  \item Theo dõi kích thước, duration và trạng thái backup.
+\end{itemize}
+
+Khi lượng user/transaction tăng, bổ sung backup nhiều lần/ngày hoặc WAL/point-in-time recovery.
+
+\subsection{Object storage}
+
+Nếu file nằm trên VPS: backup offsite, checksum và lifecycle. Nếu dùng object storage ngoài: private access, lifecycle và versioning khi phù hợp.
+
+\subsection{Configuration}
+
+Backup Docker Compose, reverse proxy config, migration history và tài liệu runbook. Secret backup phải được mã hóa và giới hạn quyền.
+
+\section{Restore và disaster recovery}
+
+\subsection{Restore test}
+
+\begin{flowbox}
+Tạo database test \arrow Restore backup \arrow Apply migration phù hợp \arrow Khởi động app \arrow Kiểm tra User/Submission/Payment/Credit \arrow Ghi kết quả
+\end{flowbox}
+
+\subsection{Restore Production}
+
+\begin{enumerate}
+  \item Đánh giá incident và bật Maintenance Mode.
+  \item Dừng các luồng ghi dữ liệu mới.
+  \item Chọn backup/restore point phù hợp.
+  \item Restore database và storage liên quan.
+  \item Apply migration tương thích.
+  \item Chạy payment/credit reconciliation.
+  \item Chạy Deletion Ledger để không phục hồi user đã xóa.
+  \item Smoke test và xác minh dữ liệu.
+  \item Mở lại dịch vụ và theo dõi.
+  \item Viết incident report/postmortem.
+\end{enumerate}
+
+\subsection{RPO và RTO mục tiêu}
+
+\begin{longtable}{L{0.22\textwidth}L{0.25\textwidth}L{0.45\textwidth}}
+\toprule
+\textbf{Chỉ số} & \textbf{MVP} & \textbf{Hướng nâng cấp} \\
+\midrule
+RPO & Tối đa 24 giờ & Giảm bằng backup thường xuyên/PITR khi có nhiều user trả phí \\
+RTO & Vài giờ & Tự động hóa restore và hạ tầng dự phòng \\
+\bottomrule
+\end{longtable}
+
+\section{Data retention}
+
+\begin{longtable}{L{0.43\textwidth}L{0.24\textwidth}L{0.25\textwidth}}
+\toprule
+\textbf{Dữ liệu} & \textbf{Retention đề xuất} & \textbf{Ghi chú} \\
+\midrule
+Essay, assessment, progress & Trong thời gian tài khoản tồn tại & Xóa khi account deletion \\
+Draft bỏ dở & 90 ngày & Cleanup theo batch \\
+Raw AI response & Không lưu hoặc tối đa 7 ngày & Chỉ phục vụ debug có kiểm soát \\
+Application log & 30 ngày & Không chứa essay/secret \\
+Error log & 90 ngày & Phục vụ điều tra lỗi \\
+Security event & 12 tháng & Có thể kéo dài khi incident \\
+Admin audit & 24 tháng & Payment audit theo retention tài chính \\
+Support ticket & 12 tháng sau khi đóng & Attachment 90 ngày \\
+Product analytics thô & 13 tháng & Aggregate ẩn danh có thể giữ lâu hơn \\
+Database backup & Rolling 30 ngày & Có bản offsite \\
+Payment/accounting & Theo yêu cầu pháp luật áp dụng & Anonymize khi có thể \\
+\bottomrule
+\end{longtable}
+
+Cleanup job phải có log, metric, batch size và không khóa database quá lâu.
+
+\section{Xóa tài khoản}
+
+\subsection{Workflow}
+
+\begin{flowbox}
+User yêu cầu xóa \arrow Re-authenticate Google \arrow Cảnh báo \arrow DataDeletionRequest \arrow Revoke Sessions \arrow Worker xóa/anonymize \arrow Delete Objects \arrow DeletionLedger \arrow Completed
+\end{flowbox}
+
+\subsection{Dữ liệu xóa}
+
+Profile, Google external identifier, avatar, draft, essay, assessment, mistakes, progress, redo, notification, support attachment và analytics có thể định danh.
+
+\subsection{Dữ liệu giữ tối thiểu}
+
+Payment/refund/accounting record và audit liên quan tranh chấp hoặc nghĩa vụ pháp lý. Thông tin nhận dạng phải xóa/mask nếu không còn cần thiết.
+
+\subsection{Backup}
+
+Không sửa từng backup cũ. Backup tự hết hạn; khi restore backup cũ phải áp dụng lại Deletion Ledger.
+
+\section{Security operations}
+
+\subsection{Access policy}
+
+Mỗi người dùng tài khoản riêng; không dùng chung admin account. Role/permission gồm Content Admin, User Support Admin, Finance Admin, Security Admin và Super Admin.
+
+\subsection{Review định kỳ}
+
+\begin{itemize}
+  \item Ai còn quyền admin/production?
+  \item Tài khoản không hoạt động còn quyền không?
+  \item Người rời nhóm đã revoke chưa?
+  \item Permission có rộng hơn nhiệm vụ không?
+\end{itemize}
+
+\subsection{Admin security}
+
+Khuyến nghị Google 2-Step Verification, session ngắn hơn, re-authentication cho hành động nguy hiểm, audit và có thể IP restriction cho Super Admin.
+
+\subsection{Patch management}
+
+Cập nhật OS, Docker, reverse proxy, .NET, Node, NuGet/npm packages, database, Hangfire và storage provider sau khi kiểm thử Staging.
+
+\section{Dependency và vulnerability management}
+
+CI nên kiểm tra dependency, container base image, secret leak và license khi cần.
+
+\begin{longtable}{L{0.18\textwidth}L{0.74\textwidth}}
+\toprule
+\textbf{Mức độ} & \textbf{Xử lý} \\
+\midrule
+Critical & Điều tra và patch khẩn cấp; ưu tiên auth/payment/database \\
+High & Lên release gần nhất, có mitigation tạm thời \\
+Medium & Theo dõi và cập nhật theo lịch \\
+Low & Xử lý định kỳ \\
+\bottomrule
+\end{longtable}
+
+\section{Capacity và performance}
+
+Theo dõi CPU, RAM, disk, I/O, network, container restart, database size và backup size.
+
+\begin{longtable}{L{0.35\textwidth}L{0.57\textwidth}}
+\toprule
+\textbf{Ngưỡng tham khảo} & \textbf{Hành động} \\
+\midrule
+Disk trên 70\% & Warning và dự báo tăng trưởng \\
+Disk trên 85\% & High alert, cleanup/mở rộng ngay \\
+RAM thường xuyên trên 80\% & Kiểm tra process, query và worker concurrency \\
+Queue latency tăng liên tục & Kiểm tra worker, provider, database và rate limit \\
+Slow query tăng & Review index/query plan \\
+\bottomrule
+\end{longtable}
+
+Scale up trước: tăng CPU/RAM, tối ưu query/index và log. Scale out sau: tách Worker, managed database, external storage, Redis và load balancer.
+
+\section{Cost management}
+
+\subsection{Nhóm chi phí}
+
+VPS, domain, backup/storage, OpenAI, email, payment fee và monitoring.
+
+\subsection{AI cost}
+
+Theo dõi chi phí/ngày, tháng, bài, user, prompt version, retry và failed call.
+
+\subsection{Profitability}
+
+\begin{flowbox}
+Doanh thu gộp - Payment Fee - Refund - OpenAI Cost - Infrastructure Cost = Lợi nhuận ước tính
+\end{flowbox}
+
+Budget alert có ba mức: Warning, Soft Limit và Hard Limit. Hard Limit có thể tắt free grading, giảm concurrency hoặc tạm dừng grading theo policy.
+
+\section{Maintenance Mode}
+
+Dùng khi migration lớn, restore, payment/credit incident, security incident hoặc thay đổi hạ tầng quan trọng.
+
+Khi bật:
+
+\begin{itemize}
+  \item Không nhận submit/payment mới nếu không an toàn.
+  \item Có thể cho phép đọc dữ liệu nếu không ảnh hưởng.
+  \item Admin Portal vẫn truy cập theo permission.
+  \item Có thông báo rõ dịch vụ bị ảnh hưởng và trạng thái dữ liệu.
+  \item Có audit log và người chịu trách nhiệm.
+\end{itemize}
+
+\section{Incident management}
+
+\subsection{Severity}
+
+\begin{longtable}{L{0.14\textwidth}L{0.78\textwidth}}
+\toprule
+\textbf{Mức} & \textbf{Mô tả} \\
+\midrule
+SEV-1 & Mất dịch vụ, mất dữ liệu, sai tiền/credit diện rộng hoặc secret compromise \\
+SEV-2 & Chức năng cốt lõi lỗi cho nhiều user, có ảnh hưởng đáng kể \\
+SEV-3 & Lỗi giới hạn, có workaround, ảnh hưởng một nhóm nhỏ \\
+SEV-4 & Lỗi nhỏ, thẩm mỹ hoặc góp ý \\
+\bottomrule
+\end{longtable}
+
+\subsection{Quy trình}
+
+\begin{flowbox}
+Detect \arrow Acknowledge \arrow Contain \arrow Diagnose \arrow Mitigate \arrow Recover \arrow Verify \arrow Communicate \arrow Postmortem
+\end{flowbox}
+
+Dù chỉ có một người vận hành, incident record vẫn ghi owner, timeline, severity, user bị ảnh hưởng, dữ liệu/tài chính bị ảnh hưởng và thao tác xử lý.
+
+\section{Runbook catalog}
+
+Tối thiểu phải có runbook cho:
+
+\begin{enumerate}
+  \item API down hoặc readiness fail.
+  \item Database không kết nối.
+  \item VPS hết disk.
+  \item Worker dừng hoặc Hangfire queue nghẽn.
+  \item OpenAI lỗi diện rộng hoặc cost tăng bất thường.
+  \item Payment webhook không tới hoặc credit không được cộng.
+  \item Credit cộng/trừ trùng hoặc ledger mismatch.
+  \item User mất draft hoặc Google Login lỗi.
+  \item Cookie mất hiệu lực sau deploy.
+  \item Backup thất bại hoặc cần restore Production.
+  \item Secret/payOS credential bị lộ.
+  \item Admin account bị chiếm quyền.
+  \item XSS, malicious attachment hoặc database intrusion.
+\end{enumerate}
+
+Mỗi runbook gồm: triệu chứng, severity, kiểm tra đầu tiên, containment, bước xử lý, xác minh phục hồi, communication và follow-up.
+
+\section{Runbook mẫu: OpenAI lỗi diện rộng}
+
+\subsection{Triệu chứng}
+
+AI failure rate, 429/5xx, queue và thời gian chờ tăng.
+
+\subsection{Xử lý}
+
+\begin{enumerate}
+  \item Kiểm tra log, provider status, API key và budget.
+  \item Giảm worker concurrency nếu rate limit.
+  \item Mở circuit breaker hoặc tắt free grading.
+  \item Giữ/reschedule job; không consume credit khi chưa có kết quả.
+  \item Đăng system announcement nếu user bị ảnh hưởng.
+  \item Theo dõi provider và mở lại theo chế độ half-open.
+\end{enumerate}
+
+\subsection{Xác minh}
+
+AI call thành công trở lại, queue giảm, không có reservation thất lạc và các submission bị kẹt được recovery.
+
+\section{Runbook mẫu: Payment không cộng credit}
+
+\subsection{Kiểm tra}
+
+Payment Order, provider transaction, webhook event/signature, payment state, Credit Transaction và idempotency key.
+
+\subsection{Xử lý}
+
+\begin{enumerate}
+  \item Không sửa balance trực tiếp.
+  \item Xác minh payment với payOS.
+  \item Cập nhật payment state qua service phù hợp.
+  \item Gọi Credit Service tạo transaction \code{PURCHASE} đúng một lần.
+  \item Ghi audit và thông báo user.
+  \item Điều tra webhook/reconciliation để ngăn lặp lại.
+\end{enumerate}
+
+\section{Postmortem}
+
+SEV-1 và SEV-2 cần postmortem gồm:
+
+\begin{itemize}
+  \item Tóm tắt và timeline.
+  \item User, dữ liệu và tài chính bị ảnh hưởng.
+  \item Root cause và yếu tố góp phần.
+  \item Vì sao monitoring/alert không phát hiện sớm.
+  \item Điều đã làm tốt, điều cần cải thiện.
+  \item Action items, owner và deadline.
+\end{itemize}
+
+Postmortem nhằm cải thiện hệ thống, không đổ lỗi cá nhân.
+
+\section{Lịch bảo trì định kỳ}
+
+\begin{longtable}{L{0.18\textwidth}L{0.74\textwidth}}
+\toprule
+\textbf{Chu kỳ} & \textbf{Công việc} \\
+\midrule
+Hằng ngày & Alert, failed jobs, AI cost, payment errors, backup status, disk usage \\
+Hằng tuần & Support backlog, payment failure, queue latency, error log, dependency high severity, credit reconciliation \\
+Hằng tháng & Restore test, admin access review, cost review, security event, retention job, database growth, AI quality \\
+Hằng quý & Secret rotation theo policy, disaster recovery exercise, permission review, incident action items, capacity planning \\
+\bottomrule
+\end{longtable}
+
+\section{Production access policy}
+
+\begin{itemize}
+  \item SSH key; hạn chế password login và root login trực tiếp.
+  \item Firewall chỉ mở port cần thiết.
+  \item Database không public Internet.
+  \item Hangfire Dashboard và internal metrics không public.
+  \item Backup/storage private.
+  \item Có danh sách người có production access và ngày review gần nhất.
+\end{itemize}
+
+Admin nghiệp vụ không mặc nhiên có quyền SSH/database. Quyền Admin Portal và quyền hạ tầng là hai phạm vi khác nhau.
+
+\section{Go-Live Checklist}
+
+\subsection{Infrastructure}
+
+\begin{itemize}
+  \item[$\square$] Domain, DNS và HTTPS hoạt động.
+  \item[$\square$] Firewall, Docker Compose và persistent volume đã cấu hình.
+  \item[$\square$] Health check, monitoring và alerting hoạt động.
+  \item[$\square$] Database và storage không public không cần thiết.
+\end{itemize}
+
+\subsection{Security}
+
+\begin{itemize}
+  \item[$\square$] Production secrets riêng và không nằm trong source.
+  \item[$\square$] Cookie Secure/HttpOnly/SameSite và CSRF/CSP đã kiểm tra.
+  \item[$\square$] Authorization, admin roles, rate limit và audit hoạt động.
+  \item[$\square$] payOS signature verification và OpenAI key protection đã test.
+\end{itemize}
+
+\subsection{Data}
+
+\begin{itemize}
+  \item[$\square$] Migration/seed đúng và không có dữ liệu test.
+  \item[$\square$] Backup offsite thành công và restore đã test.
+  \item[$\square$] Retention và account deletion workflow hoạt động.
+\end{itemize}
+
+\subsection{Product và Operations}
+
+\begin{itemize}
+  \item[$\square$] Google Login, Writing Room, Autosave, Submission và Result hoạt động.
+  \item[$\square$] Credit, payment, support và Admin Portal hoạt động.
+  \item[$\square$] Runbook, rollback, maintenance mode, kill switch và budget cap sẵn sàng.
+  \item[$\square$] Có email hỗ trợ và người chịu trách nhiệm incident.
+\end{itemize}
+
+\section{Operations Acceptance Criteria}
+
+Hệ thống chỉ đủ điều kiện Production khi:
+
+\begin{itemize}
+  \item Có Development, Staging và Production tách biệt hợp lý.
+  \item Production dùng HTTPS và secret management.
+  \item CI tự động build/test, có deploy và rollback procedure.
+  \item Migration đã test trên Staging.
+  \item Có health check, structured logging, metrics và alerting.
+  \item Backup nằm ngoài VPS và restore đã được thử.
+  \item Hangfire Dashboard được bảo vệ; worker restart không mất job.
+  \item AI failure không làm mất credit.
+  \item Webhook trùng không cộng credit trùng.
+  \item Payment và Credit reconciliation hoạt động.
+  \item Retention và account deletion jobs hoạt động.
+  \item Có incident severity, runbook, postmortem và go-live checklist.
+  \item Có owner cho support, payment và incident.
+\end{itemize}
+
+\section{Phụ lục A - Environment Variables Checklist}
+
+\begin{longtable}{L{0.34\textwidth}L{0.20\textwidth}L{0.38\textwidth}}
+\toprule
+\textbf{Nhóm} & \textbf{Secret} & \textbf{Ví dụ cấu hình} \\
+\midrule
+Database & Có & Connection string, command timeout \\
+Google Auth & Có & Client ID, Client Secret, callback path \\
+OpenAI & Có & API key, model, timeout, budget \\
+payOS & Có & Client ID/API key/checksum key, return/cancel URL \\
+Cookie/Data Protection & Có một phần & Cookie name, expiry, key ring path \\
+Hangfire & Không/connection secret & Queue, concurrency, storage connection \\
+Storage & Có khi external & Provider, bucket, endpoint, access key \\
+Email & Có & SMTP/provider credentials, sender address \\
+Retention & Không & Số ngày cho log, draft, attachment, backup \\
+Monitoring & Có thể có & DSN/token và alert channel \\
+\bottomrule
+\end{longtable}
+
+\section{Phụ lục B - Service Dependency Matrix}
+
+\begin{longtable}{L{0.25\textwidth}L{0.20\textwidth}L{0.20\textwidth}L{0.27\textwidth}}
+\toprule
+\textbf{Service} & \textbf{Database} & \textbf{External} & \textbf{Khi dependency lỗi} \\
+\midrule
+Web & Không trực tiếp & API & Hiển thị lỗi/kết nối lại \\
+API & Bắt buộc & Google, payOS tùy endpoint & Readiness fail nếu DB; degrade theo chức năng ngoài \\
+Worker grading & Bắt buộc & OpenAI & Retry/circuit breaker, giữ credit reserved \\
+Worker payment & Bắt buộc & payOS & Reconciliation retry, không grant mù \\
+Worker maintenance & Bắt buộc & Storage tùy job & Retry và alert nếu cleanup/deletion fail \\
+\bottomrule
+\end{longtable}
+
+\section{Phụ lục C - Release Checklist}
+
+\begin{enumerate}
+  \item Chốt release notes, version và migration list.
+  \item CI pass và artifact/image đã ký/tag đúng version.
+  \item Backup Production thành công.
+  \item Maintenance/deploy window được xác định nếu cần.
+  \item Apply migration và deploy theo runbook.
+  \item Health check và smoke test.
+  \item Kiểm tra login, draft, submit, worker, result, payment và credit.
+  \item Theo dõi metrics tối thiểu 15-30 phút hoặc theo risk.
+  \item Ghi kết quả release và issue phát sinh.
+\end{enumerate}
+
+\section{Phụ lục D - Monthly Maintenance Checklist}
+
+\begin{itemize}
+  \item[$\square$] Restore một backup vào môi trường test.
+  \item[$\square$] Review admin/production access.
+  \item[$\square$] Review AI cost, payment fee và profitability.
+  \item[$\square$] Review failed jobs, retry và queue latency.
+  \item[$\square$] Review security event và dependency vulnerabilities.
+  \item[$\square$] Review database/disk growth và backup size.
+  \item[$\square$] Review retention cleanup và Deletion Requests.
+  \item[$\square$] Review support SLA nội bộ và quality disputes.
+  \item[$\square$] Cập nhật runbook/postmortem action items.
+\end{itemize}
+
+\section{Kết luận}
+
+BandUp được vận hành theo nguyên tắc: dữ liệu và tiền phải đúng trước, trải nghiệm phải phục hồi được, chi phí AI phải được kiểm soát và mọi thao tác nhạy cảm phải có khả năng truy vết.
+
+\begin{successbox}
+Phương án baseline: VPS + Docker Compose + reverse proxy; ba môi trường; CI/CD có version và approval; Hangfire Worker riêng; OpenAI budget/circuit breaker; payOS webhook + reconciliation; credit ledger + reconciliation; structured logging; backup offsite hằng ngày; restore test định kỳ; retention tự động; incident runbook và postmortem.
+\end{successbox}
+
+\end{document}

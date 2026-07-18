@@ -1,0 +1,2619 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=2.25cm,right=2.25cm,headheight=15pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\usepackage[vietnamese]{babel}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.45em,itemsep=0.22em,topsep=0.3em}
+\setlist[enumerate]{leftmargin=1.65em,itemsep=0.22em,topsep=0.3em}
+\usepackage{xcolor}
+\definecolor{BandBlue}{HTML}{244A73}
+\definecolor{BandLight}{HTML}{EEF4F8}
+\definecolor{BandGray}{HTML}{5F6B76}
+\definecolor{BandGreen}{HTML}{287A5A}
+\definecolor{BandGreenLight}{HTML}{EDF7F2}
+\definecolor{BandOrange}{HTML}{A45A14}
+\definecolor{BandOrangeLight}{HTML}{FFF4E8}
+\definecolor{BandRed}{HTML}{A63636}
+\definecolor{BandRedLight}{HTML}{FFF0F0}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Large\bfseries\color{BandBlue}}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{BandBlue}}{\thesubsection}{0.55em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{BandGray}}{\thesubsubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.55em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.4em}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=BandBlue,urlcolor=BandBlue,citecolor=BandBlue,pdftitle={BandUp - Tài liệu yêu cầu sản phẩm},pdfauthor={BandUp}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small BandUp - Product Requirements Document}
+\fancyhead[R]{\sffamily\small Phiên bản 1.0}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\newtcolorbox{importantbox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{warningbox}{breakable,colback=BandRedLight,colframe=BandRed,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newenvironment{requirementbox}[1][BandBlue]{\begin{tcolorbox}[breakable,colback=white,colframe=#1,boxrule=0.55pt,arc=1.3mm,left=3mm,right=3mm,top=2mm,bottom=2mm,before skip=4pt,after skip=4pt]}{\end{tcolorbox}}
+\newtcolorbox{acceptancebox}{breakable,colback=BandGreenLight,colframe=BandGreen,boxrule=0.55pt,arc=1.3mm,left=3mm,right=3mm,top=2mm,bottom=2mm,before skip=5pt,after skip=5pt}
+\newtcolorbox{flowbox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.6pt,arc=2mm,left=4mm,right=4mm,top=3mm,bottom=3mm}
+\newcommand{\flowarrow}{\par\centering\sffamily\color{BandBlue}\Large$\downarrow$\par}
+\newcommand{\flowstep}[1]{\par\centering\sffamily\bfseries #1\par}
+\newcommand{\priority}[1]{\colorbox{BandLight}{\sffamily\footnotesize #1}}
+\usepackage{longtable,booktabs,array,tabularx}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{pdflscape}
+\usepackage{needspace}
+\usepackage{lastpage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\emergencystretch=2em
+\begin{document}
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+{\sffamily\fontsize{34}{40}\selectfont\bfseries\color{BandBlue} BandUp\par}
+\vspace{0.55cm}
+{\sffamily\fontsize{22}{28}\selectfont Tài liệu yêu cầu sản phẩm\par}
+\vspace{0.25cm}
+{\sffamily\large Product Requirements Document - PRD\par}
+\vfill
+\begin{tcolorbox}[colback=BandLight,colframe=BandBlue,width=0.78\textwidth,boxrule=0.7pt,arc=2mm]
+\centering\sffamily
+\textbf{Phiên bản: 1.0}\\[1mm]
+Trạng thái: Baseline yêu cầu MVP\\[1mm]
+Phạm vi: BandUp - IELTS Writing Task 2\\[1mm]
+Ngày chốt: 17/07/2026
+\end{tcolorbox}
+\vspace{1.2cm}
+{\sffamily\small Tài liệu nghiệp vụ làm cơ sở cho UI/UX, System Design, Development Roadmap và Testing Plan\par}
+\vspace*{1cm}
+\end{titlepage}
+\section*{Kiểm soát tài liệu}\addcontentsline{toc}{section}{Kiểm soát tài liệu}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.64\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Giá trị} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Giá trị} \\ \hline
+\endhead
+Tên tài liệu & 02\_\allowbreak{}Product\_\allowbreak{}Requirements \\ \hline
+Phiên bản & 1.0 \\ \hline
+Trạng thái & Baseline yêu cầu MVP \\ \hline
+Ngày chốt & 17/\allowbreak{}07/\allowbreak{}2026 \\ \hline
+Ngôn ngữ & Tiếng Việt \\ \hline
+Sản phẩm & BandUp \\ \hline
+Phạm vi & IELTS Writing Task 2 - Web MVP \\ \hline
+Tài liệu liên quan & 01\_\allowbreak{}BandUp\_\allowbreak{}Overview; 03\_\allowbreak{}Data\_\allowbreak{}Model\_\allowbreak{}Draft; UI/\allowbreak{}UX Specification; System Design; Testing Plan \\ \hline
+\end{longtable}
+\normalsize
+\begin{importantbox}
+\textbf{Giới hạn tài liệu.} PRD mô tả sản phẩm phải làm gì, quy tắc nghiệp vụ và điều kiện nghiệm thu. Chi tiết bảng vật lý, API endpoint, cấu trúc module, migration, Docker Compose và code implementation được tách sang tài liệu kỹ thuật.
+\end{importantbox}
+\tableofcontents
+\clearpage
+\section*{Mục đích tài liệu}\addcontentsline{toc}{section}{Mục đích tài liệu}
+Tài liệu này là baseline yêu cầu sản phẩm cho BandUp MVP. Nó thống nhất hành trình người dùng, yêu cầu chức năng, yêu cầu phi chức năng, quy tắc nghiệp vụ, trạng thái miền, tiêu chí nghiệm thu và các quyết định đã chốt trước khi bước sang thiết kế chi tiết và phát triển.
+
+\begin{itemize}
+  \item BandUp phục vụ ai và mỗi vai trò được làm gì?
+  \item Người dùng đi qua các luồng sản phẩm như thế nào?
+  \item Mỗi chức năng phải có hành vi và dữ liệu tối thiểu nào?
+  \item Hệ thống phải đạt mức chất lượng, bảo mật và độ tin cậy nào?
+  \item Khi nào một requirement được xem là hoàn thành và có thể nghiệm thu?
+  \item Những quyết định nào đã chốt và không nên tiếp tục thay đổi tùy tiện trong khi code?
+\end{itemize}
+\section{Tổng quan sản phẩm}
+BandUp là nền tảng AI Writing Coach hỗ trợ người học luyện IELTS Writing Task 2. Sản phẩm không chỉ trả về một band score ước lượng mà tạo một vòng lặp học tập dài hạn: viết bài, nhận feedback, hiểu lỗi, lưu lỗi, theo dõi tiến bộ và luyện tập lại.
+
+\begin{flowbox}
+\flowstep{Đăng nhập Google}
+\flowarrow
+\flowstep{Thiết lập mục tiêu}
+\flowarrow
+\flowstep{Chọn /\allowbreak{} random /\allowbreak{} redo đề}
+\flowarrow
+\flowstep{Viết bài}
+\flowarrow
+\flowstep{Nộp bài và giữ chỗ credit}
+\flowarrow
+\flowstep{Một model AI chấm}
+\flowarrow
+\flowstep{Xem kết quả}
+\flowarrow
+\flowstep{Lưu Mistake Bank}
+\flowarrow
+\flowstep{Theo dõi tiến bộ}
+\flowarrow
+\flowstep{Luyện tập tiếp}
+\end{flowbox}
+\begin{importantbox}
+BandUp không phải công cụ chấm thi chính thức và không được cam kết điểm giống giám khảo thật. Điểm và feedback là ước lượng phục vụ luyện tập.
+\end{importantbox}
+\section{Mục tiêu sản phẩm}
+\subsection{Mục tiêu người dùng}
+\begin{itemize}
+  \item Giảm chi phí chữa bài IELTS Writing.
+  \item Giúp người học biết vì sao mất điểm, không chỉ biết điểm số.
+  \item Giảm lỗi lặp lại thông qua Mistake Bank và lịch sử.
+  \item Tạo thói quen luyện viết và cho phép nhìn thấy tiến bộ.
+  \item Giúp người học chủ động chọn đề, random đề hoặc redo đề cũ tùy nhu cầu.
+\end{itemize}
+\subsection{Mục tiêu sản phẩm}
+\begin{itemize}
+  \item Cung cấp một quy trình IELTS Writing Task 2 hoàn chỉnh và nhất quán.
+  \item Dùng một model AI chấm chính, structured output và backend validation để giảm độ phức tạp.
+  \item Tạo khác biệt bằng Model Essays, Mistake Bank, Progress và Redo Challenge.
+  \item Kiểm soát chi phí bằng BandUp Credit, queue, rate limit, retry có giới hạn và daily budget cap.
+  \item Tạo nền tảng có thể mở rộng sang Teacher Classroom mà không đập lại tài khoản cốt lõi.
+\end{itemize}
+\subsection{Mục tiêu kinh doanh và chỉ số ban đầu}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.16\textwidth}|P{0.38\textwidth}|P{0.36\textwidth}|}
+\hline
+\textbf{Nhóm} & \textbf{Chỉ số cần đo} & \textbf{Ý nghĩa} \\ \hline
+\endfirsthead
+\hline
+\textbf{Nhóm} & \textbf{Chỉ số cần đo} & \textbf{Ý nghĩa} \\ \hline
+\endhead
+Acquisition & Đăng ký mới, nguồn truy cập, tỷ lệ landing  ->  Google login & Đo khả năng thu hút \\ \hline
+Activation & Tỷ lệ hoàn tất onboarding; tỷ lệ bắt đầu và hoàn tất bài đầu & Đo người dùng nhận giá trị ban đầu \\ \hline
+Engagement & DAU/\allowbreak{}WAU/\allowbreak{}MAU; số bài/\allowbreak{}user/\allowbreak{}tuần; số lần xem Result/\allowbreak{}Mistake/\allowbreak{}Progress & Đo mức sử dụng \\ \hline
+Retention & Tỷ lệ quay lại 7 ngày, 30 ngày; cohort retention & Đo giá trị dài hạn \\ \hline
+Revenue & Doanh thu, người mua credit, conversion, average revenue per paying user & Đo mô hình kinh doanh \\ \hline
+Cost & Chi phí AI/\allowbreak{}bài, payment fee, storage/\allowbreak{}log cost & Đo tính bền vững \\ \hline
+Learning & Xu hướng band, lỗi lặp lại, redo improvement & Đo giá trị học tập; không dùng để cam kết kết quả thi \\ \hline
+\end{longtable}
+\normalsize
+\section{Phạm vi MVP}
+\subsection{Trong phạm vi}
+\begin{itemize}
+  \item Google OAuth/\allowbreak{}OIDC kết hợp ASP.NET Core Identity và application cookie-session.
+  \item Landing Page, bảng thông báo, FAQ, Trợ giúp \& Pháp lý.
+  \item Onboarding band hiện tại, band mục tiêu, ngày thi dự kiến và mục tiêu học.
+  \item Danh sách đề có đánh số, tìm kiếm/\allowbreak{}lọc, chọn đề, random đề và Redo Challenge.
+  \item Writing Room với timer 40 phút, word count, autosave, pause/\allowbreak{}resume.
+  \item Queue chấm bài, BandUp Credit reservation/\allowbreak{}capture/\allowbreak{}release và một model GPT-5.6 Terra.
+  \item Kết quả chấm bốn tiêu chí, corrections, vocabulary suggestions, errors và next practice plan.
+  \item Model Essays đã review, History, Mistake Bank, Progress và Redo comparison.
+  \item Mua gói credit qua payOS/\allowbreak{}VietQR, webhook, đối soát và lịch sử thanh toán.
+  \item In-app support ticket, tranh chấp kết quả, hoàn credit có kiểm soát.
+  \item Admin quản lý nội dung, user, activity, credit, payment, revenue, AI usage, support, security và settings.
+  \item Rate limit, budget cap, kill switch, logging, audit, backup và quy trình xóa tài khoản.
+\end{itemize}
+\subsection{Ngoài phạm vi MVP}
+\begin{itemize}
+  \item IELTS Speaking, Listening và Reading.
+  \item AI Voice và mobile app native.
+  \item Diễn đàn cộng đồng đầy đủ và gamification phức tạp.
+  \item Teacher Classroom hoàn chỉnh.
+  \item Flashcards và spaced repetition.
+  \item Subscription định kỳ tự động.
+  \item Pipeline chấm nhiều model hoặc model fallback tự động.
+  \item Cam kết band score hoặc thay thế giám khảo IELTS.
+\end{itemize}
+\section{Thuật ngữ và quy ước}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.24\textwidth}|P{0.68\textwidth}|}
+\hline
+\textbf{Thuật ngữ} & \textbf{Định nghĩa} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuật ngữ} & \textbf{Định nghĩa} \\ \hline
+\endhead
+MVP & Phiên bản nhỏ nhất có đủ giá trị cốt lõi để user thật sử dụng và kiểm chứng. \\ \hline
+Beta & Giai đoạn phát hành cho nhóm user thật có giới hạn để đo lỗi, cost, retention và conversion. \\ \hline
+BandUp Credit & Đơn vị quyền lợi nội bộ; không phải tiền pháp định và không tự động rút/\allowbreak{}chuyển nhượng. \\ \hline
+Available Credit & Credit có thể dùng để tạo reservation mới. \\ \hline
+Reserved Credit & Credit đã giữ chỗ cho submission nhưng chưa ghi nhận đã tiêu. \\ \hline
+Captured Credit & Credit đã tiêu sau khi grading hoàn tất và lưu kết quả hợp lệ. \\ \hline
+Released Credit & Reservation được hoàn về số dư khả dụng khi job thất bại/\allowbreak{}hủy đúng điều kiện. \\ \hline
+Assessment & Kết quả chấm có cấu trúc của một submission. \\ \hline
+Attempt & Một lần gọi model trong grading job; tối đa 3 attempt tổng cộng. \\ \hline
+Provider & Dịch vụ bên thứ ba như OpenAI, payOS, storage hoặc email. \\ \hline
+Ownership check & Kiểm tra resource có thuộc user đang đăng nhập hay không. \\ \hline
+Anonymize & Loại bỏ/\allowbreak{}biến đổi thông tin nhận dạng nhưng giữ phần dữ liệu tối thiểu bắt buộc. \\ \hline
+\end{longtable}
+\normalsize
+\section{Đối tượng và vai trò người dùng}
+\subsection{GUEST}
+\begin{itemize}
+  \item Xem Landing Page, tính năng, cách hoạt động, bảng giá và giới hạn AI.
+  \item Xem thông báo công khai, FAQ, điều khoản, chính sách quyền riêng tư, thanh toán, hoàn credit và email hỗ trợ.
+  \item Bắt đầu đăng nhập bằng Google.
+  \item Không được tạo draft, submit, mua/\allowbreak{}sử dụng credit hoặc xem dữ liệu học tập khi chưa đăng nhập.
+\end{itemize}
+\subsection{USER}
+\begin{itemize}
+  \item Quản lý profile, band hiện tại, band mục tiêu, ngày thi và thiết lập học.
+  \item Duyệt/\allowbreak{}chọn/\allowbreak{}random/\allowbreak{}redo đề; viết draft; nộp bài; xem kết quả.
+  \item Xem Model Essays, History, Mistake Bank, Progress và insight.
+  \item Quản lý credit, payment và support ticket của chính mình.
+  \item Yêu cầu xóa tài khoản theo chính sách.
+\end{itemize}
+\subsection{ADMIN}
+ADMIN là vai trò vận hành. Quyền admin nên được chia theo policy/\allowbreak{}permission; không mặc nhiên cho mọi admin toàn quyền hoặc quyền đọc toàn bộ essay.
+
+\begin{landscape}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.24\textwidth}|P{0.12\textwidth}|P{0.14\textwidth}|P{0.16\textwidth}|P{0.14\textwidth}|P{0.16\textwidth}|}
+\hline
+\textbf{Nhóm quyền} & \textbf{USER} & \textbf{Content Admin} & \textbf{Support Admin} & \textbf{Finance Admin} & \textbf{Security/\allowbreak{}Super Admin} \\ \hline
+\endfirsthead
+\hline
+\textbf{Nhóm quyền} & \textbf{USER} & \textbf{Content Admin} & \textbf{Support Admin} & \textbf{Finance Admin} & \textbf{Security/\allowbreak{}Super Admin} \\ \hline
+\endhead
+Sử dụng chức năng học tập & Dữ liệu của mình & Không cần & Không cần & Không cần & Theo policy \\ \hline
+Quản lý đề/\allowbreak{}model essay/\allowbreak{}taxonomy & Không & Có & Chỉ đọc khi hỗ trợ & Không & Có \\ \hline
+Xem thông tin user tổng quan & Chính mình & Tổng hợp & Có trong phạm vi ticket & Có phần billing & Có \\ \hline
+Đọc essay user & Chính mình & Không mặc định & Permission riêng + lý do + audit & Không & Permission đặc biệt \\ \hline
+Điều chỉnh credit & Không & Không & Có giới hạn + audit & Có + audit & Có + audit \\ \hline
+Xem doanh thu/\allowbreak{}payment & Của mình & Không & Theo ticket & Có & Có \\ \hline
+Khóa/\allowbreak{}mở user & Không & Không & Đề xuất/\allowbreak{}giới hạn & Không & Có \\ \hline
+Thay app settings/\allowbreak{}kill switch & Không & Không & Không & Không & Có \\ \hline
+Xem security events & Không & Không & Giới hạn & Không & Có \\ \hline
+\end{longtable}
+\normalsize
+\end{landscape}
+\subsection{Phạm vi quản lý người dùng của Admin}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.19\textwidth}|P{0.73\textwidth}|}
+\hline
+\textbf{Nhóm} & \textbf{Thuộc tính/\allowbreak{}chỉ số tối thiểu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Nhóm} & \textbf{Thuộc tính/\allowbreak{}chỉ số tối thiểu} \\ \hline
+\endhead
+Định danh & User ID, email, display name, avatar trạng thái, role, account status, ngày tạo. \\ \hline
+Hoạt động & Last login, last active, số phiên, số ngày active, số bài tổng/\allowbreak{}7 ngày/\allowbreak{}30 ngày, lần submit gần nhất. \\ \hline
+Học tập & Số draft, submission, completed/\allowbreak{}failed grading, overall gần nhất, redo count; không mở essay mặc định. \\ \hline
+Credit & Available, reserved, lifetime granted, purchased, spent, released, refunded, manual adjustment. \\ \hline
+Payment & Số order, paid/\allowbreak{}failed/\allowbreak{}refunded, tổng tiền đã trả, tổng tiền hoàn, last payment. \\ \hline
+Support & Ticket đang mở, ticket gần nhất, dispute/\allowbreak{}refund status. \\ \hline
+Security & Rate-limit events, blocked status, suspicious events, session revoke. \\ \hline
+Tổng hợp & Total users, new users, deleted users, DAU/\allowbreak{}WAU/\allowbreak{}MAU, retention, plan/\allowbreak{}paid distribution. \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Vai trò tương lai TEACHER và STUDENT}
+TEACHER và STUDENT không được mô hình hóa bằng kế thừa cứng kiểu Teacher : User hoặc Student : User. BandUp dùng một AppUser chung, role/\allowbreak{}permission, profile bổ sung và ClassMember theo từng lớp. Một user có thể là teacher ở lớp này và student ở lớp khác mà không tạo tài khoản trùng.
+
+\section{Giả định và ràng buộc}
+\begin{itemize}
+  \item Phiên bản đầu chỉ hỗ trợ IELTS Writing Task 2.
+  \item IELTS Task 2 chính thức yêu cầu ít nhất 250 từ và khoảng 40 phút; BandUp cho phép 200-249 từ sau cảnh báo, 250-350 từ bình thường và chặn trên 350 từ.
+  \item Band score từ 0 đến 9, bước 0.5; chỉ là ước lượng.
+  \item User đăng nhập Google nhưng BandUp vẫn phát hành application cookie-session riêng.
+  \item Free user nhận 5 credit mỗi chu kỳ miễn phí; mặc định chu kỳ một tháng và phải cấu hình được.
+  \item Một grading thành công mặc định tốn 1 credit.
+  \item OpenAI là provider ban đầu và GPT-5.6 Terra là model chấm chính duy nhất trong MVP.
+  \item Development dùng local database/\allowbreak{}storage; production dự kiến container trên VPS.
+  \item AI, payment, storage và email phải nằm sau interface; database dùng EF Core provider abstraction.
+  \item Model Essays và payOS payment thuộc MVP.
+  \item Xóa tài khoản xóa/\allowbreak{}anonymize dữ liệu học tập; payment/\allowbreak{}accounting và audit bắt buộc giữ tuân theo retention.
+\end{itemize}
+\section{User Journey}
+\subsection{Người dùng mới}
+\begin{flowbox}
+\flowstep{Landing Page}
+\flowarrow
+\flowstep{Đăng nhập Google}
+\flowarrow
+\flowstep{BandUp tạo/\allowbreak{}liên kết local user}
+\flowarrow
+\flowstep{Onboarding mục tiêu}
+\flowarrow
+\flowstep{Dashboard}
+\flowarrow
+\flowstep{User tự chọn làm bài hoặc quay lại sau}
+\end{flowbox}
+\subsection{Chọn đề và luyện tập}
+\begin{flowbox}
+\flowstep{Dashboard}
+\flowarrow
+\flowstep{Danh sách đề /\allowbreak{} Random /\allowbreak{} Redo}
+\flowarrow
+\flowstep{Writing Room}
+\flowarrow
+\flowstep{Autosave}
+\flowarrow
+\flowstep{Submit}
+\flowarrow
+\flowstep{Reserve credit}
+\flowarrow
+\flowstep{Queue grading}
+\flowarrow
+\flowstep{Result Page}
+\end{flowbox}
+\subsection{Mua credit}
+\begin{flowbox}
+\flowstep{Hết/\allowbreak{}thiếu credit}
+\flowarrow
+\flowstep{Chọn gói}
+\flowarrow
+\flowstep{Tạo payOS order}
+\flowarrow
+\flowstep{Quét VietQR bằng app ngân hàng}
+\flowarrow
+\flowstep{Webhook được xác minh}
+\flowarrow
+\flowstep{Cộng credit đúng một lần}
+\flowarrow
+\flowstep{Quay lại submit}
+\end{flowbox}
+\subsection{Hỗ trợ/\allowbreak{}hoàn credit}
+\begin{flowbox}
+\flowstep{Mở submission/\allowbreak{}payment/\allowbreak{}credit transaction}
+\flowarrow
+\flowstep{Tạo ticket}
+\flowarrow
+\flowstep{Đính kèm bằng chứng}
+\flowarrow
+\flowstep{Admin review}
+\flowarrow
+\flowstep{Re-grade /\allowbreak{} Refund /\allowbreak{} Reject}
+\flowarrow
+\flowstep{User nhận kết quả}
+\end{flowbox}
+\subsection{Xóa tài khoản}
+\begin{flowbox}
+\flowstep{Settings}
+\flowarrow
+\flowstep{Xem cảnh báo}
+\flowarrow
+\flowstep{Re-auth Google}
+\flowarrow
+\flowstep{Xác nhận cụm từ}
+\flowarrow
+\flowstep{Revoke session}
+\flowarrow
+\flowstep{Purge/\allowbreak{}anonymize}
+\flowarrow
+\flowstep{Xác nhận hoàn tất}
+\end{flowbox}
+\subsection{Admin xử lý sự cố AI}
+\begin{flowbox}
+\flowstep{Dashboard vận hành}
+\flowarrow
+\flowstep{Phát hiện error/\allowbreak{}cost bất thường}
+\flowarrow
+\flowstep{Circuit breaker hoặc kill switch}
+\flowarrow
+\flowstep{Giữ job trong queue}
+\flowarrow
+\flowstep{Điều tra}
+\flowarrow
+\flowstep{Khôi phục có kiểm soát}
+\end{flowbox}
+\section{User Stories}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.14\textwidth}|P{0.78\textwidth}|}
+\hline
+\textbf{Mã} & \textbf{User Story} \\ \hline
+\endfirsthead
+\hline
+\textbf{Mã} & \textbf{User Story} \\ \hline
+\endhead
+US-001 & Là một khách, tôi muốn hiểu BandUp, giới hạn của AI và giá sử dụng trước khi đăng nhập. \\ \hline
+US-002 & Là một người học, tôi muốn đăng nhập bằng Google để không phải tạo và nhớ thêm mật khẩu. \\ \hline
+US-003 & Là một người học mới, tôi muốn thiết lập band hiện tại, band mục tiêu và ngày thi mà không bị ép làm bài ngay. \\ \hline
+US-004 & Là một người học, tôi muốn duyệt danh sách đề có đánh số, lọc và chọn đề giống một hệ thống bài tập. \\ \hline
+US-005 & Là một người học, tôi muốn nhận đề ngẫu nhiên khi không biết nên chọn đề nào. \\ \hline
+US-006 & Là một người học, tôi muốn timer, word count, autosave và pause/\allowbreak{}resume để kiểm soát quá trình viết. \\ \hline
+US-007 & Là một người học, tôi muốn nộp bài và nhận feedback theo bốn tiêu chí IELTS. \\ \hline
+US-008 & Là một người học, tôi muốn xem câu sai, câu sửa và lý do để hiểu cách cải thiện. \\ \hline
+US-009 & Là một người học, tôi muốn nhận gợi ý từ vựng theo đúng ngữ cảnh bài viết. \\ \hline
+US-010 & Là một người học, tôi muốn xem bài mẫu đã được review để đối chiếu cách triển khai ý. \\ \hline
+US-011 & Là một người học, tôi muốn lỗi được lưu vào Mistake Bank để theo dõi lỗi lặp lại. \\ \hline
+US-012 & Là một người học, tôi muốn xem dữ liệu tiến bộ ngay từ bài đầu tiên nhưng được cảnh báo khi cỡ mẫu còn nhỏ. \\ \hline
+US-013 & Là một người học, tôi muốn chủ động làm lại bất kỳ đề cũ nào và so sánh kết quả. \\ \hline
+US-014 & Là một người học, tôi muốn thấy credit khả dụng, credit đang giữ chỗ và lịch sử giao dịch. \\ \hline
+US-015 & Là một người học, tôi muốn mua credit bằng VietQR và được cộng credit tự động sau thanh toán. \\ \hline
+US-016 & Là một người học, tôi muốn gửi ticket gắn với bài chấm hoặc giao dịch để không phải giải thích lại từ đầu qua email. \\ \hline
+US-017 & Là một người học, tôi muốn xóa tài khoản và được biết rõ dữ liệu nào mất, dữ liệu nào phải giữ theo pháp luật. \\ \hline
+US-018 & Là một admin nội dung, tôi muốn quản lý đề, bài mẫu và taxonomy để bảo đảm chất lượng học tập. \\ \hline
+US-019 & Là một admin hỗ trợ, tôi muốn xem hoạt động, credit, payment và ticket của user trong phạm vi cần thiết. \\ \hline
+US-020 & Là một admin tài chính, tôi muốn xem doanh thu, refund, credit đã bán và chi phí AI. \\ \hline
+US-021 & Là một admin vận hành, tôi muốn theo dõi queue, lỗi AI, rate limit và tắt grading khi có sự cố. \\ \hline
+US-022 & Là chủ sản phẩm, tôi muốn các provider AI, payment, storage và email có thể thay đổi mà không viết lại business core. \\ \hline
+\end{longtable}
+\normalsize
+\section{Yêu cầu chức năng}
+\subsection{Authentication, cookie-session, authorization và tài khoản}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-001}\hfill\priority{P0}\par
+Hệ thống phải cho phép user đăng nhập bằng tài khoản Google thông qua OAuth 2.0/\allowbreak{}OIDC.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-002}\hfill\priority{P0}\par
+BandUp không được yêu cầu hoặc lưu mật khẩu Google của user.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-003}\hfill\priority{P0}\par
+Sau lần đăng nhập Google đầu tiên, hệ thống phải tạo một local User và liên kết với định danh Google ổn định của tài khoản.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-004}\hfill\priority{P0}\par
+Hệ thống phải kiểm tra email và trạng thái email verified do Google cung cấp trước khi tạo/\allowbreak{}liên kết tài khoản theo chính sách.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-005}\hfill\priority{P0}\par
+Đăng nhập lại bằng cùng một Google account phải liên kết đúng local User, không tạo tài khoản trùng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-006}\hfill\priority{P0}\par
+Hệ thống phải cho phép người dùng đăng xuất và thu hồi session BandUp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-007}\hfill\priority{P0}\par
+Hệ thống phải duy trì trạng thái đăng nhập bằng secure authentication cookie trong thời hạn session được cấu hình.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-008}\hfill\priority{P0}\par
+Hệ thống phải từ chối tài khoản bị khóa, suspended hoặc deletion pending.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-009}\hfill\priority{P0}\par
+Hệ thống phải phân quyền tối thiểu theo USER và ADMIN.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-010}\hfill\priority{P0}\par
+Authentication chỉ xác định user là ai; authorization phải dùng role, claim, policy và ownership để quyết định user được làm gì.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-011}\hfill\priority{P0}\par
+USER được sử dụng chức năng học tập, billing và support thuộc tài khoản của mình, nhưng không được truy cập Admin Portal hoặc dữ liệu của user khác.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-012}\hfill\priority{P0}\par
+ADMIN được truy cập chức năng vận hành theo permission được cấp, nhưng không được bỏ qua ownership/\allowbreak{}privacy rule nếu permission đó không cần thiết.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-013}\hfill\priority{P0}\par
+Các endpoint admin phải yêu cầu role/\allowbreak{}policy tương ứng; chỉ ẩn menu frontend không được xem là cơ chế bảo mật.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-014}\hfill\priority{P0}\par
+Người dùng phải có thể xem và cập nhật hồ sơ cơ bản gồm tên hiển thị, avatar, band hiện tại, band mục tiêu, ngày thi dự kiến và cài đặt học tập.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-015}\hfill\priority{P0}\par
+Hệ thống phải hỗ trợ yêu cầu xóa tài khoản và hiển thị rõ dữ liệu nào bị xóa, dữ liệu nào phải giữ tối thiểu vì nghĩa vụ pháp lý hoặc chống gian lận.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AUTH-016}\hfill\priority{P0}\par
+Trong MVP chỉ có Google login nên không cần chức năng quên/\allowbreak{}đặt lại mật khẩu local.
+\end{requirementbox}
+\subsection{Landing Page, thông báo và Trợ giúp \& Pháp lý}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-001}\hfill\priority{P0}\par
+Landing Page phải giải thích rõ BandUp là AI Writing Coach, không phải hệ thống chấm IELTS chính thức.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-002}\hfill\priority{P0}\par
+Landing Page phải trình bày ngắn gọn quy trình sử dụng, giá trị chính, bảng giá credit và giới hạn của AI grading.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-003}\hfill\priority{P0}\par
+Landing Page không được ép người dùng làm bài ngay sau đăng nhập hoặc onboarding.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-004}\hfill\priority{P0}\par
+Landing Page phải có đường dẫn rõ đến đăng nhập Google, bảng giá, Trợ giúp \& Pháp lý và thông báo hệ thống.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-005}\hfill\priority{P0}\par
+Hệ thống phải có bảng thông báo công khai cho bảo trì, cập nhật, ưu đãi và thay đổi chính sách.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-006}\hfill\priority{P0}\par
+Mỗi thông báo phải có tiêu đề, nội dung, mức độ, thời gian hiệu lực, trạng thái và đối tượng hiển thị.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-007}\hfill\priority{P0}\par
+Khu vực Trợ giúp \& Pháp lý phải gồm FAQ, điều khoản sử dụng, chính sách quyền riêng tư, chính sách thanh toán, chính sách hoàn credit, giới hạn AI và email hỗ trợ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-008}\hfill\priority{P0}\par
+Các tài liệu pháp lý phải có version, ngày hiệu lực và lịch sử cập nhật.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-009}\hfill\priority{P0}\par
+Người dùng phải có thể xem chính sách hiện hành trước khi thanh toán hoặc xóa tài khoản.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-LAND-010}\hfill\priority{P0}\par
+Các thay đổi chính sách quan trọng phải được thông báo cho user theo mức độ ảnh hưởng.
+\end{requirementbox}
+\subsection{Onboarding và Dashboard}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-001}\hfill\priority{P0}\par
+Sau lần đăng nhập đầu tiên, hệ thống phải hiển thị onboarding ngắn.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-002}\hfill\priority{P0}\par
+Onboarding phải cho phép user thiết lập band hiện tại, target band, ngày thi dự kiến và mục tiêu luyện tập.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-003}\hfill\priority{P0}\par
+Onboarding không được bắt buộc user phải làm bài ngay.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-004}\hfill\priority{P0}\par
+Dashboard phải hiển thị ba cách bắt đầu khi phù hợp: chọn đề, random đề và Redo Challenge.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-005}\hfill\priority{P0}\par
+Dashboard phải hiển thị số dư credit khả dụng và credit đang giữ chỗ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-006}\hfill\priority{P0}\par
+Dashboard phải hiển thị bài viết gần đây và draft chưa hoàn tất.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-007}\hfill\priority{P0}\par
+Dashboard phải hiển thị trạng thái của các bài đang được chấm.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-008}\hfill\priority{P0}\par
+Progress phải bắt đầu thống kê từ assessment đầu tiên.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-009}\hfill\priority{P0}\par
+Insight dạng kết luận phải hiển thị số mẫu và tránh khẳng định mạnh khi dữ liệu ít.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DASH-010}\hfill\priority{P0}\par
+Dashboard phải hiển thị thông báo quan trọng đang active nếu có.
+\end{requirementbox}
+\subsection{Danh mục đề Writing Prompt}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-001}\hfill\priority{P0}\par
+Mỗi đề phải có mã số/\allowbreak{}PromptNumber duy nhất và dễ hiển thị tương tự danh sách bài tập.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-002}\hfill\priority{P0}\par
+Hệ thống phải có trang danh sách đề Writing Task 2 đang active.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-003}\hfill\priority{P0}\par
+User phải có thể chọn một đề cụ thể từ danh sách.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-004}\hfill\priority{P0}\par
+User phải có thể yêu cầu hệ thống random một đề active.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-005}\hfill\priority{P0}\par
+User phải có thể chọn redo một đề đã hoàn thành trước đó.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-006}\hfill\priority{P0}\par
+Đề phải có nội dung câu hỏi, loại đề, topic, difficulty, tag và trạng thái.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-007}\hfill\priority{P0}\par
+Hệ thống không được phân phối đề Draft, Archived hoặc Inactive.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-008}\hfill\priority{P0}\par
+Random nên hạn chế lặp lại đề quá gần nhau khi còn đề khác phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-009}\hfill\priority{P0}\par
+Danh sách đề nên hiển thị trạng thái của user đối với từng đề: chưa làm, đang có draft, đã hoàn thành và đã redo.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-010}\hfill\priority{P0}\par
+Admin phải có thể tạo, sửa, lưu draft, review, publish, unpublish và archive đề.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROMPT-011}\hfill\priority{P0}\par
+Admin phải có thể tìm kiếm và lọc đề theo mã số, trạng thái, loại, topic và difficulty.
+\end{requirementbox}
+\subsection{Writing Room}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-001}\hfill\priority{P0}\par
+Writing Room phải hiển thị đầy đủ đề bài.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-002}\hfill\priority{P0}\par
+Writing Room phải có editor nhập văn bản.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-003}\hfill\priority{P0}\par
+Writing Room phải hiển thị word count theo thời gian thực.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-004}\hfill\priority{P0}\par
+Writing Room phải hiển thị timer mặc định 40 phút.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-005}\hfill\priority{P0}\par
+Timer phải bắt đầu khi người dùng bắt đầu phiên viết.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-006}\hfill\priority{P0}\par
+Người dùng phải có thể pause và resume phiên viết.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-007}\hfill\priority{P0}\par
+Khi pause, editor phải bị khóa.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-008}\hfill\priority{P0}\par
+Hệ thống phải ghi nhận tổng thời gian pause.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-009}\hfill\priority{P0}\par
+Hệ thống phải autosave draft định kỳ hoặc khi người dùng ngừng gõ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-010}\hfill\priority{P0}\par
+Người dùng phải có thể tiếp tục draft chưa nộp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-011}\hfill\priority{P0}\par
+Hệ thống phải cảnh báo trước khi người dùng rời trang khi có thay đổi chưa được lưu.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-012}\hfill\priority{P0}\par
+Hệ thống không được cho phép chỉnh sửa bài đã submit như một draft cũ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-013}\hfill\priority{P0}\par
+Hệ thống phải hiển thị giới hạn số từ tối đa.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-014}\hfill\priority{P0}\par
+Hệ thống phải từ chối full grading nếu bài dưới 200 từ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-015}\hfill\priority{P0}\par
+Hệ thống phải cảnh báo nếu bài có từ 200 đến 249 từ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-016}\hfill\priority{P0}\par
+Bài từ 250 từ trở lên phải được xử lý theo quy trình chấm bình thường.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-017}\hfill\priority{P0}\par
+Hệ thống phải từ chối bài vượt quá 350 từ theo giá trị MaxEssayWords có thể cấu hình.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-WRITE-018}\hfill\priority{P0}\par
+Người dùng phải xác nhận trước khi submit chính thức.
+\end{requirementbox}
+\subsection{Submission, trạng thái và credit reservation}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-001}\hfill\priority{P0}\par
+Khi user submit hợp lệ, hệ thống phải tạo một submission riêng và idempotency key.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-002}\hfill\priority{P0}\par
+Mỗi submission phải lưu prompt, essay, word count, thời gian làm bài và thời điểm nộp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-003}\hfill\priority{P0}\par
+Submission phải có trạng thái rõ ràng gồm tối thiểu: SUBMITTED, QUEUED, PROCESSING, COMPLETED, FAILED và CANCELLED.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-004}\hfill\priority{P0}\par
+Hệ thống phải kiểm tra auth, ownership, word limit, rate limit, app settings, budget cap và credit trước khi enqueue.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-005}\hfill\priority{P0}\par
+Nếu user đủ credit, hệ thống phải tạo CreditReservation trong cùng transaction logic với submission trước khi enqueue.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-006}\hfill\priority{P0}\par
+Credit giữ chỗ chưa được tính là đã tiêu.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-007}\hfill\priority{P0}\par
+Khi assessment hợp lệ được lưu và submission COMPLETED, reservation phải được capture thành giao dịch SPEND đúng một lần.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-008}\hfill\priority{P0}\par
+Khi job FAILED/\allowbreak{}CANCELLED hoàn toàn do hệ thống và không có kết quả sử dụng được, reservation phải được RELEASE đúng một lần.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-009}\hfill\priority{P0}\par
+Hệ thống phải chống double-submit, double-enqueue, double-capture và double-release.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-010}\hfill\priority{P0}\par
+Frontend phải hiển thị trạng thái đang chờ và cho phép user rời trang rồi quay lại.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-011}\hfill\priority{P0}\par
+Nếu grading thất bại, hệ thống phải hiển thị failure status và hướng xử lý phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUB-012}\hfill\priority{P0}\par
+Các tranh chấp không tự xử lý được phải tạo SupportTicket/\allowbreak{}RefundRequest, không chỉ phụ thuộc vào email rời rạc.
+\end{requirementbox}
+\subsection{AI Grading}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-001}\hfill\priority{P0}\par
+OpenAI là AI provider ban đầu của MVP và phải được truy cập qua IAiGradingProvider.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-002}\hfill\priority{P0}\par
+MVP chỉ sử dụng một model chấm chính: GPT-5.6 Terra. Tên model phải là cấu hình có version, không hard-code vào business logic, để có thể thay đổi sau benchmark mà không sửa luồng nghiệp vụ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-003}\hfill\priority{P0}\par
+Trước khi mở public production, model chấm chính phải được đánh giá trên một bộ bài có điểm tham chiếu và nhận xét của giáo viên/\allowbreak{}giám khảo; không xây dựng pipeline nhiều model trong MVP.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-004}\hfill\priority{P0}\par
+AI phải chấm theo bốn tiêu chí: Task Response, Coherence and Cohesion, Lexical Resource, Grammatical Range and Accuracy.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-005}\hfill\priority{P0}\par
+Kết quả phải có overall band và điểm từng tiêu chí từ 0 đến 9, bước 0.5.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-006}\hfill\priority{P0}\par
+Kết quả phải có summary, strengths, weaknesses và top score loss reasons.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-007}\hfill\priority{P0}\par
+Kết quả phải có sentence corrections, vocabulary suggestions, error taxonomy và next practice plan khi phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-008}\hfill\priority{P0}\par
+Hệ thống phải dùng structured output/\allowbreak{}JSON schema và backend phải validate trước khi lưu.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-009}\hfill\priority{P0}\par
+Backend phải validate score range, error code, string length, array length và các trường bắt buộc.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-010}\hfill\priority{P0}\par
+Retry phải phân biệt lỗi tạm thời và lỗi vĩnh viễn.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-011}\hfill\priority{P0}\par
+Mỗi grading job có tối đa 3 lần gọi AI tổng cộng: một lần gọi đầu tiên và tối đa hai lần retry cho lỗi transient, với exponential backoff và jitter cấu hình được.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-012}\hfill\priority{P0}\par
+Structured output không hợp lệ được phép một corrective retry nhưng vẫn nằm trong giới hạn 3 attempt tổng cộng. Lỗi 400, 401, 403, cấu hình prompt/\allowbreak{}schema sai hoặc budget cap bị vượt phải dừng và cảnh báo admin.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-013}\hfill\priority{P0}\par
+Hệ thống phải tránh tạo nhiều assessment cho một grading attempt thành công.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-014}\hfill\priority{P0}\par
+Mỗi assessment phải lưu model, prompt version và grading attempt.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-015}\hfill\priority{P0}\par
+Mỗi AI call phải lưu token usage, latency, success, error category và estimated cost.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-016}\hfill\priority{P0}\par
+AI không được thực hiện hành động thay đổi quyền, credit, payment hoặc dữ liệu admin.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-017}\hfill\priority{P0}\par
+Essay phải được xem là untrusted input và không được phép thay đổi system instruction.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-018}\hfill\priority{P0}\par
+Khi tỷ lệ lỗi provider vượt ngưỡng cấu hình, circuit breaker phải tạm dừng gọi mới, giữ job trong queue và cảnh báo admin.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-019}\hfill\priority{P0}\par
+Sau khi hết 3 attempt, submission chuyển FAILED, credit reservation được release và user có thể yêu cầu chấm lại miễn phí.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-AI-020}\hfill\priority{P0}\par
+Một model chấm phải tạo toàn bộ structured grading result trong một giai đoạn gọi AI; MVP không chia chấm điểm thành chuỗi nhiều model.
+\end{requirementbox}
+\subsection{Result Page}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-001}\hfill\priority{P0}\par
+Result Page phải hiển thị overall band nổi bật.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-002}\hfill\priority{P0}\par
+Result Page phải hiển thị điểm và nhận xét của bốn tiêu chí.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-003}\hfill\priority{P0}\par
+Result Page phải hiển thị điểm mạnh và điểm yếu.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-004}\hfill\priority{P0}\par
+Result Page phải hiển thị các nguyên nhân mất điểm quan trọng nhất.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-005}\hfill\priority{P0}\par
+Result Page phải hiển thị sentence corrections dưới dạng dễ so sánh.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-006}\hfill\priority{P0}\par
+Mỗi correction phải có câu gốc, câu sửa, loại lỗi và giải thích.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-007}\hfill\priority{P0}\par
+Result Page phải hiển thị vocabulary suggestions theo context.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-008}\hfill\priority{P0}\par
+Result Page phải hiển thị kế hoạch luyện tập tiếp theo nếu có.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-009}\hfill\priority{P0}\par
+Người dùng phải có thể xem lại toàn bộ bài đã viết.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-010}\hfill\priority{P0}\par
+Người dùng phải có thể điều hướng đến Mistake Bank và History.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-011}\hfill\priority{P0}\par
+Raw AI output không được render trực tiếp ra giao diện.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-RESULT-012}\hfill\priority{P0}\par
+Nội dung hiển thị phải được xử lý an toàn, không thực thi HTML/\allowbreak{}script.
+\end{requirementbox}
+\subsection{Model Essays}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MODEL-001}\hfill\priority{P0}\par
+Admin phải có thể gắn một hoặc nhiều bài mẫu với một đề.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MODEL-002}\hfill\priority{P0}\par
+Bài mẫu phải có band level và trạng thái review.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MODEL-003}\hfill\priority{P0}\par
+Chỉ bài mẫu được publish hoặc approved mới hiển thị cho người dùng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MODEL-004}\hfill\priority{P0}\par
+Hệ thống phải lưu source type và license note khi cần.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MODEL-005}\hfill\priority{P0}\par
+Không được sử dụng nội dung có bản quyền mà chưa có quyền phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MODEL-006}\hfill\priority{P0}\par
+Result Page có thể hiển thị bài mẫu phù hợp để người dùng tham khảo.
+\end{requirementbox}
+\subsection{Mistake Bank}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-001}\hfill\priority{P0}\par
+Các lỗi hợp lệ từ assessment phải được lưu vào Mistake Bank.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-002}\hfill\priority{P0}\par
+Mỗi lỗi phải liên kết với user, submission và assessment.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-003}\hfill\priority{P0}\par
+Mỗi lỗi phải có error group, error code, criterion và severity.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-004}\hfill\priority{P0}\par
+Mỗi lỗi phải lưu câu gốc, câu sửa và giải thích khi có.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-005}\hfill\priority{P0}\par
+Người dùng phải có thể lọc lỗi theo nhóm.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-006}\hfill\priority{P0}\par
+Người dùng phải có thể xem lỗi xuất hiện trong những bài nào.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-007}\hfill\priority{P0}\par
+Hệ thống phải thống kê các lỗi xuất hiện thường xuyên.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-008}\hfill\priority{P0}\par
+Hệ thống phải giữ lịch sử lỗi ngay cả khi taxonomy được đổi tên sau này.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-009}\hfill\priority{P0}\par
+Admin phải có thể tạo, sửa, sắp xếp và vô hiệu hóa error taxonomy.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-MISTAKE-010}\hfill\priority{P0}\par
+Error taxonomy đã được dùng không nên bị xóa cứng nếu làm mất lịch sử.
+\end{requirementbox}
+\subsection{Writing History}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-HISTORY-001}\hfill\priority{P0}\par
+Người dùng phải có thể xem danh sách các bài đã nộp.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-HISTORY-002}\hfill\priority{P0}\par
+Danh sách phải hiển thị đề, ngày nộp, trạng thái và overall band nếu có.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-HISTORY-003}\hfill\priority{P0}\par
+Người dùng phải có thể mở lại một submission.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-HISTORY-004}\hfill\priority{P0}\par
+Người dùng chỉ được xem submission thuộc tài khoản của mình.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-HISTORY-005}\hfill\priority{P0}\par
+History phải hỗ trợ phân trang khi số lượng bài lớn.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-HISTORY-006}\hfill\priority{P0}\par
+Người dùng nên có thể lọc theo thời gian, trạng thái hoặc loại đề.
+\end{requirementbox}
+\subsection{Progress Dashboard và insight}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-001}\hfill\priority{P0}\par
+Hệ thống phải hiển thị overall band ngay từ assessment đầu tiên.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-002}\hfill\priority{P0}\par
+Hệ thống phải hiển thị bốn tiêu chí, số lỗi theo nhóm, word count và time spent.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-003}\hfill\priority{P0}\par
+Với một bài, giao diện phải hiển thị dữ liệu hiện có nhưng ghi rõ cỡ mẫu nhỏ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-004}\hfill\priority{P0}\par
+Khi có nhiều bài, hệ thống phải hiển thị xu hướng theo thời gian.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-005}\hfill\priority{P0}\par
+Insight phải kèm số bài được dùng để tính và không được tạo kết luận giả.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-006}\hfill\priority{P0}\par
+Hệ thống có thể bắt đầu insight mô tả sau 1 bài, nhưng insight xu hướng hoặc khuyến nghị mạnh chỉ nên kích hoạt sau ngưỡng cấu hình, ví dụ 3-5 assessment.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-PROGRESS-007}\hfill\priority{P0}\par
+Các biểu đồ và insight chỉ được dùng dữ liệu thuộc user hiện tại.
+\end{requirementbox}
+\subsection{Redo Challenge}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-REDO-001}\hfill\priority{P0}\par
+Khi bắt đầu viết, user phải có thể chọn: - Chọn đề từ danh sách. - Random đề. - Redo một đề đã hoàn thành trước đó.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-REDO-002}\hfill\priority{P0}\par
+Redo phải tạo submission mới và không ghi đè bài cũ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-REDO-003}\hfill\priority{P0}\par
+Hệ thống phải liên kết bài redo với submission gốc.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-REDO-004}\hfill\priority{P0}\par
+Sau khi chấm xong, hệ thống phải hiển thị so sánh overall và bốn tiêu chí.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-REDO-005}\hfill\priority{P0}\par
+Hệ thống phải lưu RedoAttempt và số lần redo của prompt.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-REDO-006}\hfill\priority{P0}\par
+Recommendation tự động có thể dùng thời gian, điểm cũ, lỗi và số lần redo, nhưng user không cần chờ đủ số bài mới được chủ động redo.
+\end{requirementbox}
+\subsection{BandUp Credit và thanh toán payOS}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-001}\hfill\priority{P0}\par
+BandUp Credit là đơn vị quyền lợi nội bộ, không phải tiền pháp định và không được chuyển nhượng hoặc rút thành tiền trừ khi chính sách/\allowbreak{}pháp luật yêu cầu.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-002}\hfill\priority{P0}\par
+Free user được cấp 5 credit chấm bài theo chu kỳ cấu hình.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-003}\hfill\priority{P0}\par
+Hệ thống phải có CreditWallet, CreditLedger và CreditReservation.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-004}\hfill\priority{P0}\par
+Mọi biến động credit phải là ledger entry bất biến gồm loại giao dịch, số lượng, nguồn, reference, thời gian và số dư sau giao dịch.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-005}\hfill\priority{P0}\par
+Hệ thống phải hiển thị credit khả dụng, credit đang giữ chỗ và lịch sử biến động.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-006}\hfill\priority{P0}\par
+Mỗi submission chỉ được reserve/\allowbreak{}capture/\allowbreak{}release credit đúng một lần.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-007}\hfill\priority{P0}\par
+MVP phải hỗ trợ mua gói BandUp Credit bằng thanh toán tự động qua payOS.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-008}\hfill\priority{P0}\par
+payOS phải được tích hợp sau IPaymentGateway để có thể thay đổi payment provider trong tương lai.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-009}\hfill\priority{P0}\par
+Backend chỉ cộng credit sau khi xác minh webhook/\allowbreak{}signature và trạng thái giao dịch từ payOS. Return URL trên trình duyệt chỉ phục vụ trải nghiệm giao diện, không phải nguồn xác nhận cuối cùng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-010}\hfill\priority{P0}\par
+Webhook và order phải idempotent, không cộng credit hai lần.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-011}\hfill\priority{P0}\par
+Hệ thống phải lưu payment order, payment transaction, webhook event và refund.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-012}\hfill\priority{P0}\par
+Admin phải có thể xử lý manual credit adjustment/\allowbreak{}refund có reason và audit log.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-013}\hfill\priority{P0}\par
+User phải có thể gửi SupportTicket/\allowbreak{}RefundRequest và đính kèm bằng chứng. Email hỗ trợ dùng để thông báo và trao đổi, nhưng trạng thái chính phải được lưu trong app.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-014}\hfill\priority{P0}\par
+MVP bán các gói credit thanh toán một lần. Subscription định kỳ không thuộc MVP; chỉ xem xét sau khi dữ liệu sử dụng và nhu cầu thị trường chứng minh cần thiết.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-015}\hfill\priority{P0}\par
+Một lượt AI grading trong MVP tiêu tốn mặc định 1 credit; giá credit theo tính năng phải cấu hình được để mở rộng sau này.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-016}\hfill\priority{P0}\par
+Checkout payOS phải cung cấp mã VietQR/\allowbreak{}link thanh toán để user thanh toán bằng ứng dụng ngân hàng hỗ trợ NAPAS/\allowbreak{}VietQR.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-017}\hfill\priority{P0}\par
+Payment order phải có mã đơn duy nhất, số tiền, gói credit, trạng thái, thời gian hết hạn và idempotency key.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-018}\hfill\priority{P0}\par
+Hệ thống phải có reconciliation job để đối soát các đơn PENDING lâu, webhook bị thiếu hoặc trạng thái không nhất quán.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-019}\hfill\priority{P0}\par
+Credit chỉ được cộng một lần sau payment PAID; giao dịch CANCELLED, EXPIRED hoặc FAILED không được cộng credit.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-BILL-020}\hfill\priority{P0}\par
+Trang lịch sử thanh toán phải hiển thị mã đơn, gói, số tiền, thời gian, trạng thái và credit đã cộng.
+\end{requirementbox}
+\subsection{Hỗ trợ, tranh chấp và hoàn credit}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-001}\hfill\priority{P0}\par
+User phải có thể tạo support ticket trực tiếp trong ứng dụng thay vì chỉ gửi email rời rạc.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-002}\hfill\priority{P0}\par
+Ticket phải hỗ trợ các nhóm: grading failed, result quality dispute, duplicate credit charge, payment not credited, account problem, data deletion và other.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-003}\hfill\priority{P0}\par
+Ticket có thể liên kết với submission, payment hoặc credit transaction liên quan.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-004}\hfill\priority{P0}\par
+User phải có thể nhập mô tả, đính kèm bằng chứng và theo dõi trạng thái xử lý.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-005}\hfill\priority{P0}\par
+Trạng thái ticket tối thiểu gồm OPEN, IN\_\allowbreak{}REVIEW, WAITING\_\allowbreak{}FOR\_\allowbreak{}USER, RESOLVED, REJECTED và CLOSED.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-006}\hfill\priority{P0}\par
+Email hỗ trợ là kênh dự phòng và nhận thông báo; nguồn trạng thái chính của yêu cầu phải nằm trong hệ thống.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-007}\hfill\priority{P0}\par
+Hệ thống phải tự động release credit khi grading thất bại hoàn toàn do hệ thống và không có assessment hợp lệ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-008}\hfill\priority{P0}\par
+Tranh chấp chất lượng kết quả không tự động hoàn credit; admin có thể chọn re-grade miễn phí, hoàn credit hoặc giữ nguyên kết quả.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-009}\hfill\priority{P0}\par
+Mọi hoàn credit hoặc manual adjustment phải tạo credit ledger entry và admin audit log.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-010}\hfill\priority{P0}\par
+Support attachment phải được kiểm tra kích thước, loại file, quyền truy cập và malware theo khả năng hạ tầng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-011}\hfill\priority{P0}\par
+User chỉ được xem ticket của chính mình; admin chỉ được xem theo permission hỗ trợ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SUPPORT-012}\hfill\priority{P0}\par
+Hệ thống phải hiển thị thời gian phản hồi dự kiến theo chính sách, nhưng không cam kết SLA nếu chưa có nguồn lực vận hành.
+\end{requirementbox}
+\subsection{Notification}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-NOTIFY-001}\hfill\priority{P1}\par
+Hệ thống phải thông báo khi bài chấm hoàn tất.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-NOTIFY-002}\hfill\priority{P1}\par
+MVP có thể sử dụng thông báo trong ứng dụng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-NOTIFY-003}\hfill\priority{P1}\par
+Email notification là tùy chọn phát triển sau.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-NOTIFY-004}\hfill\priority{P1}\par
+Thông báo không được làm lộ thông tin nhạy cảm.
+\end{requirementbox}
+\subsection{Admin Portal}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-001}\hfill\priority{P0}\par
+Admin Dashboard phải hiển thị KPI tổng quan: total users, new users, DAU/\allowbreak{}WAU/\allowbreak{}MAU, submissions, grading success rate, queue, AI cost và revenue.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-002}\hfill\priority{P0}\par
+Admin phải quản lý Writing Prompts, Model Essays, Error Taxonomies, Announcements, FAQ và Legal Documents.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-003}\hfill\priority{P0}\par
+Admin User Management phải hỗ trợ tìm kiếm, lọc, phân trang và export có kiểm soát.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-004}\hfill\priority{P0}\par
+Danh sách user phải có tối thiểu: UserId, email, display name, role, status, created date, last login, last active, submissions count, submissions 7/\allowbreak{}30 days, credit available, plan và lifetime paid amount.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-005}\hfill\priority{P0}\par
+Trang chi tiết user phải có các tab: Overview, Activity, Writing Usage, Credit, Payments, Support, Security và Audit.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-006}\hfill\priority{P0}\par
+Admin phải xem được trạng thái ACTIVE, SUSPENDED, BLOCKED, DELETION\_\allowbreak{}PENDING hoặc DELETED/\allowbreak{}ANONYMIZED theo thiết kế dữ liệu.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-007}\hfill\priority{P0}\par
+Admin phải có thể suspend/\allowbreak{}unblock user, điều chỉnh credit và xử lý support/\allowbreak{}refund.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-008}\hfill\priority{P0}\par
+Mọi hành động thay đổi user, credit, payment hoặc setting phải có audit log.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-009}\hfill\priority{P0}\par
+Admin Finance phải xem gross revenue, successful/\allowbreak{}failed/\allowbreak{}refunded payments, revenue by package, credit sold/\allowbreak{}used/\allowbreak{}refunded và estimated gross margin.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-010}\hfill\priority{P0}\par
+Admin phải xem AI usage, estimated cost, latency, grading failure và provider status.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-011}\hfill\priority{P0}\par
+Admin phải xem Security Events, rate-limit events và blocked clients.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-012}\hfill\priority{P0}\par
+Admin phải bật/\allowbreak{}tắt Maintenance Mode, AI Grading và Free Grading.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-013}\hfill\priority{P0}\par
+Admin không được xem secret, Google token hoặc payment credential.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ADMIN-014}\hfill\priority{P0}\par
+Quyền đọc toàn bộ essay của user không được cấp mặc định; nếu cần hỗ trợ, phải có permission riêng, lý do truy cập và audit log.
+\end{requirementbox}
+\subsection{Security và Abuse Control}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-001}\hfill\priority{P0}\par
+Hệ thống phải rate limit theo user và/\allowbreak{}hoặc IP.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-002}\hfill\priority{P0}\par
+Hệ thống phải kiểm tra essay length trước khi gọi AI.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-003}\hfill\priority{P0}\par
+Hệ thống phải kiểm tra daily AI budget.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-004}\hfill\priority{P0}\par
+Hệ thống phải có kill switch cho AI grading.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-005}\hfill\priority{P0}\par
+Hệ thống phải có maintenance mode.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-006}\hfill\priority{P0}\par
+Hệ thống phải ghi Security Events cho các sự kiện quan trọng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-007}\hfill\priority{P0}\par
+Admin phải có thể block user hoặc client nghi ngờ.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-008}\hfill\priority{P0}\par
+Hệ thống không được log API key, mật khẩu hoặc payment secret.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-009}\hfill\priority{P0}\par
+Hệ thống phải bảo vệ form và endpoint phù hợp với cơ chế auth được chọn.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-SEC-010}\hfill\priority{P0}\par
+Dữ liệu AI trả về phải được sanitize trước khi hiển thị.
+\end{requirementbox}
+\subsection{Product Analytics}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ANALYTICS-001}\hfill\priority{P0}\par
+Hệ thống nên ghi nhận các sự kiện sản phẩm quan trọng.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ANALYTICS-002}\hfill\priority{P0}\par
+Các sự kiện tối thiểu gồm đăng ký, bắt đầu viết, submit, hoàn tất grading, xem result và nâng cấp gói.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ANALYTICS-003}\hfill\priority{P0}\par
+Analytics không được lưu nội dung essay nếu không cần thiết.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ANALYTICS-004}\hfill\priority{P0}\par
+Admin nên xem được số user đăng ký, active user, số submission, grading success rate và cost.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-ANALYTICS-005}\hfill\priority{P0}\par
+Hệ thống nên hỗ trợ đo funnel: Đăng ký  ->  Viết bài  ->  Submit  ->  Xem kết quả  ->  Quay lại  ->  Nâng cấp.   ============================================================
+\end{requirementbox}
+\subsection{Xóa tài khoản và dữ liệu}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-001}\hfill\priority{P0}\par
+User phải có thể bắt đầu quy trình xóa tài khoản trong phần Settings.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-002}\hfill\priority{P0}\par
+Trước khi xóa, hệ thống phải hiển thị popup cảnh báo rõ rằng bài viết, kết quả, Mistake Bank, tiến bộ và credit còn lại có thể mất vĩnh viễn.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-003}\hfill\priority{P0}\par
+User phải xác nhận bằng cụm từ được yêu cầu và re-authenticate bằng Google hoặc phiên xác thực gần nhất.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-004}\hfill\priority{P0}\par
+Sau khi xác nhận, hệ thống phải revoke toàn bộ BandUp session và ngăn phát sinh dữ liệu mới.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-005}\hfill\priority{P0}\par
+Hệ thống phải xóa hoặc anonymize hồ sơ, Google external identity, avatar, draft, essay, assessment, correction, suggestion, mistake, progress, redo, notification và support attachment.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-006}\hfill\priority{P0}\par
+Dữ liệu payment/\allowbreak{}accounting, refund và audit bắt buộc giữ phải được tối thiểu hóa, tách khỏi dữ liệu học tập và không dùng tiếp cho marketing/\allowbreak{}cá nhân hóa.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-007}\hfill\priority{P0}\par
+Payment record giữ lại phải thay thông tin nhận dạng không cần thiết bằng giá trị anonymous hoặc deleted user reference khi pháp luật cho phép.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-008}\hfill\priority{P0}\par
+Credit khuyến mại còn lại mất khi xóa; credit đã mua chưa dùng phải được xử lý theo chính sách refund được công bố trước khi user xác nhận.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-009}\hfill\priority{P0}\par
+Hệ thống phải ghi DataDeletionRequest và DeletionLedger để tránh dữ liệu bị khôi phục lại ngoài ý muốn từ backup.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-010}\hfill\priority{P0}\par
+Dữ liệu chính phải được xóa/\allowbreak{}anonymize trong thời hạn công bố; backup không chỉnh sửa từng bản mà tự hết hạn theo lifecycle tối đa 30 ngày.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-011}\hfill\priority{P0}\par
+Sau khi hoàn tất, user phải nhận thông báo xác nhận không chứa dữ liệu nhạy cảm.
+\end{requirementbox}
+\begin{requirementbox}[BandBlue]
+\textbf{FR-DELETE-012}\hfill\priority{P0}\par
+Quy trình xóa phải có log lỗi và cơ chế tiếp tục xử lý nếu một provider bên thứ ba tạm thời không khả dụng.
+\end{requirementbox}
+\section{Yêu cầu phi chức năng}
+\subsection{Hiệu năng}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-001}\par
+Các API không gọi AI nên có thời gian phản hồi trung vị dưới 500 ms trong điều kiện tải bình thường.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-002}\par
+Các thao tác đọc dashboard phổ biến nên hoàn tất trong vòng 2 giây.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-003}\par
+Autosave không được làm editor bị giật hoặc khóa giao diện đáng kể.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-004}\par
+Submission request phải trả về trạng thái đã tiếp nhận mà không chờ AI chấm xong.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-005}\par
+Hệ thống phải dùng queue cho grading.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-006}\par
+Số worker gọi AI đồng thời phải có thể cấu hình.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PERF-007}\par
+Danh sách history và admin phải hỗ trợ phân trang.
+\end{requirementbox}
+\subsection{Khả năng mở rộng và thay thế provider}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-001}\par
+MVP phải hỗ trợ ít nhất 1.000 registered users.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-002}\par
+Hệ thống phải hỗ trợ 100-500 user đồng thời đang truy cập hoặc viết bài trong điều kiện hạ tầng phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-003}\par
+Grading phải đi qua queue và số worker phải cấu hình được.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-004}\par
+AI provider phải nằm sau IAiGradingProvider.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-005}\par
+Object/\allowbreak{}file storage phải nằm sau IObjectStorage hoặc IFileStorage. LocalFileStorage được dùng khi dev; cloud implementation được chọn khi deploy.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-006}\par
+Payment provider phải nằm sau IPaymentGateway.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-007}\par
+Email provider phải nằm sau IEmailSender.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-008}\par
+Không nên tạo một ISqlProvider tổng quát chỉ để che toàn bộ database. EF Core đã là lớp abstraction chính; provider SQL Server/\allowbreak{}PostgreSQL được cấu hình trong Infrastructure và raw SQL phải được cô lập.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-009}\par
+Nếu dùng Dapper, có thể dùng IDbConnectionFactory để thay connection/\allowbreak{}provider, nhưng vẫn phải chấp nhận migration và SQL dialect có thể cần sửa.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-010}\par
+Hosting/\allowbreak{}container provider không cần interface trong business code. Ứng dụng phải đóng gói bằng container, dùng environment variables và không phụ thuộc trực tiếp vào SDK riêng của VPS/\allowbreak{}cloud nếu chưa cần.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SCALE-011}\par
+Cache provider có thể được bổ sung qua ICacheService khi phát sinh nhu cầu thực tế.
+\end{requirementbox}
+\subsection{Độ tin cậy, retry và phục hồi}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-001}\par
+Autosave phải hạn chế mất quá 10 giây nội dung trong điều kiện bình thường.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-002}\par
+Mỗi grading job có tối đa 3 attempt tổng cộng, chỉ retry lỗi transient theo backoff cấu hình; không retry lỗi request, authentication, policy hoặc validation vĩnh viễn.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-003}\par
+Retry phải idempotent và không tạo dữ liệu, payment hoặc credit trùng.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-004}\par
+Hệ thống phải ghi failure reason và error category khi job thất bại.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-005}\par
+Tạo submission và reserve credit phải nhất quán; capture/\allowbreak{}release phải atomic hoặc có cơ chế bù trừ an toàn.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-006}\par
+Payment webhook phải có signature verification, idempotency và reconciliation job.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-007}\par
+Database phải được backup định kỳ khi chạy production.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-008}\par
+Phải có quy trình khôi phục tối thiểu cho user, credit và payment data.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-009}\par
+Circuit breaker phải ngăn hệ thống tiếp tục gọi provider khi lỗi diện rộng và phải tự thử phục hồi theo khoảng thời gian cấu hình.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-010}\par
+Job hết retry phải chuyển vào trạng thái/\allowbreak{}queue có thể điều tra; không được retry vô hạn.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-REL-011}\par
+Payment reconciliation phải chạy định kỳ để phát hiện webhook thiếu hoặc trạng thái thanh toán không đồng bộ.
+\end{requirementbox}
+\subsection{Bảo mật}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-001}\par
+BandUp web MVP nên dùng Google OAuth kết hợp ASP.NET Core Identity và cookie authentication thay vì tự phát hành JWT cho trình duyệt.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-002}\par
+Authentication cookie phải Secure, HttpOnly, có SameSite phù hợp, thời hạn hợp lý và chỉ được gửi qua HTTPS ở production.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-003}\par
+Các request thay đổi dữ liệu phải có CSRF protection phù hợp với cookie auth.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-004}\par
+Authorization phải dùng role/\allowbreak{}policy/\allowbreak{}claim và ownership check ở backend.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-005}\par
+API key, Google client secret, payment secret và connection string chỉ được lưu ở backend secret/\allowbreak{}configuration.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-006}\par
+Dữ liệu user và AI output phải được render an toàn chống XSS.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-007}\par
+Hệ thống phải rate limit endpoint đăng nhập callback, submit, payment, support upload và admin action có nguy cơ abuse.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-008}\par
+Log phải mask dữ liệu nhạy cảm và không lưu Google access token nếu không cần.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-009}\par
+Hệ thống phải kiểm tra ownership khi đọc draft, submission, result, progress, credit và support ticket.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-SEC-010}\par
+Dependency phải được cập nhật và kiểm tra lỗ hổng định kỳ.
+\end{requirementbox}
+\subsection{Quyền riêng tư, xóa dữ liệu và retention}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-001}\par
+Chỉ thu thập dữ liệu cần thiết cho mục đích học tập, vận hành và thanh toán.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-002}\par
+User phải được thông báo rằng essay được gửi đến AI provider để chấm.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-003}\par
+Không sử dụng essay để huấn luyện, marketing hoặc mục đích khác nếu chưa có cơ sở pháp lý/\allowbreak{}sự đồng ý phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-004}\par
+User phải có thể yêu cầu xóa tài khoản.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-005}\par
+Khi xóa, hệ thống phải xóa hoặc anonymize hồ sơ, Google external login, draft, essay, assessment, error, progress, support attachment và session trong thời hạn công bố.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-006}\par
+Không thể cam kết xóa tuyệt đối mọi bản ghi nếu một phần dữ liệu phải lưu để tuân thủ kế toán, thuế, chống gian lận, tranh chấp hoặc yêu cầu pháp luật. Những bản ghi giữ lại phải tối thiểu hóa và tách khỏi dữ liệu học tập.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-007}\par
+Essay và kết quả học tập có thể được lưu trong suốt thời gian tài khoản active, nhưng phải bị xóa/\allowbreak{}anonymize khi user xóa tài khoản, trừ trường hợp pháp luật khác.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-008}\par
+Application log mặc định nên lưu 30-90 ngày; security log/\allowbreak{}audit thường 12-24 tháng, trừ khi có incident hoặc yêu cầu khác.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-009}\par
+Payment/\allowbreak{}accounting records phải lưu theo thời hạn pháp luật hiện hành; không gắn tuyên bố “lưu vĩnh viễn” cho toàn bộ dữ liệu.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-010}\par
+Privacy Policy phải mô tả retention theo từng nhóm dữ liệu và dữ liệu được chuyển cho Google, OpenAI, payment, email hoặc storage provider.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-011}\par
+Main database và object storage phải xóa/\allowbreak{}anonymize dữ liệu thuộc phạm vi xóa trong tối đa 24 giờ sau khi yêu cầu được xác nhận, trừ sự cố được ghi nhận.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-012}\par
+Backup production sử dụng rolling lifecycle tối đa 30 ngày; nếu restore backup phải chạy lại DeletionLedger.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-PRIV-013}\par
+Raw AI request/\allowbreak{}response không được lưu mặc định; nếu cần debug phải giới hạn tối đa 7 ngày, mã hóa và kiểm soát truy cập.
+\end{requirementbox}
+\subsection{Khả dụng và trải nghiệm}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-001}\par
+Giao diện phải responsive trên desktop, tablet và mobile web phổ biến.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-002}\par
+Luồng bắt đầu viết phải dễ tìm từ Dashboard.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-003}\par
+Thông báo lỗi phải dễ hiểu và hướng dẫn bước tiếp theo.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-004}\par
+Người dùng phải luôn biết bài đang ở trạng thái nào.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-005}\par
+Result Page phải ưu tiên thông tin quan trọng, tránh quá tải nội dung.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-006}\par
+Màu sắc không được là cách duy nhất để truyền đạt trạng thái.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-007}\par
+Các control chính phải hỗ trợ sử dụng bàn phím ở mức cơ bản.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-008}\par
+Onboarding phải hoàn tất trong vài bước ngắn và có thể bỏ qua các trường không bắt buộc.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-UX-009}\par
+Không được dùng dark pattern để ép user mua credit, làm bài ngay hoặc từ bỏ quyền xóa dữ liệu.
+\end{requirementbox}
+\subsection{Khả năng bảo trì}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-001}\par
+Hệ thống nên sử dụng Modular Monolith ở giai đoạn đầu.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-002}\par
+Business logic không được hard-code trong frontend.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-003}\par
+Các rule quan trọng phải có automated test.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-004}\par
+Database migration phải được quản lý bằng mã nguồn.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-005}\par
+Prompt chấm bài phải có version.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-006}\par
+Error taxonomy phải có thể cập nhật mà không phá lịch sử.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-MAINT-007}\par
+Tài liệu API, schema và deployment phải được cập nhật cùng code.
+\end{requirementbox}
+\subsection{Observability}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-001}\par
+Mỗi request quan trọng phải có correlation hoặc trace identifier khi phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-002}\par
+Mỗi AI call phải có log usage và latency.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-003}\par
+Mỗi grading job phải có log trạng thái.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-004}\par
+Các admin action quan trọng phải được audit.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-005}\par
+Hệ thống phải theo dõi queue length, failure rate và AI cost.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-006}\par
+Log production phải có mức độ Information, Warning, Error và Critical.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-007}\par
+Không được log toàn bộ essay ở mức mặc định nếu không cần thiết.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-008}\par
+Hệ thống phải theo dõi tỷ lệ reserve/\allowbreak{}capture/\allowbreak{}release credit và phát hiện reservation treo.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-OBS-009}\par
+Hệ thống phải theo dõi payment webhook success rate, reconciliation mismatch và thời gian cộng credit.
+\end{requirementbox}
+\subsection{Tương thích}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-COMPAT-001}\par
+Ứng dụng web phải hỗ trợ các phiên bản gần đây của Chrome, Edge và Safari.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-COMPAT-002}\par
+Frontend và backend phải sử dụng UTF-8.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-COMPAT-003}\par
+Hệ thống phải hiển thị đúng tiếng Việt có dấu.
+\end{requirementbox}
+\subsection{Pháp lý và minh bạch}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-LEGAL-001}\par
+Sản phẩm phải ghi rõ điểm số chỉ mang tính ước lượng.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-LEGAL-002}\par
+Không được tự nhận là công cụ chấm chính thức của IELTS, IDP, British Council hoặc Cambridge.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-LEGAL-003}\par
+Nội dung bài mẫu phải có nguồn gốc và quyền sử dụng phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-LEGAL-004}\par
+Trước khi thu tiền public, phải có điều khoản sử dụng, chính sách quyền riêng tư và chính sách thanh toán phù hợp.   ============================================================
+\end{requirementbox}
+\begin{requirementbox}[BandGreen]
+\textbf{NFR-LEGAL-005}\par
+Trước public production có thanh toán, điều khoản, chính sách quyền riêng tư, retention và hoàn tiền phải được rà soát theo pháp luật Việt Nam hiện hành.
+\end{requirementbox}
+\section{Business Rules}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-001}\par
+Bài dưới 200 từ không được chấm full.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-002}\par
+Bài từ 200 đến 249 từ có thể submit sau cảnh báo.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-003}\par
+Bài từ 250 đến 350 từ được xử lý bình thường nếu đáp ứng điều kiện khác.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-004}\par
+Bài trên 350 từ không được enqueue; MaxEssayWords phải cấu hình được.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-005}\par
+Điểm từ 0 đến 9, bước 0.5.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-006}\par
+Free user được cấp 5 credit theo chu kỳ cấu hình.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-007}\par
+Submit hợp lệ phải reserve credit; chỉ COMPLETED mới capture credit.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-008}\par
+FAILED/\allowbreak{}CANCELLED do hệ thống phải release reservation đúng một lần.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-009}\par
+Mỗi submission chỉ có một grading result thành công cho một attempt logic.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-010}\par
+Random, select prompt và redo đều là cách bắt đầu hợp lệ.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-011}\par
+Mỗi prompt phải có mã số duy nhất.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-012}\par
+Chỉ đề active/\allowbreak{}published và Model Essay approved mới hiển thị.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-013}\par
+Progress thống kê từ bài đầu tiên; insight phải nêu rõ cỡ mẫu.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-014}\par
+AI không có quyền quyết định role, credit, payment hoặc admin action.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-015}\par
+Mọi payment webhook, credit transaction và retry phải idempotent.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-016}\par
+Admin action quan trọng phải có audit log.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-017}\par
+User chỉ được xem dữ liệu thuộc tài khoản của mình.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-018}\par
+Teacher/\allowbreak{}Student là role/\allowbreak{}profile của User, không phải tài khoản kế thừa tách biệt.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-019}\par
+Daily AI budget cap có quyền chặn grading mới.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-020}\par
+User deletion xóa/\allowbreak{}anonymize dữ liệu học tập; payment/\allowbreak{}accounting record giữ lại tối thiểu theo pháp luật và không được dùng tiếp cho mục đích khác.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-021}\par
+Một AI grading thành công trong MVP tiêu tốn mặc định 1 BandUp Credit.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-022}\par
+Mỗi grading job có tối đa 3 attempt tổng cộng; không retry vô hạn.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-023}\par
+MVP sử dụng một model chấm chính GPT-5.6 Terra; không có chuỗi nhiều model.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-024}\par
+PayOS là payment provider mặc định cho MVP nhưng phải nằm sau IPaymentGateway.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-025}\par
+Chỉ webhook payOS đã xác minh hoặc kết quả đối soát backend mới được phép cộng credit.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-026}\par
+Rate limit mặc định: tối đa 3 submit grading/\allowbreak{}5 phút/\allowbreak{}user và 10 submit grading/\allowbreak{}5 phút/\allowbreak{}IP; các giá trị phải cấu hình được.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-027}\par
+Tranh chấp chất lượng kết quả không tự động hoàn credit; cần review hoặc re-grade theo support policy.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-028}\par
+Xóa tài khoản có hiệu lực ngay với quyền truy cập; dữ liệu học tập được purge/\allowbreak{}anonymize theo deletion workflow.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-029}\par
+Backup production tự hết hạn trong tối đa 30 ngày và phải áp dụng lại DeletionLedger sau restore.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-030}\par
+Admin không có quyền đọc essay mặc định; quyền này phải riêng biệt, có lý do và audit.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-031}\par
+Model Essay phải được review/\allowbreak{}approved và có nguồn hoặc license note phù hợp.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-032}\par
+Credit khuyến mại không quy đổi tiền; credit đã mua chưa dùng được xử lý theo chính sách refund công bố.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-033}\par
+Support ticket là nguồn trạng thái chính; email chỉ là kênh thông báo và dự phòng.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-034}\par
+User profile, essay và progress không được lưu vĩnh viễn sau khi user xóa tài khoản.
+\end{requirementbox}
+\begin{requirementbox}[BandOrange]
+\textbf{BR-035}\par
+Payment/\allowbreak{}accounting record được giữ tối thiểu theo nghĩa vụ pháp luật và được tách khỏi dữ liệu học tập.
+\end{requirementbox}
+\section{Mô hình trạng thái nghiệp vụ}
+\subsection{Trạng thái tài khoản}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.19\textwidth}|P{0.36\textwidth}|P{0.16\textwidth}|P{0.21\textwidth}|}
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} & \textbf{Cho đăng nhập?} & \textbf{Hành động chính} \\ \hline
+\endfirsthead
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} & \textbf{Cho đăng nhập?} & \textbf{Hành động chính} \\ \hline
+\endhead
+ACTIVE & Tài khoản hoạt động bình thường & Có & Sử dụng theo role/\allowbreak{}credit \\ \hline
+SUSPENDED & Tạm khóa do hỗ trợ, vi phạm hoặc điều tra & Không/\allowbreak{}giới hạn & Admin review và mở lại \\ \hline
+BLOCKED & Bị chặn do abuse/\allowbreak{}security & Không & Security admin xử lý \\ \hline
+DELETION\_\allowbreak{}PENDING & Đã xác nhận xóa, đang purge/\allowbreak{}anonymize & Không & Deletion workflow \\ \hline
+DELETED/\allowbreak{}ANONYMIZED & Đã xóa dữ liệu active; chỉ còn dữ liệu tối thiểu bắt buộc & Không & Không khôi phục tài khoản cũ \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Trạng thái Submission và Grading}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.22\textwidth}|P{0.47\textwidth}|P{0.23\textwidth}|}
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} & \textbf{Credit} \\ \hline
+\endfirsthead
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} & \textbf{Credit} \\ \hline
+\endhead
+DRAFT & Bài đang viết, chưa submit & Không giữ chỗ \\ \hline
+SUBMITTED & Backend đã tiếp nhận và kiểm tra & Chuẩn bị reserve \\ \hline
+QUEUED & Đã reserve credit và chờ worker & RESERVED \\ \hline
+PROCESSING & Worker đang gọi/\allowbreak{}validate AI & RESERVED \\ \hline
+RETRY\_\allowbreak{}SCHEDULED & Lỗi transient, chờ attempt tiếp theo & RESERVED \\ \hline
+COMPLETED & Assessment hợp lệ đã lưu & CAPTURED/\allowbreak{}SPENT \\ \hline
+FAILED & Hết attempt hoặc lỗi không retry & RELEASED nếu lỗi hệ thống \\ \hline
+CANCELLED & Bị hủy trước kết quả hợp lệ & RELEASED theo rule \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Trạng thái Payment}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.22\textwidth}|P{0.50\textwidth}|P{0.20\textwidth}|}
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} & \textbf{Cộng credit?} \\ \hline
+\endfirsthead
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} & \textbf{Cộng credit?} \\ \hline
+\endhead
+CREATED & Order nội bộ đã tạo & Không \\ \hline
+PENDING & Đang chờ user thanh toán/\allowbreak{}payOS xác nhận & Không \\ \hline
+PAID & Webhook/\allowbreak{}đối soát đã xác minh & Có, đúng một lần \\ \hline
+CANCELLED & User hoặc provider hủy & Không \\ \hline
+EXPIRED & Hết hạn thanh toán & Không \\ \hline
+FAILED & Giao dịch lỗi & Không \\ \hline
+REFUNDED & Đã hoàn tiền theo policy & Điều chỉnh ledger theo quyết định \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Trạng thái Support Ticket}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.25\textwidth}|P{0.67\textwidth}|}
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} \\ \hline
+\endfirsthead
+\hline
+\textbf{Trạng thái} & \textbf{Ý nghĩa} \\ \hline
+\endhead
+OPEN & Ticket mới \\ \hline
+IN\_\allowbreak{}REVIEW & Admin đang điều tra \\ \hline
+WAITING\_\allowbreak{}FOR\_\allowbreak{}USER & Cần thêm thông tin/\allowbreak{}bằng chứng \\ \hline
+RESOLVED & Đã có phương án xử lý \\ \hline
+REJECTED & Yêu cầu không được chấp nhận, có lý do \\ \hline
+CLOSED & Ticket kết thúc \\ \hline
+\end{longtable}
+\normalsize
+\section{Chính sách retry, rate limit và circuit breaker}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.27\textwidth}|P{0.49\textwidth}|P{0.16\textwidth}|}
+\hline
+\textbf{Tình huống} & \textbf{Xử lý} & \textbf{Credit} \\ \hline
+\endfirsthead
+\hline
+\textbf{Tình huống} & \textbf{Xử lý} & \textbf{Credit} \\ \hline
+\endhead
+Timeout, network, HTTP 429, 5xx & Retry với backoff; tối đa 3 attempt tổng cộng & Giữ RESERVED \\ \hline
+Structured output sai & Một corrective retry nếu còn attempt & Giữ RESERVED \\ \hline
+HTTP 400 & Không retry; kiểm tra request/\allowbreak{}prompt & Release khi FAILED \\ \hline
+HTTP 401/\allowbreak{}403 & Không retry; cảnh báo secret/\allowbreak{}config & Release khi FAILED \\ \hline
+Budget cap /\allowbreak{} AI disabled & Không gọi AI & Không reserve hoặc release \\ \hline
+Provider lỗi diện rộng & Mở circuit breaker, giữ job trong queue, cảnh báo admin & Giữ RESERVED có timeout policy \\ \hline
+Hết attempt & FAILED; release; cho phép re-grade miễn phí & RELEASED \\ \hline
+\end{longtable}
+\normalsize
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.25\textwidth}|P{0.39\textwidth}|}
+\hline
+\textbf{Giới hạn mặc định} & \textbf{Giá trị} & \textbf{Ghi chú} \\ \hline
+\endfirsthead
+\hline
+\textbf{Giới hạn mặc định} & \textbf{Giá trị} & \textbf{Ghi chú} \\ \hline
+\endhead
+Submit grading/\allowbreak{}user & 3 lần /\allowbreak{} 5 phút & Cấu hình được; credit vẫn được kiểm tra riêng \\ \hline
+Submit grading/\allowbreak{}IP & 10 lần /\allowbreak{} 5 phút & Chống tạo nhiều account/\allowbreak{}abuse \\ \hline
+AI attempt/\allowbreak{}job & 3 tổng cộng & 1 initial + tối đa 2 retry \\ \hline
+Essay & 200-350 từ & 200-249 cần xác nhận cảnh báo \\ \hline
+Free credit & 5 /\allowbreak{} chu kỳ tháng & Chu kỳ và số lượng cấu hình được \\ \hline
+\end{longtable}
+\normalsize
+\section{Chính sách Credit, thanh toán và hoàn credit}
+\subsection{Credit lifecycle}
+\begin{flowbox}
+\flowstep{AVAILABLE}
+\flowarrow
+\flowstep{RESERVED khi submit}
+\flowarrow
+\flowstep{CAPTURED khi COMPLETED}
+\end{flowbox}
+Nếu job thất bại hoàn toàn do hệ thống hoặc bị hủy trước khi có kết quả hợp lệ, reservation chuyển sang RELEASED và credit quay về số dư khả dụng.
+
+\subsection{Khi nào tự động hoàn và khi nào cần review}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.38\textwidth}|P{0.54\textwidth}|}
+\hline
+\textbf{Tình huống} & \textbf{Xử lý} \\ \hline
+\endfirsthead
+\hline
+\textbf{Tình huống} & \textbf{Xử lý} \\ \hline
+\endhead
+Job hết retry, không có assessment & Tự động release credit \\ \hline
+Double charge/\allowbreak{}double capture & Tự động hoặc admin hoàn phần trùng; có audit \\ \hline
+AI grading bị tắt sau khi reserve & Release credit \\ \hline
+User không hài lòng về band/\allowbreak{}feedback & Tạo ticket; không tự động hoàn \\ \hline
+Result thiếu phần quan trọng & Admin chọn re-grade miễn phí hoặc hoàn credit \\ \hline
+User submit nhầm & Không tự động hoàn; áp dụng policy công bố \\ \hline
+Payment PAID nhưng chưa cộng credit & Reconciliation hoặc support; cộng đúng một lần \\ \hline
+\end{longtable}
+\normalsize
+\subsection{payOS checkout}
+\begin{flowbox}
+\flowstep{Chọn gói credit}
+\flowarrow
+\flowstep{Tạo Payment Order}
+\flowarrow
+\flowstep{payOS checkout/\allowbreak{}VietQR}
+\flowarrow
+\flowstep{User quét bằng app ngân hàng}
+\flowarrow
+\flowstep{payOS webhook}
+\flowarrow
+\flowstep{Xác minh signature + idempotency}
+\flowarrow
+\flowstep{Cộng credit}
+\flowarrow
+\flowstep{Hiển thị receipt}
+\end{flowbox}
+\section{Chính sách quyền riêng tư, xóa tài khoản và retention}
+\subsection{Popup xóa tài khoản}
+\begin{warningbox}
+\textbf{Nội dung cảnh báo tối thiểu:} Sau khi xác nhận, bài viết, kết quả chấm, Mistake Bank, tiến bộ, draft, lịch sử luyện tập và dữ liệu cá nhân sẽ bị xóa hoặc ẩn danh và không thể khôi phục. Credit còn lại được xử lý theo chính sách đã công bố. Một số chứng từ thanh toán và audit tối thiểu có thể phải giữ theo pháp luật. User sẽ bị đăng xuất khỏi mọi thiết bị.
+\end{warningbox}
+\subsection{Retention baseline}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.27\textwidth}|P{0.25\textwidth}|P{0.40\textwidth}|}
+\hline
+\textbf{Loại dữ liệu} & \textbf{Thời hạn} & \textbf{Khi user xóa tài khoản} \\ \hline
+\endfirsthead
+\hline
+\textbf{Loại dữ liệu} & \textbf{Thời hạn} & \textbf{Khi user xóa tài khoản} \\ \hline
+\endhead
+Profile/\allowbreak{}Google identity & Trong thời gian account active & Xóa/\allowbreak{}anonymize ngay trong deletion workflow \\ \hline
+Essay, assessment, correction, mistake, progress, redo & Trong thời gian account active & Xóa khi user xóa account \\ \hline
+Draft đã bỏ dở & 90 ngày không hoạt động & Purge tự động \\ \hline
+Raw AI request/\allowbreak{}response & Không lưu mặc định; tối đa 7 ngày khi debug & Purge tự động, quyền truy cập hạn chế \\ \hline
+Application log & 30 ngày & Không lưu essay/\allowbreak{}secret mặc định \\ \hline
+Error log & 90 ngày & Mask dữ liệu nhạy cảm \\ \hline
+Security event & 12 tháng & Có thể kéo dài nếu incident \\ \hline
+Admin audit thông thường & 24 tháng & Payment/\allowbreak{}refund audit theo payment retention \\ \hline
+Support ticket & 12 tháng sau khi đóng & Anonymize/\allowbreak{}xóa khi phù hợp \\ \hline
+Support attachment & 90 ngày sau khi đóng ticket & Xóa object storage \\ \hline
+Product analytics thô & 13 tháng & Không chứa essay; anonymize sau xóa \\ \hline
+Analytics tổng hợp đã ẩn danh & Có thể lưu dài hơn & Không thể truy ngược user \\ \hline
+Database backup & Rolling tối đa 30 ngày & Restore phải áp dụng DeletionLedger \\ \hline
+Payment/\allowbreak{}accounting records & Baseline thận trọng 10 năm hoặc thời hạn pháp luật áp dụng & Tối thiểu hóa định danh; rà soát pháp lý trước production \\ \hline
+\end{longtable}
+\normalsize
+\begin{importantbox}
+Retention trên là baseline sản phẩm, không thay thế tư vấn pháp lý. Trước public production có thanh toán, cần rà soát nghĩa vụ theo Luật Bảo vệ dữ liệu cá nhân và Luật Kế toán hiện hành.
+\end{importantbox}
+\section{Provider abstraction và nguyên tắc triển khai VPS}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.18\textwidth}|P{0.22\textwidth}|P{0.25\textwidth}|P{0.27\textwidth}|}
+\hline
+\textbf{Phạm vi} & \textbf{Interface/\allowbreak{}abstraction} & \textbf{Implementation MVP} & \textbf{Nguyên tắc} \\ \hline
+\endfirsthead
+\hline
+\textbf{Phạm vi} & \textbf{Interface/\allowbreak{}abstraction} & \textbf{Implementation MVP} & \textbf{Nguyên tắc} \\ \hline
+\endhead
+AI & IAiGradingProvider & OpenAiGradingProvider & Business core không phụ thuộc SDK/\allowbreak{}model cụ thể \\ \hline
+Payment & IPaymentGateway & PayOsPaymentGateway & Webhook verification, idempotency, reconciliation \\ \hline
+Object storage & IObjectStorage & Local khi dev; S3-compatible/\allowbreak{}cloud khi deploy & Avatar/\allowbreak{}support attachment; essay text ở database \\ \hline
+Email & IEmailSender & Development sink; SMTP/\allowbreak{}provider production & Email là notification/\allowbreak{}dự phòng \\ \hline
+Queue & IGradingJobQueue & Hangfire adapter & Không để controller phụ thuộc trực tiếp job engine \\ \hline
+Database & EF Core DbContext/\allowbreak{}provider & Local SQL khi dev; managed/\allowbreak{}self-hosted SQL khi deploy & Không tạo ISqlProvider khổng lồ; cô lập raw SQL \\ \hline
+Cache & ICacheService khi thật sự cần & Chưa bắt buộc MVP & Không tạo abstraction sớm nếu chưa có use case \\ \hline
+\end{longtable}
+\normalsize
+Production dự kiến chạy trên VPS bằng container và reverse proxy. Khả năng di chuyển hạ tầng đến từ Docker image, environment variables, health checks, backup/\allowbreak{}restore và việc không hard-code provider; không cần tạo interface ICloudProvider trong business code.
+
+\section{Acceptance Criteria}
+
+\begin{acceptancebox}
+\textbf{AC-AUTH-001 - Google login lần đầu}\par
+\textbf{Given:} User chưa có local account và chọn Tiếp tục với Google.\par
+\textbf{When:} Google trả identity hợp lệ, email verified và callback thành công.\par
+\textbf{Then:} BandUp tạo local User, liên kết Google subject, tạo secure application cookie và chuyển đến onboarding; không lưu mật khẩu Google.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AUTH-002 - Google login lần sau}\par
+\textbf{Given:} User đã liên kết Google account và trạng thái ACTIVE.\par
+\textbf{When:} User đăng nhập lại bằng cùng Google identity.\par
+\textbf{Then:} Hệ thống dùng đúng local User, không tạo tài khoản trùng và tạo session mới.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AUTH-003 - Tài khoản bị khóa}\par
+\textbf{Given:} User có trạng thái SUSPENDED/\allowbreak{}BLOCKED/\allowbreak{}DELETION\_\allowbreak{}PENDING.\par
+\textbf{When:} Google callback xác thực thành công.\par
+\textbf{Then:} BandUp không tạo application session và hiển thị thông báo phù hợp.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AUTH-004 - Authorization admin}\par
+\textbf{Given:} User role USER đang đăng nhập.\par
+\textbf{When:} User gọi endpoint hoặc route admin.\par
+\textbf{Then:} Backend trả forbidden/\allowbreak{}unauthorized phù hợp và không trả dữ liệu admin; việc ẩn menu frontend không được xem là đủ.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-DASH-001 - Onboarding không ép làm bài}\par
+\textbf{Given:} User đăng nhập lần đầu.\par
+\textbf{When:} User hoàn tất hoặc bỏ qua các trường onboarding cho phép.\par
+\textbf{Then:} User vào Dashboard và tự chọn làm bài hoặc rời hệ thống; không bị chuyển bắt buộc vào Writing Room.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-PROMPT-001 - Chọn đề}\par
+\textbf{Given:} User đã đăng nhập và danh sách có đề active.\par
+\textbf{When:} User chọn một PromptNumber.\par
+\textbf{Then:} Hệ thống mở đúng đề active và không phân phối đề draft/\allowbreak{}inactive.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-PROMPT-002 - Random đề}\par
+\textbf{Given:} User yêu cầu random.\par
+\textbf{When:} Hệ thống chọn đề.\par
+\textbf{Then:} Đề active được trả về, ưu tiên tránh lặp quá gần khi còn lựa chọn khác.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-WRITE-001 - Autosave}\par
+\textbf{Given:} User đang nhập bài.\par
+\textbf{When:} Đến chu kỳ autosave hoặc user ngừng gõ.\par
+\textbf{Then:} Draft được lưu, LastAutosavedAt cập nhật và UI hiển thị trạng thái đã lưu; mục tiêu mất dữ liệu không quá 10 giây.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-WRITE-002 - Pause/\allowbreak{}resume}\par
+\textbf{Given:} User đang viết.\par
+\textbf{When:} User bấm Pause rồi Resume.\par
+\textbf{Then:} Timer dừng khi pause, editor bị khóa, tổng pause được ghi nhận; sau resume editor và timer hoạt động lại.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SUB-001 - Bài dưới 200 từ}\par
+\textbf{Given:} Essay có dưới 200 từ.\par
+\textbf{When:} User bấm Submit.\par
+\textbf{Then:} Hệ thống từ chối grading, không reserve credit, không enqueue và hướng dẫn viết thêm.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SUB-002 - Bài 200-249 từ}\par
+\textbf{Given:} Essay có 200-249 từ và user còn credit.\par
+\textbf{When:} User bấm Submit.\par
+\textbf{Then:} Hệ thống hiển thị cảnh báo dưới chuẩn 250 từ và chỉ tiếp tục sau xác nhận rõ ràng.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SUB-003 - Bài hợp lệ}\par
+\textbf{Given:} Essay có 250-350 từ, AI enabled, budget/\allowbreak{}rate limit hợp lệ và user đủ credit.\par
+\textbf{When:} User xác nhận Submit.\par
+\textbf{Then:} Submission và CreditReservation được tạo idempotent, status QUEUED và job được enqueue; request không chờ AI hoàn tất.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SUB-004 - Double submit}\par
+\textbf{Given:} Frontend gửi cùng request nhiều lần do double-click/\allowbreak{}retry.\par
+\textbf{When:} Backend nhận idempotency key trùng.\par
+\textbf{Then:} Chỉ có một submission, một reservation và một job logic.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AI-001 - Chấm thành công}\par
+\textbf{Given:} Submission QUEUED có reservation hợp lệ.\par
+\textbf{When:} Worker gọi GPT-5.6 Terra và structured output pass validation.\par
+\textbf{Then:} Assessment được lưu, submission COMPLETED, reservation CAPTURED và user được thông báo.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AI-002 - Lỗi transient}\par
+\textbf{Given:} OpenAI trả timeout, 429 hoặc 5xx.\par
+\textbf{When:} Worker xử lý lỗi.\par
+\textbf{Then:} Job retry với backoff nhưng tổng số attempt không vượt 3; không tạo assessment/\allowbreak{}credit trùng.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AI-003 - Output không hợp lệ}\par
+\textbf{Given:} Model trả structured output không pass schema.\par
+\textbf{When:} Backend validate.\par
+\textbf{Then:} Có tối đa một corrective retry nếu còn attempt; nếu vẫn lỗi thì FAILED và release credit.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AI-004 - Lỗi vĩnh viễn}\par
+\textbf{Given:} Request lỗi 400/\allowbreak{}401/\allowbreak{}403 hoặc prompt/\allowbreak{}schema cấu hình sai.\par
+\textbf{When:} Worker nhận lỗi.\par
+\textbf{Then:} Không retry vô ích, ghi error category, cảnh báo admin, FAILED và release credit nếu đã reserve.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-AI-005 - Prompt injection trong essay}\par
+\textbf{Given:} Essay chứa chỉ dẫn yêu cầu bỏ qua rubric hoặc thay đổi quyền.\par
+\textbf{When:} Model chấm bài.\par
+\textbf{Then:} Essay vẫn được coi là nội dung cần đánh giá; không thay đổi system instruction, role, credit, payment hoặc admin data.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-RESULT-001 - Hiển thị kết quả}\par
+\textbf{Given:} Submission COMPLETED thuộc user hiện tại.\par
+\textbf{When:} User mở Result Page.\par
+\textbf{Then:} Hiển thị overall, bốn criteria, summary, strengths, weaknesses, score-loss reasons, corrections, vocabulary, mistakes và next plan khi có.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-RESULT-002 - An toàn render}\par
+\textbf{Given:} AI output chứa markup/\allowbreak{}script.\par
+\textbf{When:} Frontend render result.\par
+\textbf{Then:} Nội dung được escape/\allowbreak{}sanitize và script không thực thi.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-MODEL-001 - Bài mẫu}\par
+\textbf{Given:} Prompt có Model Essay approved.\par
+\textbf{When:} User mở khu vực bài mẫu.\par
+\textbf{Then:} Chỉ nội dung approved, có band/\allowbreak{}source/\allowbreak{}license note phù hợp được hiển thị.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-MISTAKE-001 - Lưu lỗi}\par
+\textbf{Given:} Assessment hoàn tất có errors hợp lệ.\par
+\textbf{When:} Backend lưu kết quả.\par
+\textbf{Then:} Error occurrences liên kết đúng user/\allowbreak{}submission/\allowbreak{}assessment/\allowbreak{}taxonomy và giữ snapshot code/\allowbreak{}group.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-PROGRESS-001 - Tiến bộ từ bài đầu}\par
+\textbf{Given:} User có một assessment.\par
+\textbf{When:} User mở Progress.\par
+\textbf{Then:} Hệ thống hiển thị dữ liệu hiện có, ghi rõ cỡ mẫu 1 và không kết luận xu hướng mạnh.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-REDO-001 - Redo chủ động}\par
+\textbf{Given:} User đã hoàn thành một prompt trước đó.\par
+\textbf{When:} User chọn Redo.\par
+\textbf{Then:} Một submission mới được tạo, liên kết submission gốc và không ghi đè lịch sử.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-REDO-002 - So sánh redo}\par
+\textbf{Given:} Redo submission COMPLETED.\par
+\textbf{When:} User mở comparison.\par
+\textbf{Then:} Hiển thị overall và bốn criteria cũ/\allowbreak{}mới cùng mức tăng, giảm hoặc không đổi.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-BILL-001 - Reserve credit}\par
+\textbf{Given:} User có 1 available credit và submit hợp lệ.\par
+\textbf{When:} Submission được chấp nhận.\par
+\textbf{Then:} Available giảm 1, Reserved tăng 1, chưa ghi SPEND.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-BILL-002 - Capture credit}\par
+\textbf{Given:} Grading lưu assessment hợp lệ.\par
+\textbf{When:} Submission chuyển COMPLETED.\par
+\textbf{Then:} Reservation capture đúng một lần và ledger có SPEND.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-BILL-003 - Release credit}\par
+\textbf{Given:} Job FAILED hoàn toàn do hệ thống, không có assessment hợp lệ.\par
+\textbf{When:} Job kết thúc.\par
+\textbf{Then:} Reservation release đúng một lần và available credit được phục hồi.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-PAY-001 - Thanh toán payOS thành công}\par
+\textbf{Given:} User tạo order gói credit và thanh toán bằng VietQR.\par
+\textbf{When:} Backend nhận webhook có signature hợp lệ và trạng thái PAID.\par
+\textbf{Then:} Payment chuyển PAID, credit được cộng đúng một lần và lịch sử hiển thị receipt.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-PAY-002 - Webhook trùng}\par
+\textbf{Given:} Webhook PAID cùng order được gửi nhiều lần.\par
+\textbf{When:} Backend xử lý lần sau.\par
+\textbf{Then:} Không cộng credit lần hai; webhook event vẫn được ghi để audit.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-PAY-003 - Return URL giả}\par
+\textbf{Given:} User mở/\allowbreak{}chỉnh return URL mà chưa có payment xác minh.\par
+\textbf{When:} Frontend hiển thị trang kết quả.\par
+\textbf{Then:} Không cộng credit; UI hiển thị đang xác minh/\allowbreak{}PENDING và backend chờ webhook/\allowbreak{}đối soát.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SUPPORT-001 - Ticket grading failed}\par
+\textbf{Given:} Submission FAILED thuộc user.\par
+\textbf{When:} User bấm Báo cáo vấn đề.\par
+\textbf{Then:} Ticket được tạo và tự liên kết submission, attempt, credit reservation và failure reason.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SUPPORT-002 - Tranh chấp chất lượng}\par
+\textbf{Given:} User không đồng ý kết quả nhưng grading kỹ thuật thành công.\par
+\textbf{When:} User tạo quality dispute.\par
+\textbf{Then:} Credit không tự động hoàn; admin có thể re-grade miễn phí, refund hoặc reject và phải ghi lý do/\allowbreak{}audit.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-ADMIN-001 - Quản lý user}\par
+\textbf{Given:} Admin có permission phù hợp.\par
+\textbf{When:} Admin tìm user.\par
+\textbf{Then:} Hiển thị profile, status, activity, credit, payment, support và security theo permission; essay không tự mở.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-ADMIN-002 - Kill switch}\par
+\textbf{Given:} AiGradingEnabled=false.\par
+\textbf{When:} User submit.\par
+\textbf{Then:} Hệ thống không reserve/\allowbreak{}enqueue/\allowbreak{}call AI và hiển thị thông báo tạm ngừng.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-ADMIN-003 - Audit admin action}\par
+\textbf{Given:} Admin thay đổi credit, account status, payment/\allowbreak{}refund hoặc app setting.\par
+\textbf{When:} Thao tác thành công hoặc thất bại.\par
+\textbf{Then:} Audit lưu actor, action, resource, before/\allowbreak{}after phù hợp, reason, time và correlation ID.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-DELETE-001 - Cảnh báo xóa}\par
+\textbf{Given:} User mở Xóa tài khoản.\par
+\textbf{When:} Popup hiển thị.\par
+\textbf{Then:} Popup liệt kê dữ liệu mất, credit policy, dữ liệu payment tối thiểu có thể giữ và yêu cầu xác nhận không thể hoàn tác.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-DELETE-002 - Xóa tài khoản}\par
+\textbf{Given:} User re-auth Google và nhập đúng cụm xác nhận.\par
+\textbf{When:} User xác nhận.\par
+\textbf{Then:} Session bị revoke, account DELETION\_\allowbreak{}PENDING, dữ liệu active được purge/\allowbreak{}anonymize trong 24 giờ mục tiêu và user không đăng nhập lại bằng account cũ.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-DELETE-003 - Backup restore}\par
+\textbf{Given:} Một backup cũ chứa user đã xóa được restore.\par
+\textbf{When:} Hệ thống khởi động recovery process.\par
+\textbf{Then:} DeletionLedger được áp dụng lại trước khi dữ liệu phục vụ người dùng.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SEC-001 - Ownership}\par
+\textbf{Given:} User A yêu cầu draft/\allowbreak{}submission/\allowbreak{}result/\allowbreak{}ticket của user B.\par
+\textbf{When:} Backend xử lý request.\par
+\textbf{Then:} Request bị từ chối và không rò rỉ nội dung hoặc metadata nhạy cảm.
+\end{acceptancebox}
+
+\begin{acceptancebox}
+\textbf{AC-SEC-002 - Rate limit}\par
+\textbf{Given:} User vượt 3 submit/\allowbreak{}5 phút hoặc IP vượt 10/\allowbreak{}5 phút.\par
+\textbf{When:} Có submit mới.\par
+\textbf{Then:} Backend từ chối trước khi reserve/\allowbreak{}gọi AI và ghi rate-limit event.
+\end{acceptancebox}
+\section{Tiêu chí hoàn thành MVP}
+\begin{itemize}
+  \item Google Login + secure cookie-session + role/\allowbreak{}policy/\allowbreak{}ownership hoạt động.
+  \item Landing, onboarding không ép làm bài, Dashboard và thông báo/\allowbreak{}pháp lý hoàn chỉnh.
+  \item Prompt catalog đánh số, select/\allowbreak{}random/\allowbreak{}redo hoạt động.
+  \item Writing Room, autosave, timer, word count và pause/\allowbreak{}resume đạt acceptance criteria.
+  \item Submission + reservation/\allowbreak{}capture/\allowbreak{}release credit idempotent.
+  \item Một model GPT-5.6 Terra chấm qua queue, structured output, tối đa 3 attempt và circuit breaker.
+  \item Result, Model Essays, History, Mistake Bank, Progress và Redo hoạt động.
+  \item payOS order, VietQR checkout, webhook verification, idempotency và reconciliation hoạt động.
+  \item Support/\allowbreak{}refund ticket và admin handling có audit.
+  \item Admin quản lý content, user, activity, credit, payment, revenue, AI usage, security và settings theo permission.
+  \item Xóa tài khoản, retention, backup lifecycle và DeletionLedger được test.
+  \item Functional, integration, payment, security, load-smoke, backup/\allowbreak{}restore và recovery test pass.
+  \item Có thể deploy staging/\allowbreak{}production bằng container trên VPS và có runbook tối thiểu.
+\end{itemize}
+\section{Ưu tiên phát triển}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.22\textwidth}|P{0.70\textwidth}|}
+\hline
+\textbf{Mức} & \textbf{Nội dung} \\ \hline
+\endfirsthead
+\hline
+\textbf{Mức} & \textbf{Nội dung} \\ \hline
+\endhead
+P0 - MVP Core & Auth, landing/\allowbreak{}onboarding, prompt, writing, submission, credit, queue, AI, result, model essay, history, mistakes, progress, redo, payOS, support, admin, security, deletion. \\ \hline
+P1 - Sau ổn định & Insight/\allowbreak{}recommendation nâng cao, email notification đầy đủ, analytics cohort, refund workflow tự động một phần, tối ưu model/\allowbreak{}cost. \\ \hline
+P2 - Mở rộng & Teacher Classroom, Phrase Bank, Flashcards, community, subscription định kỳ, mobile app, các kỹ năng IELTS khác. \\ \hline
+\end{longtable}
+\normalsize
+\section{Quyết định đã chốt}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.14\textwidth}|P{0.78\textwidth}|}
+\hline
+\textbf{Mã} & \textbf{Quyết định} \\ \hline
+\endfirsthead
+\hline
+\textbf{Mã} & \textbf{Quyết định} \\ \hline
+\endhead
+D-001 & Google OAuth/\allowbreak{}OIDC + ASP.NET Core Identity + application cookie-session. \\ \hline
+D-002 & Không có password local, quên mật khẩu hoặc reset password trong MVP. \\ \hline
+D-003 & USER và ADMIN dùng authorization role/\allowbreak{}policy/\allowbreak{}ownership; admin chia permission theo nhiệm vụ. \\ \hline
+D-004 & TEACHER/\allowbreak{}STUDENT là role/\allowbreak{}profile/\allowbreak{}class membership của AppUser, không kế thừa cứng. \\ \hline
+D-005 & Free allowance: 5 credit mỗi chu kỳ tháng cấu hình được. \\ \hline
+D-006 & Một grading mặc định tốn 1 credit; reserve khi submit, capture khi completed, release khi system failure. \\ \hline
+D-007 & Word limit: dưới 200 từ không chấm; 200-249 cảnh báo; 250-350 bình thường; trên 350 chặn. \\ \hline
+D-008 & Prompt đánh số; user có thể chọn, random hoặc redo. \\ \hline
+D-009 & Một model chấm chính GPT-5.6 Terra; không dùng pipeline nhiều model trong MVP. \\ \hline
+D-010 & Retry tối đa 3 attempt tổng cộng; rate limit là cơ chế riêng. \\ \hline
+D-011 & payOS + VietQR cho mua credit một lần; subscription định kỳ để sau. \\ \hline
+D-012 & Support ticket trong app là nguồn trạng thái chính; email là dự phòng/\allowbreak{}thông báo. \\ \hline
+D-013 & Xóa account xóa/\allowbreak{}anonymize dữ liệu học tập; chỉ giữ payment/\allowbreak{}audit tối thiểu bắt buộc. \\ \hline
+D-014 & Không lưu essay/\allowbreak{}log/\allowbreak{}audit vĩnh viễn; retention theo bảng chính sách. \\ \hline
+D-015 & Development local; production container trên VPS; provider abstraction cho AI/\allowbreak{}payment/\allowbreak{}storage/\allowbreak{}email. \\ \hline
+D-016 & EF Core là database abstraction; không tạo ISqlProvider tổng quát. \\ \hline
+\end{longtable}
+\normalsize
+\section{Ma trận truy vết cấp nhóm}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.18\textwidth}|P{0.36\textwidth}|P{0.38\textwidth}|}
+\hline
+\textbf{User Story} & \textbf{Requirement} & \textbf{Acceptance/\allowbreak{}Test} \\ \hline
+\endfirsthead
+\hline
+\textbf{User Story} & \textbf{Requirement} & \textbf{Acceptance/\allowbreak{}Test} \\ \hline
+\endhead
+US-002 & FR-AUTH-* & AC-AUTH-* \\ \hline
+US-003 & FR-DASH-* & AC-DASH-* \\ \hline
+US-004..005 & FR-PROMPT-* & AC-PROMPT-* \\ \hline
+US-006 & FR-WRITE-* & AC-WRITE-* \\ \hline
+US-007..009 & FR-SUB-*, FR-AI-*, FR-RESULT-* & AC-SUB-*, AC-AI-*, AC-RESULT-* \\ \hline
+US-010 & FR-MODEL-* & AC-MODEL-* \\ \hline
+US-011 & FR-MISTAKE-* & AC-MISTAKE-* \\ \hline
+US-012 & FR-PROGRESS-* & AC-PROGRESS-* \\ \hline
+US-013 & FR-REDO-* & AC-REDO-* \\ \hline
+US-014..015 & FR-BILL-* & AC-BILL-*, AC-PAY-* \\ \hline
+US-016 & FR-SUPPORT-* & AC-SUPPORT-* \\ \hline
+US-017 & FR-DELETE-* & AC-DELETE-* \\ \hline
+US-018..021 & FR-ADMIN-*, FR-SEC-*, FR-ANALYTICS-* & AC-ADMIN-*, AC-SEC-* \\ \hline
+US-022 & NFR-SCALE-* & Kiểm tra architecture/\allowbreak{}contract test \\ \hline
+\end{longtable}
+\normalsize
+\appendix
+\section{Thuộc tính nghiệp vụ tối thiểu}
+\subsection{User Profile}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+UserId & Định danh nội bộ & Bắt buộc \\ \hline
+GoogleSubject & Định danh ổn định từ Google & Bắt buộc \\ \hline
+Email & Email verified từ Google & Bắt buộc \\ \hline
+DisplayName & Tên hiển thị & Bắt buộc \\ \hline
+AvatarUrl/\allowbreak{}ObjectKey & Ảnh đại diện & Tùy chọn \\ \hline
+CurrentBand & Band hiện tại & Tùy chọn \\ \hline
+TargetBand & Band mục tiêu & Tùy chọn \\ \hline
+ExamDate & Ngày thi dự kiến & Tùy chọn \\ \hline
+LearningGoal & Mục tiêu học & Tùy chọn \\ \hline
+Role/\allowbreak{}Permissions & Phân quyền & Bắt buộc \\ \hline
+Status & Trạng thái account & Bắt buộc \\ \hline
+CreatedAt/\allowbreak{}LastLoginAt/\allowbreak{}LastActiveAt & Mốc hoạt động & Bắt buộc \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Writing Prompt}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+PromptNumber & Mã số duy nhất & Bắt buộc \\ \hline
+QuestionText & Nội dung đề & Bắt buộc \\ \hline
+QuestionType & Loại đề & Bắt buộc \\ \hline
+PrimaryTopic/\allowbreak{}Tags & Chủ đề & Bắt buộc/\allowbreak{}Tùy chọn \\ \hline
+Difficulty & Độ khó & Tùy chọn \\ \hline
+Status/\allowbreak{}IsActive & Trạng thái phát hành & Bắt buộc \\ \hline
+Source/\allowbreak{}LicenseNote & Nguồn và quyền sử dụng & Khi áp dụng \\ \hline
+CreatedBy/\allowbreak{}ReviewedBy & Quản trị nội dung & Bắt buộc \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Draft và Submission}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+DraftId/\allowbreak{}SubmissionId & Định danh & Bắt buộc \\ \hline
+UserId/\allowbreak{}PromptId & Ownership và đề & Bắt buộc \\ \hline
+EssayText & Nội dung bài & Bắt buộc \\ \hline
+WordCount & Số từ & Bắt buộc \\ \hline
+StartedAt/\allowbreak{}SubmittedAt & Mốc thời gian & Bắt buộc \\ \hline
+TimeSpentSeconds & Thời gian viết thực & Bắt buộc \\ \hline
+TotalPausedSeconds & Tổng pause & Bắt buộc \\ \hline
+Status & Lifecycle & Bắt buộc \\ \hline
+IdempotencyKey & Chống submit trùng & Bắt buộc \\ \hline
+CreditReservationId & Liên kết credit & Khi submit \\ \hline
+FailureReason/\allowbreak{}ErrorCategory & Lý do lỗi & Khi failed \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Assessment}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+OverallBand & Điểm tổng 0-9 bước 0.5 & Bắt buộc \\ \hline
+TR/\allowbreak{}CC/\allowbreak{}LR/\allowbreak{}GRA & Bốn tiêu chí & Bắt buộc \\ \hline
+Summary & Tổng quan & Bắt buộc \\ \hline
+Strengths/\allowbreak{}Weaknesses & Điểm mạnh/\allowbreak{}yếu & Bắt buộc \\ \hline
+TopScoreLossReasons & Nguyên nhân mất điểm & Bắt buộc \\ \hline
+SentenceCorrections & Câu gốc/\allowbreak{}sửa/\allowbreak{}lý do & Khi có \\ \hline
+VocabularySuggestions & Gợi ý theo context & Khi có \\ \hline
+Errors & Taxonomy/\allowbreak{}severity/\allowbreak{}confidence & Khi có \\ \hline
+NextPracticePlan & Kế hoạch tiếp & Khi phù hợp \\ \hline
+ModelName/\allowbreak{}PromptVersion & Khả năng truy vết & Bắt buộc \\ \hline
+AttemptId/\allowbreak{}Latency/\allowbreak{}Tokens/\allowbreak{}Cost & Vận hành AI & Bắt buộc \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Credit và Payment}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+WalletId/\allowbreak{}UserId & Ví của user & Bắt buộc \\ \hline
+Available/\allowbreak{}Reserved & Số dư & Bắt buộc \\ \hline
+TransactionType & GRANT/\allowbreak{}PURCHASE/\allowbreak{}RESERVE/\allowbreak{}SPEND/\allowbreak{}RELEASE/\allowbreak{}REFUND/\allowbreak{}ADJUST & Bắt buộc \\ \hline
+Amount/\allowbreak{}BalanceAfter & Biến động và số dư & Bắt buộc \\ \hline
+ReferenceType/\allowbreak{}ReferenceId & Submission/\allowbreak{}payment/\allowbreak{}ticket & Bắt buộc \\ \hline
+PaymentOrderCode & Mã đơn payOS & Bắt buộc \\ \hline
+PackageId/\allowbreak{}AmountVnd/\allowbreak{}CreditAmount & Gói mua & Bắt buộc \\ \hline
+PaymentStatus & Lifecycle payment & Bắt buộc \\ \hline
+WebhookEventId/\allowbreak{}SignatureValid & Xác minh & Bắt buộc \\ \hline
+PaidAt/\allowbreak{}RefundedAt & Mốc giao dịch & Khi áp dụng \\ \hline
+\end{longtable}
+\normalsize
+\subsection{Support Ticket}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+TicketCode/\allowbreak{}UserId & Định danh và owner & Bắt buộc \\ \hline
+Category & Loại vấn đề & Bắt buộc \\ \hline
+SubmissionId/\allowbreak{}PaymentId/\allowbreak{}CreditTransactionId & Resource liên quan & Tùy chọn \\ \hline
+Subject/\allowbreak{}Description & Nội dung & Bắt buộc \\ \hline
+Status/\allowbreak{}Priority & Trạng thái ưu tiên & Bắt buộc \\ \hline
+AssignedAdminId & Người xử lý & Tùy chọn \\ \hline
+Resolution/\allowbreak{}DecisionReason & Kết quả & Khi đóng \\ \hline
+AttachmentObjectKeys & Bằng chứng & Tùy chọn \\ \hline
+CreatedAt/\allowbreak{}UpdatedAt/\allowbreak{}ResolvedAt & Mốc xử lý & Bắt buộc/\allowbreak{}Khi áp dụng \\ \hline
+\end{longtable}
+\normalsize
+\subsection{App Settings}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.45\textwidth}|P{0.19\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Ý nghĩa} & \textbf{Mức yêu cầu} \\ \hline
+\endhead
+AiGradingEnabled & Kill switch AI & Bắt buộc \\ \hline
+FreeGradingEnabled & Bật/\allowbreak{}tắt free tier & Bắt buộc \\ \hline
+MaintenanceMode & Chế độ bảo trì & Bắt buộc \\ \hline
+FreeCreditsPerCycle & Mặc định 5 & Bắt buộc \\ \hline
+FreeCreditCycleDays & Mặc định theo tháng & Bắt buộc \\ \hline
+CreditCostPerGrading & Mặc định 1 & Bắt buộc \\ \hline
+MinEssayWords/\allowbreak{}StandardEssayWords/\allowbreak{}MaxEssayWords & 200/\allowbreak{}250/\allowbreak{}350 & Bắt buộc \\ \hline
+MaxAiAttempts & 3 tổng cộng & Bắt buộc \\ \hline
+SubmitRateLimitUser/\allowbreak{}Ip & 3 và 10 mỗi 5 phút & Bắt buộc \\ \hline
+DailyAiBudgetLimitVnd & Ngân sách tối đa & Bắt buộc \\ \hline
+CircuitBreakerThreshold/\allowbreak{}Cooldown & Bảo vệ provider & Bắt buộc \\ \hline
+RetentionDaysByCategory & Lifecycle dữ liệu & Bắt buộc \\ \hline
+\end{longtable}
+\normalsize
+\section{Nguồn tham khảo và lưu ý}
+\begin{itemize}
+  \item IELTS Academic Writing format: Task 2 yêu cầu ít nhất 250 từ trong khoảng 40 phút. \url{https://ielts.org/take-a-test/test-types/ielts-academic-test/ielts-academic-format-writing}
+  \item IELTS Writing key assessment criteria và band descriptors. \url{https://ielts.org/cdn/Guides/ielts-writing-key-assessment-criteria.pdf}
+  \item ASP.NET Core Google external login. \url{https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins}
+  \item ASP.NET Core anti-forgery/CSRF guidance. \url{https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery}
+  \item payOS integration, checkout và webhook. \url{https://payos.vn/docs/}
+  \item Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15, có hiệu lực 01/01/2026. \url{https://vanban.chinhphu.vn/?docid=214590}
+  \item Luật Kế toán 2015, Điều 41 về lưu trữ tài liệu kế toán; thời hạn áp dụng phải được rà soát cho loại chứng từ thực tế.
+  \item OpenAI model selection và pricing phải được kiểm tra lại trước production; PRD chốt GPT-5.6 Terra làm model MVP, nhưng model ID là cấu hình có version.
+\end{itemize}
+\begin{importantbox}
+Tài liệu này là tài liệu sản phẩm/kỹ thuật, không phải tư vấn pháp lý. Các chính sách quyền riêng tư, xóa dữ liệu, thanh toán, hoàn tiền và retention phải được rà soát bởi người có chuyên môn trước khi cung cấp dịch vụ có thu tiền công khai.
+\end{importantbox}
+\section*{Kết luận}\addcontentsline{toc}{section}{Kết luận}
+Baseline PRD v1.0 chốt vòng lặp cốt lõi của BandUp: thiết lập mục tiêu, chọn hoặc random hoặc redo đề, viết bài, reserve credit, một model AI chấm, lưu kết quả, hiểu lỗi, theo dõi tiến bộ và luyện tiếp. Credit, payOS, support, provider abstraction, privacy, deletion và retention được đưa vào MVP để sản phẩm có thể vận hành với user thật mà không phải đập lại core ngay sau khi ra mắt.
+
+
+\end{document}

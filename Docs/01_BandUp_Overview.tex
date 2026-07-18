@@ -1,0 +1,421 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=2.4cm,right=2.4cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\usepackage[vietnamese]{babel}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.10}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.25em,topsep=0.35em}
+\usepackage{xcolor}
+\definecolor{BandBlue}{HTML}{244A73}
+\definecolor{BandLight}{HTML}{EEF4F8}
+\definecolor{BandGray}{HTML}{5F6B76}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Large\bfseries\color{BandBlue}}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{BandBlue}}{\thesubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.35em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.9em}{0.3em}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=BandBlue,urlcolor=BandBlue,pdftitle={BandUp - Tổng quan sản phẩm},pdfauthor={BandUp}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small BandUp - Tổng quan sản phẩm}
+\fancyhead[R]{\sffamily\small Phiên bản 0.1}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\newtcolorbox{summarybox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.6pt,arc=2mm,left=4mm,right=4mm,top=3mm,bottom=3mm}
+\newcommand{\flowarrow}{\par\centering\sffamily\color{BandBlue}\Large$\downarrow$\par}
+\newcommand{\flowstep}[1]{\par\centering\sffamily\bfseries #1\par}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3.2cm}
+{\sffamily\fontsize{34}{40}\selectfont\bfseries\color{BandBlue} BandUp\par}
+\vspace{0.6cm}
+{\sffamily\fontsize{21}{26}\selectfont Tổng quan sản phẩm\par}
+\vspace{0.35cm}
+{\sffamily\large Product Overview\par}
+\vfill
+\begin{tcolorbox}[colback=BandLight,colframe=BandBlue,width=0.72\textwidth,boxrule=0.6pt,arc=2mm]
+\centering\sffamily
+Phiên bản: 0.1\\
+Trạng thái: Bản nháp
+\end{tcolorbox}
+\vspace{1.4cm}
+{\sffamily\small Tài liệu định hướng sản phẩm BandUp\par}
+\vspace*{1.2cm}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section*{Mục đích tài liệu}
+\addcontentsline{toc}{section}{Mục đích tài liệu}
+
+Đây là tài liệu mô tả tổng quan về sản phẩm BandUp. Tài liệu trả lời các câu hỏi:
+
+\begin{itemize}
+  \item BandUp là gì?
+  \item Vì sao dự án được xây dựng?
+  \item Sản phẩm hướng đến ai?
+  \item BandUp giải quyết vấn đề gì?
+  \item Điểm khác biệt của BandUp là gì?
+  \item Mục tiêu phát triển trong tương lai là gì?
+\end{itemize}
+
+Tài liệu này không mô tả chi tiết kỹ thuật. Các nội dung như kiến trúc hệ thống, cơ sở dữ liệu, API, AI prompt và triển khai hạ tầng sẽ được trình bày trong các tài liệu kỹ thuật riêng.
+
+\section{Tầm nhìn sản phẩm}
+
+BandUp là nền tảng AI hỗ trợ luyện IELTS Writing Task 2 theo hướng đồng hành lâu dài cùng người học.
+
+Mục tiêu của BandUp không chỉ là chấm điểm bài viết bằng AI, mà còn giúp người học:
+
+\begin{itemize}
+  \item Hiểu rõ điểm mạnh và điểm yếu.
+  \item Nhận biết các lỗi thường gặp.
+  \item Theo dõi quá trình tiến bộ theo thời gian.
+  \item Biết nên luyện tập nội dung gì tiếp theo.
+\end{itemize}
+
+Trong tương lai, BandUp hướng tới việc trở thành một công cụ hỗ trợ học tập cá nhân, đồng thời xây dựng cộng đồng cùng học IELTS, nơi người dùng có thể chia sẻ kiến thức, tài liệu và hỗ trợ lẫn nhau thông qua diễn đàn và các kênh trao đổi.
+
+\section{Định vị sản phẩm}
+
+\subsection{Trong giai đoạn MVP}
+
+BandUp được định vị là:
+
+\begin{itemize}
+  \item AI Writing Coach.
+  \item Trợ lý luyện IELTS Writing cá nhân.
+  \item Nền tảng theo dõi quá trình học viết.
+\end{itemize}
+
+\subsection{Trong định hướng dài hạn}
+
+BandUp hướng tới trở thành một mạng xã hội dành cho cộng đồng học IELTS, kết hợp công cụ học tập cá nhân với không gian chia sẻ và kết nối.
+
+\subsection{Những định vị BandUp không theo đuổi}
+
+BandUp không được định vị là:
+
+\begin{itemize}
+  \item Công cụ chấm điểm IELTS chính thức.
+  \item Phần mềm thay thế giám khảo IELTS.
+  \item Công cụ chỉ sửa lỗi ngữ pháp.
+  \item Chatbot trả lời mọi câu hỏi.
+\end{itemize}
+
+Điểm khác biệt của BandUp nằm ở việc giúp người học cải thiện kỹ năng viết trong dài hạn thay vì chỉ trả về một mức điểm.
+
+\section{Đối tượng người dùng}
+
+\subsection{Người dùng chính}
+
+\begin{itemize}
+  \item Sinh viên đại học.
+  \item Người tự học IELTS.
+  \item Người có mục tiêu từ Band 6.0 đến 7.5.
+  \item Người không có điều kiện học tại các trung tâm lớn.
+\end{itemize}
+
+\subsection{Người dùng mở rộng}
+
+\begin{itemize}
+  \item Người đang học tại trung tâm.
+  \item Người cần luyện viết thường xuyên.
+  \item Thành viên cộng đồng học IELTS muốn chia sẻ tài liệu và kiến thức.
+\end{itemize}
+
+\subsection{Định hướng tương lai}
+
+\begin{itemize}
+  \item Giáo viên IELTS.
+  \item Trung tâm ngoại ngữ.
+  \item Trường học.
+\end{itemize}
+
+\section{Những vấn đề hiện nay}
+
+Qua việc khảo sát các công cụ hiện có và quan sát quá trình tự học IELTS, có thể thấy người học thường gặp các khó khăn sau:
+
+\begin{itemize}
+  \item Chi phí chữa bài viết khá cao.
+  \item Không biết mình sai ở đâu.
+  \item Không biết vì sao bị mất điểm.
+  \item Lặp lại cùng một lỗi trong nhiều bài viết.
+  \item Không có nơi lưu lại lịch sử lỗi cá nhân.
+  \item Không theo dõi được sự tiến bộ.
+  \item Không biết nên luyện tập nội dung gì tiếp theo.
+  \item Dễ mất động lực vì không nhìn thấy sự cải thiện.
+\end{itemize}
+
+Đây là những vấn đề BandUp hướng tới giải quyết.
+
+\section{Giải pháp của BandUp}
+
+BandUp xây dựng một quy trình luyện viết hoàn chỉnh:
+
+\begin{summarybox}
+\flowstep{Người học}
+\flowarrow
+\flowstep{Nhận đề Writing}
+\flowarrow
+\flowstep{Viết bài}
+\flowarrow
+\flowstep{AI chấm bài}
+\flowarrow
+\flowstep{Phân tích lỗi}
+\flowarrow
+\flowstep{Lưu lỗi cá nhân}
+\flowarrow
+\flowstep{Theo dõi tiến bộ}
+\flowarrow
+\flowstep{Đề xuất bài luyện tiếp theo}
+\flowarrow
+\flowstep{Luyện tập lại}
+\end{summarybox}
+
+Thay vì chỉ nhận một mức điểm, người học sẽ có một lộ trình cải thiện rõ ràng sau mỗi bài viết.
+
+\section{Giá trị cốt lõi}
+
+BandUp mang lại giá trị thông qua việc kết hợp nhiều chức năng thành một trải nghiệm học tập thống nhất.
+
+\subsection{Giá trị chính}
+
+\begin{itemize}
+  \item Chấm bài bằng AI.
+  \item Phân tích lỗi chi tiết.
+  \item Theo dõi tiến bộ.
+  \item Lưu lịch sử bài viết.
+  \item Gợi ý bài mẫu.
+  \item Gợi ý từ vựng phù hợp.
+  \item Đề xuất kế hoạch luyện tập.
+\end{itemize}
+
+\subsection{Giá trị mở rộng trong tương lai}
+
+\begin{itemize}
+  \item Công cụ hỗ trợ học kiến thức mới như từ vựng và ngữ pháp.
+  \item Diễn đàn hoặc bảng tin để người dùng chia sẻ kiến thức và thông tin.
+  \item Không gian lớp học để giáo viên quản lý và hỗ trợ học sinh hiệu quả hơn.
+\end{itemize}
+
+\section{Điểm khác biệt so với các công cụ hiện nay}
+
+Phần lớn các công cụ hiện nay chỉ tập trung vào việc chấm bài.
+
+\begin{summarybox}
+\textbf{Quy trình thông thường:}
+\flowstep{Viết bài}
+\flowarrow
+\flowstep{AI chấm}
+\flowarrow
+\flowstep{Kết thúc}
+\end{summarybox}
+
+BandUp hướng tới một quy trình học tập dài hạn hơn:
+
+\begin{summarybox}
+\flowstep{Viết bài}
+\flowarrow
+\flowstep{AI chấm}
+\flowarrow
+\flowstep{Giải thích}
+\flowarrow
+\flowstep{Lưu lỗi}
+\flowarrow
+\flowstep{Theo dõi tiến bộ}
+\flowarrow
+\flowstep{Đề xuất luyện tập}
+\flowarrow
+\flowstep{Làm lại}
+\flowarrow
+\flowstep{So sánh kết quả}
+\end{summarybox}
+
+Mục tiêu cuối cùng là giúp người học tiến bộ sau nhiều lần luyện tập, thay vì chỉ biết điểm của từng bài riêng lẻ.
+
+\section{Mô hình kinh doanh}
+
+BandUp dự kiến sử dụng \textbf{BandUp Credit} làm đơn vị thanh toán chung trong hệ thống.
+
+\begin{itemize}
+  \item 10 BandUp Credit tương đương một lượt chấm bài.
+\end{itemize}
+
+\subsection{Gói miễn phí}
+
+\begin{itemize}
+  \item Được cấp một lượng credit giới hạn, đủ để chấm bài và trải nghiệm các tính năng cơ bản.
+  \item Được sử dụng các chức năng cơ bản của hệ thống.
+\end{itemize}
+
+\subsection{Gói Plus}
+
+Mức giá dự kiến:
+
+\begin{itemize}
+  \item 50.000 VND mỗi tháng.
+  \item 550.000 VND mỗi năm.
+\end{itemize}
+
+Quyền lợi dự kiến:
+
+\begin{itemize}
+  \item Khoảng 400 credit cho gói tháng hoặc 5.000 credit cho gói năm.
+  \item Báo cáo đầy đủ.
+  \item Theo dõi tiến bộ.
+  \item Mistake Bank.
+  \item Model Essay.
+  \item Các tính năng AI nâng cao.
+\end{itemize}
+
+\subsection{Gói bổ sung credit}
+
+\begin{itemize}
+  \item Giá dự kiến: 10 credit tương đương 1.500 VND.
+\end{itemize}
+
+\subsection{Hướng mở rộng}
+
+Trong tương lai, mô hình kinh doanh có thể mở rộng sang:
+
+\begin{itemize}
+  \item Gói Plus với nhiều cấp độ quyền lợi.
+  \item Gói giáo viên.
+  \item Gói trung tâm.
+\end{itemize}
+
+\section{Phạm vi sản phẩm}
+
+\subsection{Phiên bản đầu tiên}
+
+Phiên bản đầu tiên tập trung vào:
+
+\begin{itemize}
+  \item Đăng ký và đăng nhập.
+  \item Writing Room.
+  \item AI Grading.
+  \item Lịch sử bài viết.
+  \item Mistake Bank.
+  \item Progress Dashboard.
+  \item Subscription.
+\end{itemize}
+
+\subsection{Các chức năng dự kiến phát triển sau}
+
+\begin{itemize}
+  \item Teacher Classroom.
+  \item Vocabulary Learning.
+  \item Flashcards.
+  \item Ứng dụng di động.
+\end{itemize}
+
+\section{Những nội dung chưa nằm trong MVP}
+
+Để tập trung vào chất lượng sản phẩm cốt lõi, phiên bản đầu tiên sẽ chưa phát triển:
+
+\begin{itemize}
+  \item Speaking.
+  \item Listening.
+  \item Reading.
+  \item AI Voice.
+  \item Diễn đàn.
+  \item Gamification.
+  \item Flashcards.
+  \item Giáo viên quản lý lớp học.
+\end{itemize}
+
+Các chức năng này sẽ được xem xét sau khi sản phẩm đã có người dùng ổn định.
+
+\section{Nguyên tắc phát triển sản phẩm}
+
+BandUp được xây dựng dựa trên các nguyên tắc sau:
+
+\begin{itemize}
+  \item Luôn đặt việc học lên trước.
+  \item Mọi chức năng đều phải giúp người học tiến bộ.
+  \item Đơn giản nhưng hiệu quả.
+  \item Trải nghiệm người dùng được ưu tiên.
+  \item Phản hồi phải nhất quán.
+  \item Không hứa hẹn những điều AI không thể đảm bảo.
+  \item Luôn minh bạch về giới hạn của hệ thống.
+\end{itemize}
+
+\section{Chỉ số đánh giá thành công}
+
+Sản phẩm được đánh giá thành công dựa trên các nhóm chỉ số sau.
+
+\subsection{Về người dùng}
+
+\begin{itemize}
+  \item Số lượng người đăng ký.
+  \item Số lượng người dùng hoạt động.
+  \item Tỷ lệ người dùng quay lại.
+\end{itemize}
+
+\subsection{Về học tập}
+
+\begin{itemize}
+  \item Số bài viết hoàn thành.
+  \item Mức cải thiện điểm số.
+  \item Mức giảm của các lỗi lặp lại theo thời gian.
+\end{itemize}
+
+\subsection{Về kinh doanh}
+
+\begin{itemize}
+  \item Số lượng người dùng trả phí.
+  \item Doanh thu.
+  \item Chi phí AI trên mỗi bài viết.
+\end{itemize}
+
+\section{Định hướng phát triển}
+
+BandUp sẽ phát triển theo từng giai đoạn:
+
+\begin{description}[leftmargin=2.8cm,style=nextline,font=\sffamily\bfseries]
+  \item[Giai đoạn 1] Xây dựng AI Writing Coach ổn định.
+  \item[Giai đoạn 2] Hoàn thiện trải nghiệm học tập.
+  \item[Giai đoạn 3] Triển khai hệ thống trả phí.
+  \item[Giai đoạn 4] Sau bản MVP, phát triển Teacher Classroom.
+  \item[Giai đoạn 5] Mở rộng thành hệ sinh thái học tiếng Anh ứng dụng AI.
+\end{description}
+
+\section{Triết lý sản phẩm}
+
+\begin{summarybox}
+\centering
+\sffamily\large\bfseries
+Người học không tiến bộ chỉ vì biết điểm số.
+\end{summarybox}
+
+Người học tiến bộ khi:
+
+\begin{itemize}
+  \item Hiểu mình sai ở đâu.
+  \item Biết cách sửa lỗi.
+  \item Luyện tập đúng trọng tâm.
+  \item Theo dõi được sự cải thiện của bản thân.
+\end{itemize}
+
+Mọi quyết định phát triển sản phẩm đều phải hướng tới mục tiêu đó.
+
+\vfill
+\begin{center}
+\sffamily\small\color{BandGray}Kết thúc tài liệu
+\end{center}
+
+\end{document}

@@ -1,0 +1,1242 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=2.25cm,right=2.25cm,headheight=15pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\usepackage[vietnamese]{babel}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.45em,itemsep=0.22em,topsep=0.3em}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0.22em,topsep=0.3em}
+\usepackage{xcolor}
+\definecolor{BandBlue}{HTML}{244A73}
+\definecolor{BandLight}{HTML}{EEF4F8}
+\definecolor{BandGray}{HTML}{5F6B76}
+\definecolor{BandGreen}{HTML}{287A5A}
+\definecolor{BandGreenLight}{HTML}{EDF7F2}
+\definecolor{BandOrange}{HTML}{A45A14}
+\definecolor{BandOrangeLight}{HTML}{FFF4E8}
+\definecolor{BandRed}{HTML}{A63636}
+\definecolor{BandRedLight}{HTML}{FFF0F0}
+\definecolor{BandPurple}{HTML}{6750A4}
+\definecolor{BandPurpleLight}{HTML}{F4F0FF}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Large\bfseries\color{BandBlue}}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{BandBlue}}{\thesubsection}{0.55em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{BandGray}}{\thesubsubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.55em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.4em}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=BandBlue,urlcolor=BandBlue,citecolor=BandBlue,pdftitle={BandUp - System Design},pdfauthor={BandUp}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small BandUp - System Design}
+\fancyhead[R]{\sffamily\small Phiên bản 1.0}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\newtcolorbox{importantbox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{decisionbox}{breakable,colback=BandGreenLight,colframe=BandGreen,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{warningbox}{breakable,colback=BandRedLight,colframe=BandRed,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{futurebox}{breakable,colback=BandPurpleLight,colframe=BandPurple,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{architecturebox}[1][]{breakable,colback=white,colframe=BandBlue,boxrule=0.55pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm,before skip=5pt,after skip=5pt,title={#1},fonttitle=\sffamily\bfseries,coltitle=BandBlue}
+\newtcolorbox{codebox}{breakable,colback=BandOrangeLight,colframe=BandOrange,boxrule=0.55pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm,fontupper=\ttfamily\small}
+\newtcolorbox{flowbox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.6pt,arc=2mm,left=4mm,right=4mm,top=3mm,bottom=3mm}
+\newcommand{\flowarrow}{\par\centering\sffamily\color{BandBlue}\Large$\downarrow$\par}
+\newcommand{\flowstep}[1]{\par\centering\sffamily\bfseries #1\par}
+\newcommand{\decision}[1]{\colorbox{BandGreenLight}{\sffamily\footnotesize\bfseries #1}}
+\newcommand{\risk}[1]{\colorbox{BandRedLight}{\sffamily\footnotesize\bfseries #1}}
+\newcommand{\futuretag}[1]{\colorbox{BandPurpleLight}{\sffamily\footnotesize\bfseries #1}}
+\usepackage{longtable,booktabs,array,tabularx,multirow}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{pdflscape}
+\usepackage{needspace}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,rulecolor=\color{BandGray},backgroundcolor=\color{BandOrangeLight},columns=fullflexible,keepspaces=true,showstringspaces=false}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\emergencystretch=2em
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.3cm}
+{\sffamily\fontsize{34}{40}\selectfont\bfseries\color{BandBlue} BandUp\par}
+\vspace{0.55cm}
+{\sffamily\fontsize{22}{28}\selectfont Thiết kế hệ thống\par}
+\vspace{0.25cm}
+{\sffamily\large System Design Specification\par}
+\vfill
+\begin{tcolorbox}[colback=BandLight,colframe=BandBlue,width=0.82\textwidth,boxrule=0.7pt,arc=2mm]
+\centering\sffamily
+\textbf{Phiên bản: 1.0}\\[1mm]
+Trạng thái: Baseline kỹ thuật Web MVP\\[1mm]
+Kiến trúc: Modular Monolith\\[1mm]
+Triển khai: VPS + Docker Compose\\[1mm]
+Background jobs: Hangfire\\[1mm]
+Ngày chốt: 18/07/2026
+\end{tcolorbox}
+\vspace{1.1cm}
+{\sffamily\small Tài liệu làm căn cứ cho thiết kế module, database, API, background processing, security, deployment và vận hành hệ thống BandUp\par}
+\vspace*{1cm}
+\end{titlepage}
+
+\section*{Kiểm soát tài liệu}\addcontentsline{toc}{section}{Kiểm soát tài liệu}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.64\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Giá trị} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Giá trị} \\ \hline
+\endhead
+Tên tài liệu & 04\_System\_Design \\ \hline
+Phiên bản & 1.0 \\ \hline
+Trạng thái & Baseline kỹ thuật Web MVP \\ \hline
+Ngày chốt & 18/07/2026 \\ \hline
+Ngôn ngữ & Tiếng Việt \\ \hline
+Sản phẩm & BandUp \\ \hline
+Tài liệu đầu vào & 01\_BandUp\_Overview; 02\_Product\_Requirements; 03\_UI\_UX\_Design \\ \hline
+Tài liệu đầu ra liên quan & Database Design; API Contract; Testing Plan; Deployment Runbook; ADR; Sprint Backlog \\ \hline
+\end{longtable}
+\normalsize
+
+\begin{importantbox}
+\textbf{Giới hạn tài liệu.} Tài liệu này mô tả kiến trúc, module, luồng xử lý, trạng thái, dữ liệu, bảo mật, background jobs, triển khai và vận hành. Nó không thay thế tài liệu UI/UX, test case chi tiết, sprint plan hay source code hoàn chỉnh.
+\end{importantbox}
+
+\tableofcontents
+\clearpage
+
+\section*{Mục đích tài liệu}\addcontentsline{toc}{section}{Mục đích tài liệu}
+Tài liệu này chuyển các yêu cầu sản phẩm và UI/UX của BandUp thành một baseline kỹ thuật đủ rõ để bắt đầu triển khai. Mục tiêu là giảm quyết định ngẫu hứng trong khi code, giữ ranh giới module, kiểm soát chi phí AI và bảo đảm các nghiệp vụ nhạy cảm như credit, thanh toán, quyền admin và xóa dữ liệu có thiết kế nhất quán.
+
+Tài liệu trả lời các câu hỏi:
+\begin{itemize}
+  \item Hệ thống BandUp gồm những tiến trình và module nào?
+  \item Google Login, cookie-session, role và permission phối hợp ra sao?
+  \item Submission, credit và AI grading được xử lý thế nào để không trùng và không mất quyền lợi user?
+  \item Hangfire có đủ dùng không, cần cấu hình queue, worker, retry và recovery như thế nào?
+  \item payOS webhook được xác minh và cộng credit thế nào?
+  \item Dữ liệu được lưu, backup, xóa và anonymize ra sao?
+  \item Hệ thống được deploy trên VPS và mở rộng trong tương lai như thế nào?
+\end{itemize}
+
+\section{Các quyết định kiến trúc đã chốt}
+
+\begin{longtable}{|P{0.27\textwidth}|P{0.29\textwidth}|P{0.34\textwidth}|}
+\hline
+\textbf{Hạng mục} & \textbf{Phương án baseline} & \textbf{Ghi chú} \\ \hline
+\endfirsthead
+\hline
+\textbf{Hạng mục} & \textbf{Phương án baseline} & \textbf{Ghi chú} \\ \hline
+\endhead
+Kiến trúc ứng dụng & Modular Monolith & Một codebase và một hệ thống deploy chính, nhưng module có ranh giới rõ. \\ \hline
+Nền tảng sản phẩm & Desktop Web-first & Mobile app không thuộc MVP; backend API vẫn được thiết kế để mở rộng sau. \\ \hline
+Frontend & React + TypeScript + Vite & SPA gọi ASP.NET Core API. \\ \hline
+Backend & ASP.NET Core Web API & Business rules nằm ở backend. \\ \hline
+Database & PostgreSQL + EF Core/Npgsql & Dùng cùng provider ở development và production. \\ \hline
+Authentication & Google OIDC + application cookie & Google xác minh danh tính; BandUp quản lý session, role và account status. \\ \hline
+Authorization & Role + Permission + Policy & Một user có nhiều role; một role có nhiều user. \\ \hline
+Background jobs & Hangfire & API và worker tách process/container ở production. \\ \hline
+AI & OpenAI qua interface & Một model chính được cấu hình và benchmark; structured output bắt buộc. \\ \hline
+Thanh toán & payOS & Cộng credit dựa trên webhook đã xác minh và idempotency. \\ \hline
+Credit & Ledger + Reservation & Reserve khi submit; consume khi thành công; release khi thất bại. \\ \hline
+Trạng thái chấm & Polling trong MVP & Chưa cần SignalR. \\ \hline
+Deploy & VPS + Docker Compose + Caddy & Same-origin deployment được ưu tiên. \\ \hline
+Object storage & Local ở dev; S3-compatible ở production & Provider cụ thể chốt trong Deployment Plan. \\ \hline
+Cache/Redis & Chưa bắt buộc & Chỉ thêm khi có số liệu chứng minh nhu cầu. \\ \hline
+\end{longtable}
+
+\begin{decisionbox}
+\textbf{Nguyên tắc tổng quát:} BandUp ưu tiên một hệ thống đủ đơn giản để solo developer hoặc team nhỏ triển khai, nhưng các điểm khó thay đổi sau này --- identity, authorization, credit ledger, payment idempotency, prompt versioning và data deletion --- phải được thiết kế đúng từ đầu.
+\end{decisionbox}
+
+\section{Mục tiêu và thuộc tính chất lượng kiến trúc}
+
+\subsection{Mục tiêu}
+\begin{enumerate}
+  \item Một developer hoặc nhóm nhỏ có thể hiểu, debug, deploy và vận hành.
+  \item HTTP request không phải chờ AI chấm xong.
+  \item Mọi thay đổi credit và payment có ledger, transaction và audit.
+  \item Dịch vụ ngoài có abstraction tại biên hệ thống, không tràn vào domain.
+  \item Có thể phục vụ MVP, beta và early production trên VPS.
+  \item Có thể scale worker và API riêng mà chưa cần microservice.
+  \item Dữ liệu user có ownership, retention và deletion rõ ràng.
+\end{enumerate}
+
+\subsection{Thuộc tính chất lượng ưu tiên}
+\begin{longtable}{|P{0.22\textwidth}|P{0.31\textwidth}|P{0.37\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Mục tiêu} & \textbf{Cách hỗ trợ trong thiết kế} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Mục tiêu} & \textbf{Cách hỗ trợ trong thiết kế} \\ \hline
+\endhead
+Maintainability & Thay đổi một module không phá toàn hệ thống & Module ownership, DTO, service contract, migration và ADR. \\ \hline
+Reliability & Không mất bài, credit hoặc payment & Autosave, transaction, ledger, idempotency, retry và recovery job. \\ \hline
+Security & Bảo vệ session, dữ liệu và quyền admin & Cookie bảo mật, CSRF, ownership, policy, audit và least privilege. \\ \hline
+Cost control & Không phát sinh AI cost ngoài kiểm soát & Queue, concurrency limit, quota, reserve credit, budget cap và kill switch. \\ \hline
+Scalability & Tăng worker/API khi cần & API stateless tương đối, worker riêng, shared DB/storage, queue rõ. \\ \hline
+Observability & Điều tra được lỗi và chi phí & Structured log, trace id, AI usage, payment event và dashboard. \\ \hline
+Portability & Có thể đổi VPS/provider & Docker, environment configuration và third-party interfaces. \\ \hline
+\end{longtable}
+
+\section{Lựa chọn Modular Monolith}
+
+\subsection{Lý do}
+BandUp chưa cần microservice vì team ban đầu nhỏ, nghiệp vụ có nhiều transaction chéo và tải chưa chứng minh nhu cầu scale độc lập. Submission liên quan chặt đến credit, grading, progress và notification; tách thành dịch vụ phân tán quá sớm sẽ làm tăng độ phức tạp về network, transaction, retry, tracing, deployment và security.
+
+\subsection{Modular Monolith không phải monolith tùy tiện}
+\begin{importantbox}
+Một database vật lý không có nghĩa module được tự do sửa bảng của nhau. Mỗi module sở hữu dữ liệu và application service của mình. Module khác tương tác qua contract hoặc service, không dùng SQL trực tiếp để bỏ qua business rules.
+\end{importantbox}
+
+\subsection{Điều kiện cân nhắc microservice sau này}
+\begin{itemize}
+  \item Một module cần scale khác biệt rõ và đã có số liệu.
+  \item Team đủ lớn để sở hữu dịch vụ độc lập.
+  \item Release chung trở thành nút thắt đáng kể.
+  \item Ranh giới module đã ổn định trong monolith.
+  \item Chi phí vận hành distributed system có lợi hơn chi phí hiện tại.
+\end{itemize}
+
+\section{System Context}
+
+\subsection{Actor và hệ thống ngoài}
+\begin{longtable}{|P{0.25\textwidth}|P{0.65\textwidth}|}
+\hline
+\textbf{Actor/Hệ thống} & \textbf{Vai trò} \\ \hline
+\endfirsthead
+\hline
+\textbf{Actor/Hệ thống} & \textbf{Vai trò} \\ \hline
+\endhead
+Guest & Xem landing page, pricing, policy và bắt đầu Google Login. \\ \hline
+User & Viết bài, chấm, xem tiến bộ, mua credit và yêu cầu hỗ trợ. \\ \hline
+Admin & Quản lý theo permission trong một Admin Portal. \\ \hline
+Google Identity & Xác minh danh tính qua OIDC/OAuth; không quản lý role BandUp. \\ \hline
+OpenAI & Tạo structured grading result từ essay và prompt version. \\ \hline
+payOS & Tạo payment link/VietQR và gửi webhook thanh toán. \\ \hline
+Email provider & Gửi email hỗ trợ, thanh toán và bảo mật khi được bật. \\ \hline
+Object storage & Lưu avatar, support attachment và file export. \\ \hline
+Monitoring/Backup & Theo dõi health, log, metric và lưu backup ngoài VPS. \\ \hline
+\end{longtable}
+
+\begin{architecturebox}[Context luồng chính]
+\flowstep{Browser của Guest / User / Admin}
+\flowarrow
+\flowstep{BandUp Web - React}
+\flowarrow
+\flowstep{BandUp API - ASP.NET Core Modular Monolith}
+\flowarrow
+\flowstep{PostgreSQL / Hangfire / OpenAI / payOS / Object Storage / Email}
+\end{architecturebox}
+
+\section{Kiến trúc runtime}
+
+\subsection{Các tiến trình chính}
+\begin{longtable}{|P{0.23\textwidth}|P{0.30\textwidth}|P{0.37\textwidth}|}
+\hline
+\textbf{Tiến trình} & \textbf{Trách nhiệm} & \textbf{Không chịu trách nhiệm} \\ \hline
+\endfirsthead
+\hline
+\textbf{Tiến trình} & \textbf{Trách nhiệm} & \textbf{Không chịu trách nhiệm} \\ \hline
+\endhead
+BandUp Web & UI, navigation, editor state, polling, client validation & Quyền, quota, credit, payment state và grading decisions. \\ \hline
+BandUp API & Auth, authorization, business logic, database transaction, enqueue job & Chạy AI dài trong request. \\ \hline
+BandUp Worker & Hangfire server, grading, email, cleanup, aggregation, deletion & Nhận request trực tiếp từ public browser. \\ \hline
+PostgreSQL & Dữ liệu nghiệp vụ và persistent Hangfire storage & Object file lớn và secret. \\ \hline
+Reverse Proxy & TLS, routing, headers, static files, rate limit biên cơ bản & Business authorization. \\ \hline
+\end{longtable}
+
+\subsection{Tách API và Worker}
+Development có thể chạy Hangfire Server cùng API để giảm số process. Production phải tách Worker thành container riêng. Việc này cho phép restart API mà không dừng job, giới hạn tài nguyên AI riêng, tăng worker độc lập và tránh latency của background work ảnh hưởng request web.
+
+\section{Topology triển khai VPS}
+
+\begin{architecturebox}[Docker Compose baseline]
+\begin{lstlisting}
+Internet
+  |
+  v
+Caddy (HTTPS, reverse proxy)
+  |-- /           -> bandup-web
+  |-- /api/*      -> bandup-api
+  `-- /hangfire   -> bandup-worker dashboard (protected)
+
+Docker Compose
+  |-- bandup-web
+  |-- bandup-api
+  |-- bandup-worker
+  |-- postgres
+  `-- caddy
+
+External
+  |-- OpenAI
+  |-- payOS
+  |-- S3-compatible storage
+  `-- Email provider
+\end{lstlisting}
+\end{architecturebox}
+
+\subsection{Same-origin}
+Frontend và API ưu tiên cùng origin:
+\begin{codebox}
+https://bandup.vn\\
+https://bandup.vn/api/v1/...\\
+https://bandup.vn/admin
+\end{codebox}
+Lợi ích gồm cookie đơn giản hơn, giảm CORS, CSRF rõ ràng và dễ cấu hình Google callback.
+
+\subsection{Hangfire Dashboard}
+\begin{warningbox}
+Hangfire Dashboard không được mở public. Chỉ permission vận hành phù hợp được truy cập; nên có xác thực, giới hạn IP nếu khả thi và không đưa essay/secret vào job arguments.
+\end{warningbox}
+
+\section{Công nghệ frontend}
+
+\subsection{Stack}
+\begin{itemize}
+  \item React + TypeScript + Vite.
+  \item React Router cho route.
+  \item TanStack Query cho server state, cache, polling và pagination.
+  \item React Hook Form cùng schema validation phù hợp.
+  \item Editor là textarea/editor text đơn giản; không cần rich text.
+\end{itemize}
+
+\subsection{Nguyên tắc state}
+\begin{itemize}
+  \item Server là nguồn dữ liệu chính cho draft, submission, credit và result.
+  \item Local state chỉ dùng cho modal, tab, filter và bản recovery tạm.
+  \item Không tin \texttt{role}, \texttt{balance}, \texttt{paymentStatus} hoặc \texttt{submissionStatus} do frontend gửi lên.
+  \item API response dùng DTO, không phụ thuộc cấu trúc database.
+\end{itemize}
+
+\section{Công nghệ backend}
+
+\subsection{Stack}
+\begin{itemize}
+  \item ASP.NET Core Web API.
+  \item Entity Framework Core + Npgsql.
+  \item ASP.NET Core Identity hoặc identity layer tương đương cho local user, external login và security stamp.
+  \item Google OpenID Connect.
+  \item Cookie Authentication.
+  \item Hangfire + PostgreSQL storage provider đã được integration test.
+  \item Structured logging.
+  \item OpenAPI/Swagger cho development và contract review.
+\end{itemize}
+
+\subsection{Backend là nguồn quyết định nghiệp vụ}
+Backend quyết định ownership, permission, essay limit, quota, credit, AI settings, payment state, prompt publication, retention và deletion. Frontend chỉ phản ánh quyết định này.
+
+\section{Database và persistence}
+
+\subsection{PostgreSQL cho development và production}
+Dùng cùng provider giúp tránh khác biệt migration, kiểu dữ liệu, JSON, case sensitivity và query giữa môi trường. Development chạy PostgreSQL bằng Docker; production có thể chạy container riêng trên VPS giai đoạn đầu hoặc chuyển managed database sau.
+
+\subsection{EF Core thay vì ISqlProvider}
+Không tạo một interface database khổng lồ. EF Core DbContext và repository/application service theo module là lớp truy cập dữ liệu. Nếu có truy vấn Dapper đặc biệt, dùng \texttt{IDbConnectionFactory} nhỏ và có mục đích rõ.
+
+\subsection{Logical schema}
+Có thể phân tách bằng PostgreSQL schema:
+\begin{codebox}
+identity.*\\
+writing.*\\
+grading.*\\
+learning.*\\
+billing.*\\
+support.*\\
+security.*\\
+operations.*
+\end{codebox}
+Giai đoạn đầu có thể dùng một schema nếu migration đơn giản hơn, nhưng naming và ownership module phải giữ nguyên.
+
+\subsection{Transaction quan trọng}
+\begin{itemize}
+  \item Tạo submission + reserve credit.
+  \item Lưu assessment + consume credit + complete submission.
+  \item Fail grading + release credit.
+  \item Payment paid + grant credit.
+  \item Admin credit adjustment.
+  \item Account deletion/anonymization.
+\end{itemize}
+
+\section{Các module nghiệp vụ}
+
+\begin{longtable}{|P{0.21\textwidth}|P{0.37\textwidth}|P{0.31\textwidth}|}
+\hline
+\textbf{Module} & \textbf{Trách nhiệm chính} & \textbf{Dữ liệu sở hữu điển hình} \\ \hline
+\endfirsthead
+\hline
+\textbf{Module} & \textbf{Trách nhiệm chính} & \textbf{Dữ liệu sở hữu điển hình} \\ \hline
+\endhead
+Identity & Google Login, cookie, session, role, permission, account status & Users, ExternalLogins, Sessions, Roles, Permissions. \\ \hline
+User Profile & Onboarding và thông tin học tập & UserProfiles, Preferences. \\ \hline
+Writing Content & Prompt, tag, model essay, publish workflow & WritingPrompts, PromptTags, ModelEssays. \\ \hline
+Writing Practice & Draft, autosave, timer, submission và history & WritingDrafts, WritingSubmissions. \\ \hline
+Grading & Prompt version, attempts, OpenAI, assessment, usage & GradingAttempts, Assessments, Criteria, AiModelCalls. \\ \hline
+Mistake Bank & Taxonomy và lỗi từng bài & ErrorTaxonomies, ErrorOccurrences, UserMistakeStats. \\ \hline
+Progress & Trend, aggregate và insight & ProgressSnapshots, derived metrics. \\ \hline
+Redo & Recommendation và comparison & RedoRecommendations, RedoAttempts. \\ \hline
+Credit & Wallet, reservation và ledger & CreditWallets, Transactions, Reservations. \\ \hline
+Payment & Package, payOS order, webhook, refund & PaymentOrders, WebhookEvents, Refunds. \\ \hline
+Support & Ticket, message, attachment và dispute & SupportTickets, Messages, Attachments. \\ \hline
+Notification & In-app và email event & Notifications, DeliveryAttempts. \\ \hline
+Admin & Dashboard và orchestration theo permission & Không sở hữu dữ liệu module khác. \\ \hline
+Security & Abuse, block, rate-limit, kill switch, audit & SecurityEvents, BlockedClients, AuditLogs. \\ \hline
+Analytics & Product events và funnel không chứa essay text & ProductEvents, DailyMetrics. \\ \hline
+\end{longtable}
+
+\section{Dependency và ranh giới module}
+
+\begin{architecturebox}[Dependency nghiệp vụ chính]
+\begin{lstlisting}
+Identity
+   ^
+   |
+Writing Content <- Writing Practice -> Credit
+                         |
+                         v
+                      Grading
+                    /    |    \
+             Mistake  Progress  Notification
+                    \    |    /
+                         v
+                        Redo
+
+Payment -> Credit
+Support -> references Submission / Payment / Credit
+Admin -> application services of each module
+\end{lstlisting}
+\end{architecturebox}
+
+\subsection{Quy tắc}
+\begin{itemize}
+  \item Grading không tự cấp hoặc trừ credit ngoài Credit Service.
+  \item Payment không sửa wallet trực tiếp.
+  \item Admin không update bảng module khác bằng SQL.
+  \item Progress không chỉnh Assessment.
+  \item Analytics chỉ nhận event, không điều khiển transaction nghiệp vụ.
+  \item Shared Kernel chỉ chứa primitive và abstraction thực sự dùng chung; không trở thành nơi chứa mọi thứ.
+\end{itemize}
+
+\section{Cấu trúc source code đề xuất}
+
+\begin{lstlisting}
+src/
+|-- BandUp.Api/
+|-- BandUp.Worker/
+|-- BandUp.Contracts/
+|-- BandUp.SharedKernel/
+|-- BandUp.Infrastructure/
+|   |-- Persistence/
+|   |-- OpenAI/
+|   |-- PayOS/
+|   |-- Storage/
+|   |-- Email/
+|   `-- Observability/
+`-- BandUp.Modules/
+    |-- Identity/
+    |-- UserProfiles/
+    |-- WritingContent/
+    |-- WritingPractice/
+    |-- Grading/
+    |-- MistakeBank/
+    |-- Progress/
+    |-- Redo/
+    |-- Credit/
+    |-- Payment/
+    |-- Support/
+    |-- Notification/
+    |-- Admin/
+    |-- Security/
+    `-- Analytics/
+\end{lstlisting}
+
+Có thể bắt đầu với ít project hơn và chia folder theo module. Chất lượng dependency quan trọng hơn số lượng project.
+
+\section{Authentication: Google Login và cookie-session}
+
+\subsection{Luồng đăng nhập}
+\begin{flowbox}
+\flowstep{User chọn ``Tiếp tục với Google''}
+\flowarrow
+\flowstep{BandUp redirect đến Google và lưu state/correlation}
+\flowarrow
+\flowstep{Google xác thực và gọi callback}
+\flowarrow
+\flowstep{Backend validate response và tìm ExternalLogin}
+\flowarrow
+\flowstep{Tạo hoặc cập nhật local User, kiểm tra account status}
+\flowarrow
+\flowstep{Phát hành application cookie của BandUp}
+\flowarrow
+\flowstep{Redirect Dashboard}
+\end{flowbox}
+
+\subsection{Vì sao vẫn cần cookie}
+Google chỉ xác minh danh tính ở bước login. Cookie của BandUp giúp xác định user cho các request sau và gắn local role, permission, session, credit, account status. BandUp không lưu mật khẩu Google.
+
+\subsection{Cookie baseline}
+\begin{longtable}{|P{0.28\textwidth}|P{0.60\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Cấu hình} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Cấu hình} \\ \hline
+\endhead
+HttpOnly & true. \\ \hline
+Secure & true ở production. \\ \hline
+SameSite & Lax, kiểm thử Google callback và payment return flow. \\ \hline
+Session duration & 8--24 giờ theo setting. \\ \hline
+Remember me & Tùy chọn riêng, thời hạn dài hơn và có revoke. \\ \hline
+Data Protection keys & Persist ra volume/shared store; không để mất khi container restart. \\ \hline
+CSRF & Bắt buộc với request thay đổi dữ liệu. \\ \hline
+\end{longtable}
+
+\section{Authorization: role, permission và policy}
+
+\subsection{Mô hình}
+\begin{codebox}
+Users $\leftrightarrow$ UserRoles $\leftrightarrow$ Roles $\leftrightarrow$ RolePermissions $\leftrightarrow$ Permissions
+\end{codebox}
+
+\subsection{Role MVP}
+\begin{itemize}
+  \item USER.
+  \item CONTENT\_ADMIN.
+  \item USER\_SUPPORT\_ADMIN.
+  \item FINANCE\_ADMIN.
+  \item SECURITY\_ADMIN.
+  \item SUPER\_ADMIN.
+\end{itemize}
+
+\subsection{Permission nhạy cảm}
+\begin{longtable}{|P{0.30\textwidth}|P{0.56\textwidth}|}
+\hline
+\textbf{Permission} & \textbf{Ý nghĩa} \\ \hline
+\endfirsthead
+\hline
+\textbf{Permission} & \textbf{Ý nghĩa} \\ \hline
+\endhead
+Prompt.Publish & Publish/unpublish đề và bài mẫu. \\ \hline
+User.Suspend & Khóa user, yêu cầu reason và audit. \\ \hline
+User.ViewEssayForSupport & Xem essay user vì mục đích hỗ trợ; permission riêng. \\ \hline
+Credit.Adjust & Cộng/trừ credit qua ledger, không sửa balance trực tiếp. \\ \hline
+Payment.Refund & Ghi nhận và xử lý refund. \\ \hline
+Security.BlockClient & Block user/IP/client. \\ \hline
+System.ToggleAi & Bật/tắt AI grading. \\ \hline
+System.Maintenance & Bật maintenance mode. \\ \hline
+Admin.ManageRoles & Gán role admin; chỉ Super Admin. \\ \hline
+\end{longtable}
+
+\section{Browser security: CSRF, CORS và XSS}
+
+\begin{itemize}
+  \item Same-origin là baseline; không dùng \texttt{AllowAnyOrigin} cùng credentials.
+  \item Request POST/PUT/PATCH/DELETE dùng anti-forgery token hoặc cơ chế CSRF tương đương.
+  \item Cookie không được JavaScript đọc.
+  \item AI output và user content được encode; không render raw HTML.
+  \item Cấu hình Content Security Policy, X-Content-Type-Options và frame policy.
+  \item Endpoint luôn kiểm tra ownership, tránh IDOR khi đổi ID trên URL.
+\end{itemize}
+
+\section{Draft và Autosave}
+
+\subsection{Luồng}
+\begin{flowbox}
+\flowstep{Mở Writing Room và lấy/tạo Draft}
+\flowarrow
+\flowstep{User nhập; frontend debounce}
+\flowarrow
+\flowstep{PUT autosave với DraftId + Version + Text}
+\flowarrow
+\flowstep{Backend kiểm tra ownership, word count và optimistic concurrency}
+\flowarrow
+\flowstep{Lưu và trả Version mới}
+\end{flowbox}
+
+\subsection{Optimistic concurrency}
+Draft có \texttt{Version} hoặc concurrency token. Nếu tab cũ gửi version lỗi thời, backend trả \texttt{409 Conflict}; UI cho user chọn tải bản server hoặc sao chép nội dung local. Không âm thầm ghi đè.
+
+\subsection{Local recovery}
+Browser có thể giữ bản recovery tạm khi mất mạng. UI phải phân biệt ``Đã lưu trên server'' và ``Chưa đồng bộ''. Khi user logout hoặc xóa tài khoản, local recovery tương ứng phải được xóa.
+
+\section{Submission State Machine}
+
+\begin{longtable}{|P{0.23\textwidth}|P{0.25\textwidth}|P{0.41\textwidth}|}
+\hline
+\textbf{Trạng thái} & \textbf{Chuyển tiếp hợp lệ} & \textbf{Ý nghĩa} \\ \hline
+\endfirsthead
+\hline
+\textbf{Trạng thái} & \textbf{Chuyển tiếp hợp lệ} & \textbf{Ý nghĩa} \\ \hline
+\endhead
+DRAFT & SUBMITTED & Nội dung còn sửa được. \\ \hline
+SUBMITTED & QUEUED & Validation và credit reservation thành công. \\ \hline
+QUEUED & PROCESSING, CANCELLED & Đang chờ worker; có thể hủy nếu chưa bắt đầu và policy cho phép. \\ \hline
+PROCESSING & COMPLETED, RETRY\_SCHEDULED, FAILED & Worker đang xử lý. \\ \hline
+RETRY\_SCHEDULED & PROCESSING, FAILED & Chờ attempt tiếp theo. \\ \hline
+COMPLETED & Terminal & Assessment đã lưu, credit đã consume. \\ \hline
+FAILED & Regrade request mới & Credit đã release; bài được giữ để thử lại. \\ \hline
+CANCELLED & Terminal hoặc submit lại & Credit release nếu đã reserve. \\ \hline
+\end{longtable}
+
+\section{Submit bài và reserve credit}
+
+\subsection{Luồng transaction}
+\begin{enumerate}
+  \item Kiểm tra authentication và ownership draft.
+  \item Kiểm tra account status, word count 200/250/350 và idempotency key.
+  \item Kiểm tra rate limit, AI settings, daily budget và credit.
+  \item Tạo immutable WritingSubmission.
+  \item Tạo CreditReservation và ledger entry RESERVE.
+  \item Tạo record cần enqueue/outbox marker.
+  \item Commit transaction.
+  \item Enqueue Hangfire job; nếu thất bại, recovery job sẽ phát hiện và enqueue lại.
+\end{enumerate}
+
+\begin{warningbox}
+Không được trừ hoặc reserve credit chỉ ở frontend. Không được tạo submission trước rồi reserve credit ở transaction khác vì hai thao tác có thể lệch trạng thái.
+\end{warningbox}
+
+\section{Credit Ledger và Reservation}
+
+\subsection{Thành phần}
+\begin{itemize}
+  \item CreditWallet: số dư tính nhanh và trạng thái wallet.
+  \item CreditTransaction: ledger bất biến cho mọi thay đổi.
+  \item CreditReservation: credit đang giữ cho một submission.
+\end{itemize}
+
+\subsection{Transaction type}
+\begin{codebox}
+PURCHASE, BONUS, RESERVE, CONSUME, RELEASE, REFUND, ADMIN\_ADJUSTMENT, EXPIRATION
+\end{codebox}
+
+\subsection{State}
+\begin{flowbox}
+\flowstep{AVAILABLE}
+\flowarrow
+\flowstep{RESERVED khi submit}
+\flowarrow
+\flowstep{CONSUMED nếu grading thành công hoặc RELEASED nếu thất bại/hủy}
+\end{flowbox}
+
+\subsection{Ràng buộc}
+\begin{itemize}
+  \item Một submission có tối đa một reservation active.
+  \item Consume/release là idempotent.
+  \item Không sửa lịch sử transaction; sai phải tạo adjustment mới.
+  \item Balance có thể rebuild từ ledger để kiểm tra reconciliation.
+\end{itemize}
+
+\section{AI Grading Pipeline}
+
+\subsection{Một model chấm chính}
+MVP dùng một model OpenAI được cấu hình trong \texttt{AiSettings.PrimaryGradingModel}. Model ID không hard-code trong domain; trước public production phải benchmark trên tập bài có điểm tham chiếu. Không xây chuỗi nhiều model trong MVP.
+
+\subsection{Luồng worker}
+\begin{enumerate}
+  \item Load submission theo ID.
+  \item Dừng nếu đã COMPLETED hoặc đã có assessment thành công.
+  \item Kiểm tra credit reservation còn hợp lệ.
+  \item Chuyển PROCESSING và tạo GradingAttempt.
+  \item Load active GradingPromptVersion và taxonomy.
+  \item Build request, gọi \texttt{IAiGradingProvider}.
+  \item Parse/validate structured output.
+  \item Trong transaction: lưu assessment, criteria, corrections, suggestions, errors; consume credit; complete submission; tạo notification.
+  \item Ghi AI usage và cost estimate.
+\end{enumerate}
+
+\subsection{Structured output validation}
+Backend kiểm tra:
+\begin{itemize}
+  \item Overall và bốn criteria từ 0 đến 9, bước 0.5.
+  \item Đủ field bắt buộc.
+  \item Error code thuộc taxonomy hoặc map OTHER.
+  \item Giới hạn số item và độ dài chuỗi.
+  \item Không có HTML/script nguy hiểm.
+  \item Không tin raw output làm dữ liệu hiển thị trực tiếp.
+\end{itemize}
+
+\section{Hangfire Background Jobs}
+
+\subsection{Kết luận lựa chọn}
+\begin{decisionbox}
+\textbf{Hangfire đủ dùng cho MVP và early production của BandUp.} Nó phù hợp với grading, notification, payment reconciliation, progress aggregation, retention cleanup và data deletion. Hệ thống chưa cần RabbitMQ, Kafka hay cloud message bus.
+\end{decisionbox}
+
+\subsection{Vai trò của Hangfire}
+Hangfire chịu trách nhiệm persist job, phân phối cho worker, quản lý queue, lịch recurring và trạng thái job. Hangfire không tự bảo đảm business idempotency, credit consistency hoặc payment correctness; các phần đó thuộc module nghiệp vụ.
+
+\subsection{Production topology}
+\begin{itemize}
+  \item \texttt{bandup-api}: enqueue, không chạy grading worker.
+  \item \texttt{bandup-worker}: chạy Hangfire Server.
+  \item Dùng shared PostgreSQL storage.
+  \item Worker có thể scale thành nhiều instance sau này.
+\end{itemize}
+
+\subsection{Queue}
+\begin{longtable}{|P{0.22\textwidth}|P{0.35\textwidth}|P{0.32\textwidth}|}
+\hline
+\textbf{Queue} & \textbf{Job} & \textbf{Ưu tiên/tài nguyên} \\ \hline
+\endfirsthead
+\hline
+\textbf{Queue} & \textbf{Job} & \textbf{Ưu tiên/tài nguyên} \\ \hline
+\endhead
+grading & Gọi OpenAI và lưu assessment & Concurrency thấp, kiểm soát cost. \\ \hline
+payments & Reconciliation, webhook recovery & Ưu tiên cao vì liên quan tiền. \\ \hline
+notifications & In-app/email delivery & Có thể retry độc lập. \\ \hline
+maintenance & Cleanup, aggregate, retention, deletion & Thấp, chạy theo lịch. \\ \hline
+\end{longtable}
+
+\subsection{Concurrency baseline}
+Bắt đầu \texttt{MaxConcurrentAiJobs = 3}, cấu hình được. Không dùng worker count mặc định để gọi AI không giới hạn. Tăng concurrency dựa trên rate limit, latency, cost, queue time và tài nguyên thực tế.
+
+\subsection{Job argument}
+Job chỉ nhận ID nhỏ như \texttt{SubmissionId}, \texttt{PaymentOrderId} hoặc \texttt{DeletionRequestId}. Không serialize essay, API key, cookie hoặc payload nhạy cảm vào Hangfire storage.
+
+\subsection{Automatic retry}
+Hangfire có retry mặc định; grading job phải tắt hoặc giảm retry framework và để Grading Service phân loại lỗi. Nếu cả Hangfire và service cùng retry, số AI call có thể nhân lên ngoài ý muốn.
+
+\subsection{Idempotency của job}
+Trước mỗi side effect:
+\begin{itemize}
+  \item Kiểm tra state hiện tại.
+  \item Dùng unique constraint khi phù hợp.
+  \item Consume/release credit idempotent.
+  \item Webhook và payment grant có processed marker.
+  \item Assessment có uniqueness theo successful logical grading.
+\end{itemize}
+
+\subsection{Recovery job}
+Recurring recovery tìm:
+\begin{itemize}
+  \item Submission QUEUED quá ngưỡng nhưng chưa có job/enqueued marker.
+  \item Reservation quá lâu do worker crash.
+  \item Payment PAID nhưng credit chưa grant.
+  \item Deletion request bị treo.
+\end{itemize}
+Recovery không tạo duplicate nhờ idempotency key và state check.
+
+\subsection{Storage provider risk}
+\texttt{Hangfire.PostgreSql} là provider cộng đồng, nên cần integration test cho enqueue, retry, distributed locking, restart worker và nhiều worker. Nếu provider trở thành rủi ro lớn, có thể dùng Hangfire SQL Server storage hoặc thay job system mà không đổi domain contract \texttt{IGradingJobQueue}.
+
+\section{AI Retry, Circuit Breaker và Kill Switch}
+
+\subsection{Retry policy}
+Tối đa ba lần gọi AI tổng cộng cho một logical grading:
+\begin{longtable}{|P{0.18\textwidth}|P{0.25\textwidth}|P{0.45\textwidth}|}
+\hline
+\textbf{Attempt} & \textbf{Delay gợi ý} & \textbf{Ghi chú} \\ \hline
+\endfirsthead
+\hline
+\textbf{Attempt} & \textbf{Delay gợi ý} & \textbf{Ghi chú} \\ \hline
+\endhead
+1 & Ngay lập tức & Gọi chính. \\ \hline
+2 & Khoảng 30 giây + jitter & Timeout, 429, 5xx hoặc output có thể sửa. \\ \hline
+3 & Khoảng 2 phút + jitter & Attempt cuối; hết lỗi thì fail và release credit. \\ \hline
+\end{longtable}
+
+Không retry lỗi 400 do request/schema, 401/403, essay invalid, budget exceeded hoặc AI disabled.
+
+\subsection{Circuit breaker}
+Nếu provider lỗi liên tiếp vượt ngưỡng:
+\begin{itemize}
+  \item Mở circuit, không gọi mới trong thời gian cooldown.
+  \item Reschedule job thay vì fail ngay.
+  \item Credit giữ ở RESERVED trong thời gian gián đoạn có giới hạn.
+  \item Cảnh báo admin và hiển thị status thân thiện.
+  \item Half-open bằng một số request thử trước khi mở lại.
+\end{itemize}
+
+\subsection{Kill switch}
+\texttt{AiGradingEnabled}, \texttt{FreeGradingEnabled}, \texttt{MaintenanceMode}, \texttt{DailyAiBudgetLimit}, \texttt{MaxConcurrentAiJobs} là business settings. Thay đổi cần permission, reason và audit.
+
+\section{Prompt Versioning}
+
+Không ghi đè prompt đang active. Mỗi version lưu system prompt, template, output schema, model config, status và activation time. Assessment lưu \texttt{PromptVersionId} cùng \texttt{ModelName}, nhờ đó có thể so sánh chất lượng và điều tra lịch sử.
+
+\section{Third-party abstraction}
+
+\subsection{Interface nên có}
+\begin{lstlisting}
+IAiGradingProvider
+IPaymentGateway
+IObjectStorage
+IEmailSender
+IGradingJobQueue
+IClock (khi business rule phụ thuộc thời gian)
+\end{lstlisting}
+
+\subsection{Không abstraction quá mức}
+Không tạo \texttt{ISqlProvider} có hàng trăm method. Không bọc mọi framework class chỉ để ``có interface''. Abstraction đặt tại biên dịch vụ ngoài hoặc khi cần kiểm thử/đổi provider thật sự.
+
+\subsection{Implementation baseline}
+\begin{longtable}{|P{0.30\textwidth}|P{0.54\textwidth}|}
+\hline
+\textbf{Contract} & \textbf{Implementation} \\ \hline
+\endfirsthead
+\hline
+\textbf{Contract} & \textbf{Implementation} \\ \hline
+\endhead
+IAiGradingProvider & OpenAiGradingProvider. \\ \hline
+IPaymentGateway & PayOsPaymentGateway. \\ \hline
+IObjectStorage & LocalObjectStorage ở dev; S3CompatibleObjectStorage ở production. \\ \hline
+IEmailSender & Development sink; SMTP/API provider ở production. \\ \hline
+IGradingJobQueue & HangfireGradingJobQueue. \\ \hline
+\end{longtable}
+
+\section{payOS Payment Flow}
+
+\begin{flowbox}
+\flowstep{User chọn gói credit}
+\flowarrow
+\flowstep{Backend tạo PaymentOrder và gọi payOS}
+\flowarrow
+\flowstep{User quét VietQR bằng ứng dụng ngân hàng}
+\flowarrow
+\flowstep{payOS gửi webhook}
+\flowarrow
+\flowstep{Backend xác minh chữ ký và idempotency}
+\flowarrow
+\flowstep{Payment = PAID; Credit Service tạo PURCHASE transaction}
+\flowarrow
+\flowstep{Notification cho user}
+\end{flowbox}
+
+\subsection{Nguồn sự thật}
+Không cộng credit từ return URL, screenshot hoặc frontend callback. Webhook đã xác minh là nguồn chính; reconciliation job kiểm tra những payment pending bất thường.
+
+\subsection{Payment state}
+\begin{codebox}
+CREATED, PENDING, PAID, EXPIRED, CANCELLED, FAILED, REFUNDED, PARTIALLY\_REFUNDED
+\end{codebox}
+
+\subsection{Webhook idempotency}
+Lưu event ID/payload hash, signature verification result, received time, processed time và outcome. Duplicate webhook trả success phù hợp nhưng không grant credit lần hai.
+
+\section{Support, grading dispute và refund}
+
+Support ticket liên kết trực tiếp Submission, PaymentOrder hoặc CreditTransaction. Admin không sửa wallet; action Re-grade/Refund/Reject gọi service tương ứng và tạo audit. Ticket có messages, attachment, status, assignee, resolution và SLA metric.
+
+\subsection{Auto release}
+Credit tự release khi grading thất bại hoàn toàn hoặc hệ thống không tạo assessment. Khiếu nại chất lượng cần admin review; có thể re-grade miễn phí hoặc hoàn credit.
+
+\section{Progress, Mistake Bank và Redo}
+
+Giai đoạn đầu query từ assessment, criteria, error occurrence và submission. Khi dữ liệu lớn, recurring job tạo snapshot và aggregate. Insight phải có minimum evidence threshold theo loại thống kê; dữ liệu có đến đâu hiển thị đến đó nhưng không đưa kết luận giả.
+
+Redo tạo submission mới và giữ liên kết với original. Không ghi đè bài cũ hoặc result cũ.
+
+\section{Object Storage}
+
+Essay và structured grading result lưu database. Object storage dùng cho avatar, support attachment và export. Production ưu tiên storage ngoài VPS; object key ngẫu nhiên, private access, MIME/size validation, signed URL hoặc stream qua backend, lifecycle deletion theo retention.
+
+\section{Notification và email}
+
+MVP dùng in-app notification lưu database và frontend polling. Email là channel bổ sung, gửi qua background job. Notification delivery failure không rollback grading/payment đã thành công.
+
+\section{API Design}
+
+\subsection{Route convention}
+\begin{lstlisting}
+/api/v1/auth
+/api/v1/profile
+/api/v1/prompts
+/api/v1/drafts
+/api/v1/submissions
+/api/v1/results
+/api/v1/mistakes
+/api/v1/progress
+/api/v1/redo
+/api/v1/credits
+/api/v1/payments
+/api/v1/support
+/api/v1/admin
+\end{lstlisting}
+
+\subsection{Problem Details}
+Mọi lỗi dùng format nhất quán có \texttt{code}, \texttt{detail}, \texttt{traceId} và status HTTP. UI không phụ thuộc exception text nội bộ.
+
+\subsection{Pagination và filter}
+Danh sách lớn dùng page/cursor, page size giới hạn, sort whitelist và filter có validation. Không trả toàn bộ user/submission/payment.
+
+\subsection{Idempotency key}
+Bắt buộc hoặc hỗ trợ cho submit essay, create payment order, refund, credit adjustment và webhook processing.
+
+\section{Database entities cấp cao}
+
+\subsection{Identity}
+\begin{itemize}
+  \item Users, ExternalLogins, UserSessions.
+  \item Roles, Permissions, UserRoles, RolePermissions.
+  \item UserProfiles.
+\end{itemize}
+
+\subsection{Writing và grading}
+\begin{itemize}
+  \item WritingPrompts, PromptTags, ModelEssays.
+  \item WritingDrafts, WritingSubmissions.
+  \item GradingPromptVersions, GradingAttempts, WritingAssessments.
+  \item AssessmentCriteriaScores, SentenceCorrections, VocabularySuggestions, AiModelCalls.
+\end{itemize}
+
+\subsection{Learning}
+\begin{itemize}
+  \item ErrorTaxonomies, ErrorOccurrences, UserMistakeStats.
+  \item UserProgressSnapshots, RedoRecommendations, RedoAttempts.
+\end{itemize}
+
+\subsection{Billing và support}
+\begin{itemize}
+  \item CreditWallets, CreditTransactions, CreditReservations, CreditPackages.
+  \item PaymentOrders, PaymentWebhookEvents, Refunds.
+  \item SupportTickets, SupportMessages, SupportAttachments.
+\end{itemize}
+
+\subsection{Operations}
+\begin{itemize}
+  \item Notifications, AppSettings, SecurityEvents, BlockedClients.
+  \item RateLimitEvents, AdminAuditLogs, ProductEvents.
+  \item DataDeletionRequests, DeletionLedger.
+\end{itemize}
+
+Chi tiết field, index, FK và migration thuộc \texttt{05\_Database\_Design} hoặc phụ lục database riêng.
+
+\section{Configuration và secret management}
+
+\subsection{Environment secret}
+Database connection, Google Client Secret, OpenAI API key, payOS key/checksum, storage credential và email credential dùng environment variable/secret store. Không lưu trong AppSettings UI và không commit repository.
+
+\subsection{Business settings}
+MaxEssayWords, CreditCostPerGrading, retry count, free credit, budget cap, concurrency, retention days và feature toggle có thể quản lý qua AppSettings có validation/audit.
+
+\section{Logging, Audit và Observability}
+
+\subsection{Structured log fields}
+TraceId, UserId, SubmissionId, PaymentOrderId, JobId, Module, EventName, ElapsedMs và Status. Không log cookie, token, secret hoặc toàn bộ essay.
+
+\subsection{Audit}
+Audit cho role change, user suspend, session revoke, credit adjustment, refund, prompt publish, taxonomy edit, settings change, AI toggle, maintenance và quyền xem essay support.
+
+\subsection{Health check}
+\texttt{/health/live} kiểm tra process; \texttt{/health/ready} kiểm tra database, Hangfire storage và cấu hình bắt buộc. Không gọi OpenAI/payOS trong mọi health request.
+
+\subsection{Metric}
+API latency/error, queue length, job age, grading success/failure, retry, AI token/cost, payment webhook failure, database/storage/disk, CPU/RAM và support backlog.
+
+\section{Rate Limiting và abuse control}
+
+\begin{longtable}{|P{0.28\textwidth}|P{0.32\textwidth}|P{0.28\textwidth}|}
+\hline
+\textbf{Endpoint/nhóm} & \textbf{Baseline} & \textbf{Key} \\ \hline
+\endfirsthead
+\hline
+\textbf{Endpoint/nhóm} & \textbf{Baseline} & \textbf{Key} \\ \hline
+\endhead
+Google login initiation & Giới hạn hợp lý & IP/device signal. \\ \hline
+Autosave & Cao hơn submit & User + draft. \\ \hline
+Submit grading & 3 lần/5 phút & User. \\ \hline
+Submit grading IP & 10 lần/5 phút & IP. \\ \hline
+Create payment order & Chặt hơn API đọc & User. \\ \hline
+Support ticket & Chống spam & User. \\ \hline
+Admin sensitive action & Rất chặt + re-auth & Admin session. \\ \hline
+\end{longtable}
+
+Rate limit không thay thế credit, budget hoặc permission check.
+
+\section{Data Retention}
+
+\begin{longtable}{|P{0.37\textwidth}|P{0.44\textwidth}|}
+\hline
+\textbf{Dữ liệu} & \textbf{Baseline retention} \\ \hline
+\endfirsthead
+\hline
+\textbf{Dữ liệu} & \textbf{Baseline retention} \\ \hline
+\endhead
+Essay, assessment, mistakes, progress & Trong thời gian tài khoản tồn tại; xóa khi account deletion. \\ \hline
+Draft bỏ dở & 90 ngày. \\ \hline
+Raw AI response & Không lưu hoặc tối đa 7 ngày khi debug có kiểm soát. \\ \hline
+Application log & 30 ngày. \\ \hline
+Error log & 90 ngày. \\ \hline
+Security event & 12 tháng. \\ \hline
+Admin audit & 24 tháng; payment-sensitive có thể theo payment retention. \\ \hline
+Support ticket & 12 tháng sau khi đóng. \\ \hline
+Support attachment & 90 ngày sau khi đóng. \\ \hline
+Raw analytics & 13 tháng; aggregate ẩn danh có thể lâu hơn. \\ \hline
+Database backup & Rolling 30 ngày. \\ \hline
+Payment/accounting record & Theo nghĩa vụ pháp luật; baseline thận trọng 10 năm. \\ \hline
+\end{longtable}
+
+\section{Account Deletion}
+
+\begin{flowbox}
+\flowstep{User xem cảnh báo và xác thực lại Google}
+\flowarrow
+\flowstep{Tạo DataDeletionRequest và revoke mọi session}
+\flowarrow
+\flowstep{Worker xóa dữ liệu học tập và object}
+\flowarrow
+\flowstep{Anonymize payment/audit bắt buộc giữ}
+\flowarrow
+\flowstep{Ghi DeletionLedger và complete request}
+\end{flowbox}
+
+Xóa profile, Google identifier, draft, essay, assessment, mistakes, progress, redo, notification, attachment và analytics định danh. Payment/accounting tối thiểu được giữ nhưng tách khỏi identity và không dùng cho marketing. Backup hết hạn theo lifecycle; sau restore phải chạy lại DeletionLedger.
+
+\section{Backup và Disaster Recovery}
+
+\subsection{Backup}
+\begin{itemize}
+  \item PostgreSQL backup hằng ngày, mã hóa, lưu ngoài VPS.
+  \item Rolling 30 ngày ở baseline.
+  \item Kiểm thử restore định kỳ, không chỉ kiểm tra file tồn tại.
+  \item Object storage có lifecycle/versioning phù hợp.
+\end{itemize}
+
+\subsection{Mục tiêu tham khảo}
+RPO tối đa 24 giờ và RTO vài giờ cho MVP. Khi có nhiều user trả phí, giảm RPO bằng backup thường xuyên hoặc WAL archiving.
+
+\section{Failure Scenarios}
+
+\begin{longtable}{|P{0.25\textwidth}|P{0.65\textwidth}|}
+\hline
+\textbf{Sự cố} & \textbf{Xử lý} \\ \hline
+\endfirsthead
+\hline
+\textbf{Sự cố} & \textbf{Xử lý} \\ \hline
+\endhead
+OpenAI timeout/429/5xx & Retry có giới hạn; circuit breaker; không mất credit. \\ \hline
+AI output sai & Corrective retry; fail an toàn nếu vẫn invalid. \\ \hline
+Worker restart & Hangfire persist job; idempotent job chạy lại. \\ \hline
+API restart & Cookie vẫn hợp lệ nếu Data Protection keys persist. \\ \hline
+Enqueue thất bại & Recovery/outbox tìm QUEUED chưa enqueue. \\ \hline
+Webhook trùng & Idempotency; không cộng credit trùng. \\ \hline
+Webhook không tới & Reconciliation job và nút kiểm tra payment. \\ \hline
+Database down & Readiness fail; không nhận mutation mới; cảnh báo admin. \\ \hline
+Disk VPS đầy & Alert, log rotation, chặn upload, cleanup. \\ \hline
+Double-click submit & Idempotency key; một submission và một reservation. \\ \hline
+Restore backup cũ & Chạy migration, DeletionLedger và reconciliation. \\ \hline
+\end{longtable}
+
+\section{Security Threat Model cơ bản}
+
+\begin{longtable}{|P{0.28\textwidth}|P{0.59\textwidth}|}
+\hline
+\textbf{Threat} & \textbf{Mitigation} \\ \hline
+\endfirsthead
+\hline
+\textbf{Threat} & \textbf{Mitigation} \\ \hline
+\endhead
+Session hijacking & HTTPS, Secure/HttpOnly, short admin session, revoke, re-auth. \\ \hline
+CSRF & Anti-forgery, SameSite, same-origin. \\ \hline
+XSS & Encode/sanitize, CSP, không render raw AI HTML. \\ \hline
+IDOR & Ownership check và permission ở backend. \\ \hline
+Privilege escalation & Policy, role management only by Super Admin, audit. \\ \hline
+Prompt injection & Essay là untrusted content; AI chỉ trả grading schema; không có tool quyền cao. \\ \hline
+AI cost abuse & Credit, rate limit, queue, concurrency, budget cap, kill switch. \\ \hline
+Fake/replay webhook & Signature verification, event idempotency, timestamp/order check. \\ \hline
+Credit race condition & Transaction, row/concurrency locking, unique reservation. \\ \hline
+SQL injection & Parameterized EF queries; raw SQL được review. \\ \hline
+Malicious attachment & MIME/size allowlist, private storage, no execution. \\ \hline
+Secret leakage & Environment secrets, redaction, restricted admin settings. \\ \hline
+\end{longtable}
+
+\section{Attachment Security}
+
+MVP chỉ cho PNG, JPG, PDF với giới hạn dung lượng. File name user không được dùng làm path; object key ngẫu nhiên. Kiểm tra MIME và extension, không thực thi, private access, signed URL ngắn hạn hoặc stream qua backend, tự xóa theo retention.
+
+\section{Scalability Roadmap}
+
+\subsection{Giai đoạn 1}
+Một VPS chạy web, API, worker, PostgreSQL và Caddy; external object storage. AI concurrency 3.
+
+\subsection{Giai đoạn 2}
+Tách worker sang VPS riêng, tăng worker instances, managed PostgreSQL, Redis nếu cần distributed rate limit/cache.
+
+\subsection{Giai đoạn 3}
+Nhiều API instances sau load balancer, shared Data Protection keys, external storage, observability chuyên dụng. Chưa cần microservice nếu modular monolith vẫn đáp ứng.
+
+\section{Hướng mở rộng Mobile App}
+
+Web hoàn chỉnh trước. Mobile app sau này dùng chung API, DTO và account. Mobile authentication có thể dùng Authorization Code + PKCE/token flow riêng; không cần ép web hiện tại dùng JWT. Business logic và authorization vẫn ở backend.
+
+\section{Testing Boundary}
+
+\begin{itemize}
+  \item Unit test domain rule: word limit, credit reservation, retry classification.
+  \item Integration test PostgreSQL transaction, unique constraint và EF migration.
+  \item Integration test Hangfire enqueue, restart, retry và multi-worker.
+  \item Contract test OpenAI structured parser bằng fixture.
+  \item Webhook signature/idempotency test payOS.
+  \item Authorization test cho role/permission/ownership.
+  \item End-to-end test submit-to-result và payment-to-credit.
+  \item Restore test backup và account deletion replay.
+\end{itemize}
+
+\section{Migration, Seed và Admin Bootstrap}
+
+Seed roles, permissions, role-permission mapping, error taxonomy, app settings và credit package. Không hard-code production admin trong source. Bootstrap bằng Google email từ environment một lần; user đăng nhập, được cấp SUPER\_ADMIN, sau đó khóa bootstrap flow. Admin mới chỉ do Super Admin cấp quyền.
+
+\section{State Machine cần đặc tả chi tiết}
+
+\begin{enumerate}
+  \item User Account.
+  \item Draft.
+  \item Submission.
+  \item Grading Attempt.
+  \item Credit Reservation.
+  \item Payment.
+  \item Support Ticket.
+  \item Data Deletion Request.
+  \item Prompt Publication.
+  \item Model Essay Review.
+\end{enumerate}
+Mỗi state machine cần actor, transition, guard, side effect, transaction và audit requirement.
+
+\section{Sequence Diagram cần bổ sung}
+
+\begin{enumerate}
+  \item Google Login.
+  \item Autosave với version conflict.
+  \item Submit + reserve credit + enqueue.
+  \item Grading success.
+  \item Grading retry/fail/release.
+  \item Circuit breaker.
+  \item payOS checkout + webhook.
+  \item Duplicate webhook.
+  \item Payment reconciliation.
+  \item Support + credit refund.
+  \item Suspend user + revoke sessions.
+  \item Account deletion.
+  \item Restore backup + deletion ledger.
+\end{enumerate}
+
+\section{Architectural Decision Records}
+
+\begin{longtable}{|P{0.18\textwidth}|P{0.66\textwidth}|}
+\hline
+\textbf{ADR} & \textbf{Quyết định} \\ \hline
+\endfirsthead
+\hline
+\textbf{ADR} & \textbf{Quyết định} \\ \hline
+\endhead
+ADR-001 & Modular Monolith thay microservice. \\ \hline
+ADR-002 & Desktop web-first; mobile app sau. \\ \hline
+ADR-003 & React + TypeScript + Vite. \\ \hline
+ADR-004 & ASP.NET Core + PostgreSQL/EF Core. \\ \hline
+ADR-005 & Google OIDC + application cookie cho web. \\ \hline
+ADR-006 & Role + permission authorization. \\ \hline
+ADR-007 & Hangfire cho background jobs, worker riêng ở production. \\ \hline
+ADR-008 & Một model OpenAI chính và structured output. \\ \hline
+ADR-009 & Credit ledger + reservation. \\ \hline
+ADR-010 & payOS + verified webhook. \\ \hline
+ADR-011 & Polling trước SignalR. \\ \hline
+ADR-012 & VPS + Docker Compose + Caddy. \\ \hline
+ADR-013 & Production object storage tương thích S3. \\ \hline
+\end{longtable}
+
+\section{Rủi ro kỹ thuật và biện pháp}
+
+\begin{longtable}{|P{0.25\textwidth}|P{0.15\textwidth}|P{0.50\textwidth}|}
+\hline
+\textbf{Rủi ro} & \textbf{Mức} & \textbf{Biện pháp} \\ \hline
+\endfirsthead
+\hline
+\textbf{Rủi ro} & \textbf{Mức} & \textbf{Biện pháp} \\ \hline
+\endhead
+AI grading không ổn định & Cao & Benchmark, prompt version, schema validation, monitoring và dispute flow. \\ \hline
+Chi phí AI tăng & Cao & Credit, budget cap, concurrency, model config và cost dashboard. \\ \hline
+Hangfire PostgreSQL provider & Trung bình & Integration test, abstraction queue và backup phương án storage. \\ \hline
+Payment webhook sai/trùng & Cao & Signature, idempotency và reconciliation. \\ \hline
+Credit sai số dư & Cao & Ledger, transaction, unique constraints và reconciliation. \\ \hline
+VPS single point of failure & Trung bình & Offsite backup, restore test, external storage và roadmap tách DB/worker. \\ \hline
+Admin lạm quyền & Cao & Least privilege, tài khoản riêng, audit và re-auth. \\ \hline
+Data deletion không đầy đủ & Cao & Deletion workflow, object cleanup, ledger và backup lifecycle. \\ \hline
+\end{longtable}
+
+\section{Implementation Checklist}
+
+\subsection{P0 - Foundation}
+\begin{itemize}
+  \item Repository, Docker Compose, PostgreSQL migration.
+  \item Google Login, cookie, persisted Data Protection keys.
+  \item Role/permission/policy và Super Admin bootstrap.
+  \item Module skeleton, error format, logging và health checks.
+\end{itemize}
+
+\subsection{P0 - Core writing/grading}
+\begin{itemize}
+  \item Prompt, draft, autosave versioning, submission state.
+  \item Credit wallet/ledger/reservation.
+  \item Hangfire worker, grading queue và recovery.
+  \item OpenAI structured output, prompt version và usage.
+  \item Result, history, notification.
+\end{itemize}
+
+\subsection{P1 - Product differentiation}
+\begin{itemize}
+  \item Mistake Bank, Progress, Redo, Model Essay.
+  \item payOS payment, webhook, reconciliation.
+  \item Support tickets, admin modules, audit và security events.
+\end{itemize}
+
+\subsection{P1 - Production hardening}
+\begin{itemize}
+  \item Rate limit, circuit breaker, budget cap và kill switch.
+  \item Object storage, backup, restore test và retention jobs.
+  \item Account deletion và privacy documentation.
+  \item Monitoring dashboard và alerting.
+\end{itemize}
+
+\section{Tiêu chí chấp nhận System Design}
+
+Tài liệu được xem là đủ để bắt đầu implementation khi:
+\begin{itemize}
+  \item Các quyết định stack và deployment không còn mâu thuẫn.
+  \item Module ownership và dependency được thống nhất.
+  \item Auth, permission, credit, payment và grading state machine được chốt.
+  \item Hangfire queue, concurrency, retry, idempotency và recovery được chốt.
+  \item Database provider, migration và backup strategy được chốt.
+  \item Third-party interface và secret boundary rõ.
+  \item Retention, account deletion và audit có baseline.
+  \item Các ADR chính được tạo và review.
+\end{itemize}
+
+\section{Kết luận}
+
+BandUp sẽ bắt đầu bằng một Modular Monolith trên VPS, dùng React/TypeScript, ASP.NET Core, PostgreSQL, Google Login + cookie-session, Hangfire worker, một model OpenAI, credit ledger và payOS. Thiết kế tập trung vào tính đúng đắn của transaction, idempotency, quyền truy cập và data lifecycle hơn là tối ưu phân tán quá sớm.
+
+Hangfire là lựa chọn phù hợp miễn job được xem là có khả năng chạy lại, business side effect idempotent, retry được kiểm soát và worker được tách khỏi API ở production. Khi hệ thống lớn hơn, API, worker, database và storage có thể tách hạ tầng độc lập mà không cần thay đổi nghiệp vụ cốt lõi.
+
+\clearpage
+\section*{Nguồn tham khảo}\addcontentsline{toc}{section}{Nguồn tham khảo}
+\begin{itemize}
+  \item Hangfire Documentation: \url{https://docs.hangfire.io/}
+  \item Hangfire - Dealing with Exceptions: \url{https://docs.hangfire.io/en/latest/background-processing/dealing-with-exceptions.html}
+  \item Hangfire - Configuring Job Queues: \url{https://docs.hangfire.io/en/latest/background-processing/configuring-queues.html}
+  \item Hangfire - Configuring Degree of Parallelism: \url{https://docs.hangfire.io/en/latest/background-processing/configuring-degree-of-parallelism.html}
+  \item ASP.NET Core - Google external login: \url{https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins}
+  \item ASP.NET Core - Cookie authentication: \url{https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie}
+  \item Npgsql EF Core Provider: \url{https://www.npgsql.org/efcore/}
+  \item payOS Documentation: \url{https://payos.vn/docs/}
+  \item payOS Webhook and Signature: \url{https://payos.vn/docs/du-lieu-tra-ve/webhook/}
+  \item OpenAI API Documentation: \url{https://platform.openai.com/docs/}
+  \item Docker Compose Documentation: \url{https://docs.docker.com/compose/}
+\end{itemize}
+
+\begin{importantbox}
+Các nguồn tham khảo kỹ thuật có thể thay đổi theo phiên bản. Khi triển khai, đội phát triển phải khóa version package, đọc release notes và kiểm thử migration/integration trước production.
+\end{importantbox}
+
+\end{document}

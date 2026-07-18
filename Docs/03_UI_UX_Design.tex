@@ -1,0 +1,1103 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=2.25cm,right=2.25cm,headheight=15pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\usepackage[vietnamese]{babel}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.45em,itemsep=0.22em,topsep=0.3em}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0.22em,topsep=0.3em}
+\usepackage{xcolor}
+\definecolor{BandBlue}{HTML}{244A73}
+\definecolor{BandLight}{HTML}{EEF4F8}
+\definecolor{BandGray}{HTML}{5F6B76}
+\definecolor{BandGreen}{HTML}{287A5A}
+\definecolor{BandGreenLight}{HTML}{EDF7F2}
+\definecolor{BandOrange}{HTML}{A45A14}
+\definecolor{BandOrangeLight}{HTML}{FFF4E8}
+\definecolor{BandRed}{HTML}{A63636}
+\definecolor{BandRedLight}{HTML}{FFF0F0}
+\definecolor{BandPurple}{HTML}{6750A4}
+\definecolor{BandPurpleLight}{HTML}{F4F0FF}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Large\bfseries\color{BandBlue}}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{BandBlue}}{\thesubsection}{0.55em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{BandGray}}{\thesubsubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.55em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.4em}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=BandBlue,urlcolor=BandBlue,citecolor=BandBlue,pdftitle={BandUp - UI UX Design Specification},pdfauthor={BandUp}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small BandUp - UI/UX Design Specification}
+\fancyhead[R]{\sffamily\small Phiên bản 1.0}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\newtcolorbox{importantbox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{decisionbox}{breakable,colback=BandGreenLight,colframe=BandGreen,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{warningbox}{breakable,colback=BandRedLight,colframe=BandRed,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{futurebox}{breakable,colback=BandPurpleLight,colframe=BandPurple,boxrule=0.65pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{screenbox}[1][]{breakable,colback=white,colframe=BandBlue,boxrule=0.55pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm,before skip=5pt,after skip=5pt,title={#1},fonttitle=\sffamily\bfseries,coltitle=BandBlue}
+\newtcolorbox{copybox}{breakable,colback=BandOrangeLight,colframe=BandOrange,boxrule=0.55pt,arc=1.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm}
+\newtcolorbox{flowbox}{breakable,colback=BandLight,colframe=BandBlue,boxrule=0.6pt,arc=2mm,left=4mm,right=4mm,top=3mm,bottom=3mm}
+\newcommand{\flowarrow}{\par\centering\sffamily\color{BandBlue}\Large$\downarrow$\par}
+\newcommand{\flowstep}[1]{\par\centering\sffamily\bfseries #1\par}
+\newcommand{\screenid}[1]{\colorbox{BandLight}{\sffamily\footnotesize\bfseries #1}}
+\newcommand{\statuschip}[1]{\colorbox{BandGreenLight}{\sffamily\footnotesize #1}}
+\usepackage{longtable,booktabs,array,tabularx}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{pdflscape}
+\usepackage{needspace}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\emergencystretch=2em
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+{\sffamily\fontsize{34}{40}\selectfont\bfseries\color{BandBlue} BandUp\par}
+\vspace{0.55cm}
+{\sffamily\fontsize{22}{28}\selectfont Thiết kế UI/UX\par}
+\vspace{0.25cm}
+{\sffamily\large UI/UX Design Specification\par}
+\vfill
+\begin{tcolorbox}[colback=BandLight,colframe=BandBlue,width=0.80\textwidth,boxrule=0.7pt,arc=2mm]
+\centering\sffamily
+\textbf{Phiên bản: 1.0}\\[1mm]
+Trạng thái: Baseline thiết kế Web MVP\\[1mm]
+Ưu tiên: Desktop Web hoàn chỉnh trước\\[1mm]
+Mobile App: Giai đoạn mở rộng sau MVP\\[1mm]
+Ngày chốt: 18/07/2026
+\end{tcolorbox}
+\vspace{1.2cm}
+{\sffamily\small Tài liệu làm căn cứ cho Figma, frontend implementation, UX writing, accessibility và UI acceptance testing\par}
+\vspace*{1cm}
+\end{titlepage}
+
+\section*{Kiểm soát tài liệu}\addcontentsline{toc}{section}{Kiểm soát tài liệu}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|P{0.28\textwidth}|P{0.64\textwidth}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Giá trị} \\ \hline
+\endfirsthead
+\hline
+\textbf{Thuộc tính} & \textbf{Giá trị} \\ \hline
+\endhead
+Tên tài liệu & 03\_UI\_UX\_Design \\ \hline
+Phiên bản & 1.0 \\ \hline
+Trạng thái & Baseline thiết kế Web MVP \\ \hline
+Ngày chốt & 18/07/2026 \\ \hline
+Ngôn ngữ & Tiếng Việt \\ \hline
+Sản phẩm & BandUp \\ \hline
+Nền tảng ưu tiên & Desktop Web Application \\ \hline
+Nền tảng ngoài MVP & Mobile web tối ưu riêng; ứng dụng Android/iOS \\ \hline
+Tài liệu đầu vào & 01\_BandUp\_Overview; 02\_Product\_Requirements \\ \hline
+Tài liệu đầu ra liên quan & Figma; Wireframes; Component Library; Frontend Specification; UI Test Cases \\ \hline
+\end{longtable}
+\normalsize
+
+\begin{importantbox}
+\textbf{Giới hạn tài liệu.} Tài liệu này mô tả người dùng nhìn thấy gì, điều hướng ra sao, thao tác như thế nào, các trạng thái giao diện và tiêu chuẩn trải nghiệm. Tài liệu không quy định bảng vật lý, API endpoint, class, interface, Docker, cloud hay cách triển khai backend.
+\end{importantbox}
+
+\tableofcontents
+\clearpage
+
+\section*{Mục đích tài liệu}\addcontentsline{toc}{section}{Mục đích tài liệu}
+Tài liệu này chuyển các yêu cầu nghiệp vụ trong PRD thành một baseline trải nghiệm có thể dùng để thiết kế Figma và phát triển frontend. Mỗi màn hình phải có mục tiêu, bố cục, hành động chính, trạng thái loading/empty/error/success, quy tắc permission và copy hướng dẫn rõ ràng.
+
+Tài liệu trả lời các câu hỏi:
+\begin{itemize}
+  \item Website BandUp được tổ chức thành những khu vực và màn hình nào?
+  \item Người dùng đi từ Landing Page đến luyện tập, chấm bài, thanh toán và hỗ trợ như thế nào?
+  \item Admin Portal hoạt động ra sao khi một người có nhiều role hoặc nhiều người cùng một role?
+  \item Mỗi màn hình cần hiển thị dữ liệu gì và ưu tiên hành động nào?
+  \item Giao diện xử lý loading, mất kết nối, lỗi AI, thiếu credit và thanh toán chậm như thế nào?
+  \item Khi nào một màn hình được xem là hoàn thành về UI/UX?
+\end{itemize}
+
+\section{Các quyết định nền tảng đã chốt}
+
+\subsection{Web hoàn chỉnh trước, mobile phát triển sau}
+\begin{decisionbox}
+\textbf{MVP chỉ cam kết một Desktop Web Application hoàn chỉnh.} BandUp ưu tiên trải nghiệm trên laptop và máy tính để bàn vì Writing Task 2 là tác vụ nhập văn bản dài. Mobile web tối ưu riêng và ứng dụng Android/iOS không thuộc tiêu chí nghiệm thu MVP.
+\end{decisionbox}
+
+Phạm vi giao diện theo giai đoạn:
+\begin{longtable}{|P{0.20\textwidth}|P{0.30\textwidth}|P{0.40\textwidth}|}
+\hline
+\textbf{Giai đoạn} & \textbf{Nền tảng} & \textbf{Cam kết} \\ \hline
+\endfirsthead
+\hline
+\textbf{Giai đoạn} & \textbf{Nền tảng} & \textbf{Cam kết} \\ \hline
+\endhead
+MVP & Desktop Web & Hoàn chỉnh toàn bộ Learner App và Admin Portal; tối ưu cho Chrome/Edge desktop; hỗ trợ kích thước màn hình phổ biến từ 1024px trở lên. \\ \hline
+Sau MVP & Responsive/Mobile Web & Đánh giá nhu cầu thực tế; tối ưu các luồng xem Result, Progress, Credit, Notification và Support trên trình duyệt điện thoại. \\ \hline
+Mở rộng & Mobile App & Có thể phát triển ứng dụng bằng Flutter/React Native hoặc native, dùng chung backend và tài khoản BandUp. \\ \hline
+\end{longtable}
+
+Trong MVP, khi user mở bằng màn hình quá nhỏ, website có thể hiển thị thông báo:
+\begin{copybox}
+BandUp hiện được tối ưu cho máy tính để mang lại trải nghiệm viết bài tốt nhất. Bạn vẫn có thể xem thông tin cơ bản, nhưng hãy sử dụng laptop hoặc máy tính để viết và chấm bài.
+\end{copybox}
+
+\subsection{Một Admin Portal, nhiều tài khoản, nhiều role}
+\begin{decisionbox}
+BandUp chỉ có một Admin Portal. Mỗi người quản trị phải dùng tài khoản cá nhân. Một tài khoản có thể được gán nhiều role; một role có thể được gán cho nhiều tài khoản. Menu và hành động được hiển thị theo permission, đồng thời backend phải kiểm tra permission cho mọi request.
+\end{decisionbox}
+
+Ví dụ:
+\begin{itemize}
+  \item Người sáng lập giai đoạn đầu: \texttt{SUPER\_ADMIN}.
+  \item Một người vừa quản lý nội dung vừa hỗ trợ user: \texttt{CONTENT\_ADMIN} + \texttt{USER\_SUPPORT\_ADMIN}.
+  \item Ba người cùng xử lý bảo mật: ba tài khoản riêng, cùng role \texttt{SECURITY\_ADMIN}.
+  \item Không dùng chung một tài khoản admin cho nhiều người vì audit log sẽ mất ý nghĩa.
+\end{itemize}
+
+\subsection{Nguyên tắc permission trên giao diện}
+\begin{itemize}
+  \item Không có permission xem module: không hiển thị menu module đó.
+  \item Có permission xem nhưng không có quyền sửa: hiển thị chế độ read-only.
+  \item Hành động nhạy cảm phải yêu cầu xác nhận, lý do và có thể yêu cầu xác thực lại.
+  \item Ẩn button ở frontend không thay thế kiểm tra quyền ở backend.
+  \item Role và permission được quản lý trong một màn hình riêng chỉ dành cho Super Admin.
+\end{itemize}
+
+\section{Mục tiêu UI/UX}
+
+\subsection{Mục tiêu chính}
+Giao diện BandUp phải giúp người dùng:
+\begin{itemize}
+  \item Hiểu sản phẩm trong vài phút mà không bị ép làm bài ngay.
+  \item Thiết lập band hiện tại, band mục tiêu và mục tiêu học tập một cách nhẹ nhàng.
+  \item Tìm đề, chọn đề hoặc nhận đề ngẫu nhiên mà không cần hướng dẫn dài.
+  \item Viết bài tập trung, không mất nội dung và luôn biết trạng thái autosave.
+  \item Hiểu kết quả chấm theo thứ tự ưu tiên, thay vì bị ngợp bởi một báo cáo dài.
+  \item Nhìn thấy lỗi thường gặp, xu hướng tiến bộ và bước luyện tập tiếp theo.
+  \item Mua credit, báo lỗi và yêu cầu hỗ trợ bằng luồng rõ ràng.
+\end{itemize}
+
+\subsection{Cảm giác sản phẩm}
+BandUp nên tạo cảm giác:
+\begin{itemize}
+  \item Nghiêm túc nhưng không gây áp lực.
+  \item Hiện đại, sạch, đáng tin cậy.
+  \item Cá nhân hóa nhưng không xâm phạm riêng tư.
+  \item Có định hướng học tập rõ, không giống chatbot chung chung.
+  \item Không giống dashboard ERP hoặc trò chơi trẻ em.
+\end{itemize}
+
+\subsection{Nguyên tắc thiết kế}
+\begin{longtable}{|P{0.23\textwidth}|P{0.65\textwidth}|}
+\hline
+\textbf{Nguyên tắc} & \textbf{Cách áp dụng} \\ \hline
+\endfirsthead
+\hline
+\textbf{Nguyên tắc} & \textbf{Cách áp dụng} \\ \hline
+\endhead
+Learning First & Mỗi thành phần phải giúp user viết, hiểu lỗi hoặc luyện tập tốt hơn. \\ \hline
+One Primary Action & Mỗi màn hình có một hành động chính nổi bật; hành động phụ không cạnh tranh thị giác. \\ \hline
+Progressive Disclosure & Feedback được mở dần từ tổng quan đến chi tiết, không dồn tất cả vào một màn hình dài thiếu cấu trúc. \\ \hline
+Transparency & Luôn ghi rõ điểm AI là ước lượng và credit đang được giữ chỗ hay đã sử dụng. \\ \hline
+User Control & User chủ động chọn đề, random, redo, lưu draft, pause, báo lỗi và xóa tài khoản. \\ \hline
+Consistency & Thuật ngữ, màu, trạng thái, button và cách hiển thị score nhất quán. \\ \hline
+Calm UX & Tránh copy phán xét, cảnh báo quá mức và animation gây áp lực. \\ \hline
+Safe by Default & Hành động xóa, refund, khóa user và thay đổi settings đều có confirmation và audit. \\ \hline
+\end{longtable}
+
+\section{Đối tượng sử dụng giao diện}
+
+\subsection{Guest}
+Guest có thể xem Landing Page, tính năng, bảng giá, FAQ, Trợ giúp \& Pháp lý và đăng nhập bằng Google. Guest không bị bắt buộc thực hiện bài mẫu trước khi hiểu sản phẩm.
+
+\subsection{User}
+User sử dụng Learner App để thiết lập hồ sơ học tập, chọn đề, viết bài, nhận kết quả, xem Mistake Bank, Progress, Redo, Credit, Payment, Notification và Support.
+
+\subsection{Admin}
+Admin sử dụng cùng một Admin Portal nhưng nhìn thấy module theo role/permission.
+
+\subsection{Role admin đề xuất cho MVP}
+\small
+\begin{longtable}{|P{0.23\textwidth}|P{0.31\textwidth}|P{0.36\textwidth}|}
+\hline
+\textbf{Role} & \textbf{Phạm vi chính} & \textbf{Ví dụ hành động} \\ \hline
+\endfirsthead
+\hline
+\textbf{Role} & \textbf{Phạm vi chính} & \textbf{Ví dụ hành động} \\ \hline
+\endhead
+CONTENT\_ADMIN & Đề, bài mẫu, taxonomy & Tạo/sửa/publish đề; review Model Essay; cập nhật taxonomy. \\ \hline
+USER\_SUPPORT\_ADMIN & User và hỗ trợ & Xem hoạt động; xử lý ticket; khóa/mở user theo quyền; re-grade/hoàn credit có giới hạn. \\ \hline
+FINANCE\_ADMIN & Payment và doanh thu & Xem payment; refund; revenue; credit transaction; đối soát. \\ \hline
+SECURITY\_ADMIN & Bảo mật và phiên & Xem security event; revoke session; block user/client; theo dõi rate limit. \\ \hline
+SUPER\_ADMIN & Toàn quyền & Quản lý role/permission, settings nhạy cảm, maintenance và admin accounts. \\ \hline
+\end{longtable}
+\normalsize
+
+\begin{importantbox}
+Một tài khoản admin có thể đồng thời có nhiều role. Ví dụ, trong giai đoạn đầu một người có thể vừa là CONTENT\_ADMIN vừa là USER\_SUPPORT\_ADMIN. Giao diện hợp nhất các permission và hiển thị toàn bộ module người đó được phép dùng.
+\end{importantbox}
+
+\section{Kiến trúc thông tin}
+
+\subsection{Website công khai}
+\begin{flowbox}
+\flowstep{Landing Page}
+\flowarrow
+\flowstep{Tính năng - Cách hoạt động - Bảng giá}
+\flowarrow
+\flowstep{FAQ - Trợ giúp \& Pháp lý}
+\flowarrow
+\flowstep{Tiếp tục với Google}
+\end{flowbox}
+
+\subsection{Learner App}
+\begin{verbatim}
+Dashboard
+|-- Viết bài
+|   |-- Thư viện đề
+|   |-- Chi tiết đề
+|   |-- Nhận đề ngẫu nhiên
+|   `-- Writing Room
+|-- Bài viết
+|   |-- Draft
+|   |-- Đang chấm
+|   `-- Lịch sử
+|-- Kết quả và học tập
+|   |-- Result
+|   |-- Mistake Bank
+|   |-- Progress
+|   `-- Redo Challenge
+|-- Credit & Thanh toán
+|-- Thông báo
+|-- Hỗ trợ
+`-- Cài đặt
+\end{verbatim}
+
+\subsection{Admin Portal}
+\begin{verbatim}
+Admin Dashboard
+|-- Nội dung
+|   |-- Writing Prompts
+|   |-- Model Essays
+|   `-- Error Taxonomies
+|-- Người dùng
+|-- Hỗ trợ
+|-- Tài chính
+|-- AI & Usage
+|-- Bảo mật
+|-- Cấu hình
+`-- Quản trị hệ thống
+    |-- Admin Accounts
+    |-- Roles
+    `-- Permissions
+\end{verbatim}
+
+\section{Điều hướng Web MVP}
+
+\subsection{Learner App desktop}
+Learner App sử dụng sidebar trái cố định hoặc có thể thu gọn. Thứ tự menu:
+\begin{enumerate}
+  \item Dashboard.
+  \item Viết bài.
+  \item Lịch sử.
+  \item Mistake Bank.
+  \item Tiến bộ.
+  \item Redo Challenge.
+  \item Credit \& Thanh toán.
+  \item Hỗ trợ.
+  \item Cài đặt.
+\end{enumerate}
+
+Khu vực cuối sidebar hiển thị avatar, tên user, credit khả dụng, notification badge và menu tài khoản.
+
+\subsection{Admin Portal desktop}
+Admin Portal sử dụng sidebar theo module. Menu được tạo từ permission hiện tại, không hard-code theo một role duy nhất. Breadcrumb bắt buộc với màn hình nhiều cấp.
+
+Ví dụ:
+\begin{copybox}
+Admin $>$ Người dùng $>$ Nguyễn Văn A $>$ Credit History
+\end{copybox}
+
+\subsection{Màn hình nhỏ trong MVP}
+MVP không thiết kế bottom navigation và không cam kết Writing Room tối ưu trên điện thoại. Khi viewport nhỏ hơn ngưỡng hỗ trợ, có thể:
+\begin{itemize}
+  \item Cho phép xem Landing Page, Result, Payment Status và Support ở mức cơ bản.
+  \item Hiển thị banner khuyến nghị mở bằng máy tính.
+  \item Không xem mobile layout là điều kiện nghiệm thu chính thức.
+\end{itemize}
+
+\begin{futurebox}
+\textbf{Giai đoạn mobile sau này.} Khi web ổn định và có dữ liệu sử dụng, BandUp có thể ưu tiên một mobile app cho việc xem Result, Mistake Bank, Notification, Payment và luyện tập ngắn. Writing Room mobile chỉ nên triển khai sau khi có nghiên cứu hành vi người dùng thực tế.
+\end{futurebox}
+
+\section{Design System định hướng}
+
+\subsection{Phong cách hình ảnh}
+\begin{itemize}
+  \item Nhiều khoảng trắng, phân cấp rõ.
+  \item Card nhẹ, border tinh tế, hạn chế đổ bóng nặng.
+  \item Không lạm dụng gradient và animation.
+  \item Hình minh họa hỗ trợ nội dung, không che lấp thông tin học tập.
+  \item Bảng admin ưu tiên khả năng quét dữ liệu và thao tác nhanh.
+\end{itemize}
+
+\subsection{Màu sắc}
+Design System phải định nghĩa Primary, Secondary, Background, Surface, Border, Text, Success, Warning, Error và Information. Điểm band và trạng thái không được chỉ truyền đạt bằng màu; luôn đi kèm số, icon hoặc nhãn.
+
+\subsection{Typography}
+\begin{itemize}
+  \item Một font sans-serif chính cho giao diện.
+  \item Kích thước heading, body, caption, label và button được chuẩn hóa.
+  \item Vùng đọc feedback dài có chiều rộng tối đa để tránh dòng quá dài.
+  \item Essay editor dùng font dễ đọc, line-height rộng và không trang trí gây phân tâm.
+\end{itemize}
+
+\subsection{Spacing và kích thước}
+Sử dụng thang spacing thống nhất: 4, 8, 12, 16, 24, 32, 48 và 64px. Border radius đề xuất: 6px, 10px và 16px.
+
+\subsection{Icon và illustration}
+\begin{itemize}
+  \item Dùng một icon library duy nhất.
+  \item Icon không rõ nghĩa phải có tooltip.
+  \item Hành động quan trọng luôn có text, không chỉ icon.
+  \item Illustration không được làm UI giống game hoặc trẻ con.
+\end{itemize}
+
+\section{Component Library}
+
+\subsection{Navigation}
+Top bar, sidebar, breadcrumb, tab, pagination, filter bar và account menu.
+
+\subsection{Input}
+Text input, textarea, search, select, multi-select, checkbox, radio, date picker, file upload và Writing Editor.
+
+\subsection{Action}
+Primary, Secondary, Ghost, Danger, Icon button và Split action khi cần.
+
+\subsection{Feedback}
+Toast, inline validation, banner, modal, confirmation dialog, progress indicator, skeleton, retry card và offline indicator.
+
+\subsection{Data display}
+Card, table, badge, status chip, accordion, timeline, chart, empty state, score card và comparison block.
+
+\subsection{Band Score Component}
+Phải hỗ trợ overall, từng criterion, điểm tăng/giảm, nhãn ``ước lượng'' và tooltip giải thích.
+
+\subsection{Credit Component}
+Phải phân biệt rõ:
+\begin{itemize}
+  \item Credit khả dụng.
+  \item Credit đang giữ chỗ.
+  \item Credit đã dùng.
+  \item Credit được hoàn.
+  \item Nguồn credit: mua, tặng, hoàn, điều chỉnh.
+\end{itemize}
+
+\section{Trạng thái giao diện toàn cục}
+
+\subsection{Loading}
+Ưu tiên skeleton giữ nguyên layout. Button sau khi click chuyển sang loading và ngăn click lặp. Không dùng spinner toàn màn hình nếu chỉ một phần dữ liệu đang tải.
+
+\subsection{Empty state}
+Empty state phải nói rõ vì sao chưa có dữ liệu và có CTA phù hợp.
+\begin{copybox}
+Bạn chưa có đủ bài viết để hiển thị tiến bộ. Hoàn thành bài viết đầu tiên để bắt đầu theo dõi.\\
+\textbf{[Chọn đề để viết]}
+\end{copybox}
+
+\subsection{Error}
+Thông báo lỗi phải trả lời:
+\begin{itemize}
+  \item Điều gì xảy ra?
+  \item Bài viết hoặc dữ liệu đã được lưu chưa?
+  \item Credit có bị sử dụng không?
+  \item User nên retry, quay lại hay liên hệ hỗ trợ?
+\end{itemize}
+
+\subsection{Success}
+Không dùng thông báo mơ hồ như ``Thành công''. Ví dụ:
+\begin{copybox}
+Bài viết đã được gửi và đang chờ chấm. Bạn có thể rời trang và quay lại sau; BandUp sẽ thông báo khi kết quả hoàn tất.
+\end{copybox}
+
+\subsection{Disabled}
+Button bị vô hiệu hóa phải có lý do hiển thị gần button hoặc trong tooltip.
+
+\subsection{Mất kết nối}
+Writing Room phải phân biệt nội dung đã lưu server và nội dung chỉ đang giữ cục bộ. Khi mất kết nối, hiển thị trạng thái ``Chưa đồng bộ'' và tự thử lại khi kết nối phục hồi.
+
+\section{Landing Page}
+
+\subsection{Mục tiêu}
+Landing Page giới thiệu, xây dựng niềm tin và dẫn user đến Google Login hoặc bảng giá. Không bắt user thực hiện một bài viết ngay.
+
+\subsection{Cấu trúc}
+\begin{enumerate}
+  \item Header: logo, Tính năng, Cách hoạt động, Bảng giá, FAQ, Đăng nhập.
+  \item Hero: value proposition, mô tả ngắn, CTA Google Login và CTA xem cách hoạt động.
+  \item Vấn đề người học gặp phải.
+  \item Quy trình BandUp: Viết - Feedback - Lưu lỗi - Tiến bộ - Luyện lại.
+  \item Tính năng chính: AI Grading, Mistake Bank, Progress, Redo, Model Essay.
+  \item Preview giao diện Result hoặc Dashboard.
+  \item Pricing preview.
+  \item Trust: điểm ước lượng, dữ liệu, support và không liên kết chính thức với IELTS.
+  \item FAQ.
+  \item Footer: điều khoản, quyền riêng tư, thanh toán, hoàn credit, email hỗ trợ.
+\end{enumerate}
+
+\subsection{CTA chính}
+\begin{copybox}
+\textbf{Tiếp tục với Google}\\
+Không yêu cầu user tạo thêm mật khẩu BandUp.
+\end{copybox}
+
+\section{Google Login và callback}
+
+\begin{screenbox}[AUTH-01 - Đăng nhập]
+\textbf{Mục tiêu:} Cho user đăng nhập bằng một hành động duy nhất.\\
+\textbf{Nội dung:} Logo, mô tả ngắn, button Google, link Điều khoản và Chính sách quyền riêng tư.\\
+\textbf{Không có:} Form email/password trong MVP.
+\end{screenbox}
+
+\begin{screenbox}[AUTH-02 - Đang hoàn tất đăng nhập]
+Hiển thị tiến trình ngắn khi BandUp xử lý callback, tạo/tìm tài khoản local và application session.
+\end{screenbox}
+
+\begin{screenbox}[AUTH-03 - Lỗi đăng nhập]
+Các trường hợp: user hủy Google Login, callback hết hạn, không nhận được email, tài khoản BandUp bị khóa hoặc tài khoản đang xóa.
+\end{screenbox}
+
+\section{Onboarding và hồ sơ học tập}
+
+\subsection{Mục tiêu}
+Onboarding thu thập thông tin cá nhân hóa nhưng không ép user làm bài. Cho phép bỏ qua và chỉnh sửa sau.
+
+\subsection{Các bước}
+\begin{longtable}{|P{0.15\textwidth}|P{0.32\textwidth}|P{0.43\textwidth}|}
+\hline
+\textbf{Bước} & \textbf{Thông tin} & \textbf{Quy tắc UX} \\ \hline
+\endfirsthead
+\hline
+\textbf{Bước} & \textbf{Thông tin} & \textbf{Quy tắc UX} \\ \hline
+\endhead
+1 & Band hiện tại & Cho chọn ``Chưa biết''; không bắt user tự đánh giá chính xác. \\ \hline
+2 & Band mục tiêu, ngày thi dự kiến & Ngày thi không bắt buộc. \\ \hline
+3 & Tần suất luyện, mục tiêu học & Dùng lựa chọn ngắn, không phải form dài. \\ \hline
+\end{longtable}
+
+Kết thúc onboarding:
+\begin{copybox}
+Hồ sơ học tập của bạn đã sẵn sàng.\\
+\textbf{[Khám phá Dashboard]} \quad [Chọn đề để viết]
+\end{copybox}
+
+\section{Dashboard người học}
+
+\subsection{Thứ tự ưu tiên}
+\begin{enumerate}
+  \item Hành động chính: Bắt đầu viết hoặc tiếp tục draft.
+  \item Bài đang chấm và trạng thái.
+  \item Overall gần nhất, tiêu chí cần tập trung và credit còn lại.
+  \item Insight dựa trên dữ liệu hiện có.
+  \item Redo Challenge nếu có.
+  \item Bài viết gần đây.
+  \item Lỗi thường gặp.
+\end{enumerate}
+
+\subsection{Dashboard user mới}
+Không hiển thị nhiều biểu đồ trống.
+\begin{copybox}
+Chào mừng bạn đến với BandUp. Bạn có thể chọn một đề bất kỳ hoặc nhận một đề ngẫu nhiên khi sẵn sàng.\\
+\textbf{[Chọn đề]} \quad [Nhận đề ngẫu nhiên]
+\end{copybox}
+
+\section{Thư viện đề}
+
+\subsection{Mô hình giống thư viện bài tập}
+Mỗi đề có số thứ tự, tiêu đề ngắn, loại đề, topic, difficulty, trạng thái đã làm/chưa làm, điểm gần nhất và số lần đã làm.
+
+\subsection{Bộ lọc}
+\begin{itemize}
+  \item Tìm theo số đề hoặc từ khóa.
+  \item Question type.
+  \item Topic.
+  \item Difficulty.
+  \item Đã làm/chưa làm.
+  \item Điểm thấp cần luyện lại.
+\end{itemize}
+
+\subsection{Random Prompt}
+CTA ``Nhận đề ngẫu nhiên'' có thể cho chọn phạm vi: toàn bộ, theo topic, chưa làm hoặc cần cải thiện.
+
+\subsection{Chi tiết đề}
+Hiển thị số đề, nội dung, loại, topic, difficulty, lịch sử làm, điểm tốt nhất và CTA ``Bắt đầu viết''. Model Essay không hiển thị trước khi user submit.
+
+\section{Writing Room}
+
+\subsection{Bố cục desktop}
+Bố cục hai cột:
+\begin{itemize}
+  \item Cột trái: đề, metadata, timer, word count, autosave, pause/resume.
+  \item Cột phải: editor chiếm phần lớn chiều rộng.
+\end{itemize}
+Cho phép thu gọn cột đề nhưng luôn có cách mở lại nhanh.
+
+\subsection{Thành phần bắt buộc}
+Prompt, editor, timer 40 phút, word count, trạng thái autosave, pause/resume, trạng thái kết nối, exit warning và Submit.
+
+\subsection{Word count}
+\begin{longtable}{|P{0.22\textwidth}|P{0.60\textwidth}|}
+\hline
+\textbf{Khoảng từ} & \textbf{Hiển thị} \\ \hline
+\endfirsthead
+\hline
+\textbf{Khoảng từ} & \textbf{Hiển thị} \\ \hline
+\endhead
+0-199 & Chưa đủ điều kiện chấm đầy đủ; CTA submit bị từ chối có giải thích. \\ \hline
+200-249 & Có thể gửi sau cảnh báo bài dưới chuẩn 250 từ. \\ \hline
+250-350 & Đạt giới hạn cho phép. \\ \hline
+Trên 350 & Không thể gửi; chỉ rõ cần rút gọn bao nhiêu từ. \\ \hline
+\end{longtable}
+
+\subsection{Autosave}
+Các trạng thái:
+\begin{itemize}
+  \item Đang lưu...
+  \item Đã lưu lúc 14:35.
+  \item Chưa đồng bộ.
+  \item Lưu thất bại - Thử lại.
+\end{itemize}
+
+\subsection{Pause}
+Khi pause: autosave trước, timer dừng, editor khóa, overlay giải thích và button Resume nổi bật.
+
+\subsection{Rời trang}
+Nếu có nội dung chưa đồng bộ, hiển thị confirmation. Nếu đã lưu server, cho phép rời và tiếp tục sau.
+
+\section{Submit Confirmation và Credit}
+
+\subsection{Modal xác nhận}
+Hiển thị:
+\begin{itemize}
+  \item Số từ.
+  \item Thời gian viết.
+  \item Cảnh báo nếu dưới 250 từ.
+  \item Một credit sẽ được giữ chỗ.
+  \item Không thể sửa submission sau khi gửi.
+\end{itemize}
+
+Buttons: ``Quay lại chỉnh sửa'' và ``Gửi bài''.
+
+\subsection{Không đủ credit}
+Không xóa nội dung.
+\begin{copybox}
+Bạn không có đủ credit để chấm bài. Bài viết vẫn được lưu dưới dạng draft.\\
+\textbf{[Mua credit]} \quad [Quay lại]
+\end{copybox}
+
+\subsection{Double-click}
+Sau click đầu, button chuyển loading và bị khóa; frontend hiển thị đúng một trạng thái submission.
+
+\section{Submission Status}
+
+\subsection{Ngôn ngữ trạng thái}
+Không hiển thị thuật ngữ kỹ thuật. Dùng:
+\begin{itemize}
+  \item Đã tiếp nhận.
+  \item Đang chờ.
+  \item Đang chấm.
+  \item Đang hoàn tất báo cáo.
+  \item Hoàn thành.
+  \item Thất bại.
+\end{itemize}
+
+\subsection{User có thể rời trang}
+Luôn thông báo user có thể rời trang và quay lại sau.
+
+\subsection{Retry và thất bại}
+Nếu lỗi tạm thời, UI chỉ hiển thị BandUp đang thử lại. Nếu hết retry:
+\begin{copybox}
+BandUp chưa thể hoàn tất chấm bài. Credit đã được hoàn và bài viết vẫn được lưu.\\
+\textbf{[Thử chấm lại miễn phí]} \quad [Liên hệ hỗ trợ]
+\end{copybox}
+
+\section{Result Page}
+
+\subsection{Cấu trúc progressive disclosure}
+\begin{enumerate}
+  \item Overall band và disclaimer.
+  \item Bốn tiêu chí.
+  \item Ba nguyên nhân mất điểm quan trọng nhất.
+  \item Phân tích từng tiêu chí bằng tab/accordion.
+  \item Sentence Corrections.
+  \item Vocabulary Suggestions.
+  \item Mistakes.
+  \item Model Essay.
+  \item Kế hoạch luyện tiếp.
+\end{enumerate}
+
+\subsection{Sentence Correction}
+Mỗi item có câu gốc, câu sửa, loại lỗi, criterion và giải thích. Với bài dài, dùng filter theo nhóm lỗi.
+
+\subsection{Model Essay}
+Chỉ hiển thị sau khi user đã submit. Có band level, điểm nổi bật, cụm từ hữu ích và nguồn/review status nếu phù hợp.
+
+\subsection{Hành động chính}
+``Xem lỗi cần ưu tiên'', ``Viết bài tiếp theo'', ``Làm lại đề'' và ``Báo cáo vấn đề''.
+
+\section{Writing History}
+Danh sách hiển thị số đề, tiêu đề, ngày, word count, overall, status và dấu hiệu Redo. Tách tab Draft, Đang chấm, Hoàn thành và Thất bại. Có filter thời gian, loại đề, topic, band và original/redo.
+
+\section{Mistake Bank}
+
+\subsection{Tổng quan}
+Hiển thị lỗi thường gặp, số lần, xu hướng, lần gần nhất và criterion liên quan.
+
+\subsection{Bộ lọc}
+Grammar, Vocabulary, Coherence, Task Response, Mechanics, severity, thời gian và trạng thái cải thiện.
+
+\subsection{Chi tiết lỗi}
+Tên lỗi, giải thích tiếng Việt, câu gốc/câu sửa, bài liên quan, tần suất và hướng luyện tập. Copy không phán xét.
+
+\section{Progress Dashboard}
+
+\subsection{Biểu đồ}
+Overall theo thời gian, bốn criteria, lỗi theo nhóm, word count, time spent và tần suất luyện.
+
+\subsection{Quy tắc chart}
+Có title, đơn vị, tooltip, mô tả text và empty state. Không tạo xu hướng giả khi dữ liệu ít.
+
+\subsection{Insight}
+Thống kê đến đâu hiển thị đến đó. Insight chia thành: đang cải thiện, cần chú ý, lỗi lặp lại và gợi ý tuần này.
+
+\section{Redo Challenge}
+Recommendation Card hiển thị đề cũ, thời điểm, điểm cũ, lý do gợi ý và lỗi chính. Comparison Page hiển thị bài cũ/bài mới, overall, bốn criteria, word count, time spent, lỗi đã giảm và lỗi còn lặp.
+
+\section{Credit Wallet và gói credit}
+
+\subsection{Wallet}
+Hiển thị credit khả dụng, đang giữ chỗ, đã dùng trong kỳ và lịch sử giao dịch.
+
+\subsection{Gói credit}
+Mỗi card có số credit, giá, giá trung bình/lượt, bonus, hạn sử dụng nếu có và CTA mua. Không dùng countdown hoặc khan hiếm giả.
+
+\section{Thanh toán payOS}
+
+\subsection{Luồng checkout}
+\begin{flowbox}
+\flowstep{Chọn gói credit}
+\flowarrow
+\flowstep{Xác nhận đơn hàng}
+\flowarrow
+\flowstep{Hiển thị QR VietQR}
+\flowarrow
+\flowstep{User quét bằng ứng dụng ngân hàng}
+\flowarrow
+\flowstep{Chờ webhook xác nhận}
+\flowarrow
+\flowstep{Cộng credit và hiển thị thành công}
+\end{flowbox}
+
+\subsection{Màn hình QR}
+Hiển thị số tiền, mã đơn, nội dung chuyển khoản, thời gian hết hạn, hướng dẫn không sửa nội dung và button kiểm tra trạng thái.
+
+\subsection{Trạng thái}
+Pending, Paid, Expired, Cancelled và Needs Review. Không cộng credit chỉ vì user quay về return URL.
+
+\subsection{Vấn đề thanh toán}
+CTA ``Tôi đã thanh toán nhưng chưa nhận credit'' tự tạo ticket gắn Payment Order.
+
+\section{Notification Center}
+Các loại thông báo: grading hoàn tất/thất bại, credit hoàn, payment thành công, ticket được trả lời, Redo mới và thông báo hệ thống. Badge hiển thị tối đa ``9+''.
+
+\section{Support Center}
+
+\subsection{Tạo ticket}
+Category: grading failed, result incomplete, result quality, duplicate credit charge, payment not credited, account, data deletion và other.
+
+\subsection{Ticket Detail}
+Dạng conversation giữa user và admin; hiển thị status, resolution, submission/payment liên quan và credit adjustment nếu có.
+
+\subsection{Kênh email}
+Email hỗ trợ là kênh dự phòng. Luồng ưu tiên là ticket trong ứng dụng để giữ context và theo dõi trạng thái.
+
+\section{Settings và xóa tài khoản}
+
+\subsection{Hồ sơ học tập}
+Display name, avatar, current band, target band, exam date, learning frequency và language. Google email hiển thị read-only.
+
+\subsection{Privacy}
+Giải thích dữ liệu đang lưu, AI provider, retention và link chính sách.
+
+\subsection{Delete Account}
+Luồng nhiều bước:
+\begin{enumerate}
+  \item Hiển thị dữ liệu sẽ mất.
+  \item Xử lý credit còn lại.
+  \item User nhập ``XÓA TÀI KHOẢN''.
+  \item Xác thực lại bằng Google hoặc phiên xác thực gần đây.
+  \item Xác nhận cuối.
+\end{enumerate}
+
+\begin{warningbox}
+Sau khi xóa, essay, assessment, Mistake Bank, Progress và lịch sử luyện tập không thể khôi phục. Một số dữ liệu giao dịch tối thiểu có thể được giữ theo yêu cầu pháp luật và được tách khỏi hồ sơ hoạt động.
+\end{warningbox}
+
+\section{Admin Dashboard}
+
+\subsection{KPI}
+Tổng user, user mới, DAU/WAU/MAU, submission, grading success rate, credit bán, doanh thu, refund, AI cost, ticket mở và security alerts.
+
+\subsection{Cảnh báo cần hành động}
+Queue dài, AI failure tăng, daily budget gần hết, webhook lỗi, user abuse và incident đang mở. Dashboard ưu tiên action, không chỉ số liệu.
+
+\section{Admin User Management}
+
+\subsection{Danh sách user}
+Các cột:
+\begin{itemize}
+  \item User và email.
+  \item Role.
+  \item Status.
+  \item Ngày đăng ký và last active.
+  \item Số bài và tần suất hoạt động.
+  \item Credit khả dụng.
+  \item Tổng tiền đã trả.
+  \item Security flag.
+\end{itemize}
+
+\subsection{Bộ lọc}
+Active/suspended/deleted, free/paid, role, khoảng thời gian, tần suất hoạt động, có payment và có security event.
+
+\subsection{User Detail}
+Tabs: Tổng quan, Hoạt động, Bài viết, Credit, Thanh toán, Support, Security và Audit.
+
+Admin không được xem essay mặc định. Nếu cần xem để hỗ trợ, phải có permission riêng, lý do và audit.
+
+\subsection{Admin actions}
+Suspend, reactivate, điều chỉnh credit, thay đổi role, revoke sessions, gửi thông báo và bắt đầu deletion workflow. Hành động nhạy cảm cần confirmation.
+
+\section{Admin Content Management}
+Writing Prompt list/editor, Model Essay list/editor và Error Taxonomy list/editor. Mỗi editor có trạng thái Draft, Review, Published/Active và Archived/Inactive. Không xóa cứng taxonomy đã được sử dụng.
+
+\section{Admin Finance}
+
+\subsection{Revenue Dashboard}
+Gross revenue, successful/failed payment, refund, net estimate, credit sold và revenue theo gói/thời gian.
+
+\subsection{Payment Detail}
+Order code, user, amount, status, payOS reference, webhook status, credit granted và refund.
+
+\subsection{Refund Flow}
+Full refund, credit refund, re-grade miễn phí hoặc reject. Bắt buộc nhập lý do và tạo audit.
+
+\section{Admin AI \& Usage}
+Số call, successful/failed, token input/output, estimated cost, latency, retry, model, prompt version, validation failure, queue length và daily budget. Không hiển thị raw essay trong log table mặc định.
+
+\section{Admin Support}
+Ticket queue có priority, category, age, user, submission/payment, assigned admin và status. Admin có thể reply, request info, re-grade, refund credit, transfer và close.
+
+\section{Admin Security và Settings}
+
+\subsection{Security}
+Suspicious activity, rate limit, blocked user/client, session revocation, prompt injection suspected, login anomaly và admin action.
+
+\subsection{Settings}
+Nhóm General, Writing, AI Grading, Credit, Payment, Security, Maintenance và Retention. Setting nhạy cảm có warning và confirmation.
+
+\section{Admin Accounts, Roles và Permissions}
+
+\subsection{Admin Accounts}
+Chỉ Super Admin được xem và quản lý. Mỗi admin là một tài khoản riêng. Danh sách hiển thị tên, email, role, status, last login và MFA status trong tương lai.
+
+\subsection{Gán nhiều role}
+Màn hình chỉnh role dùng multi-select hoặc checkbox nhóm. Hiển thị preview permission sau khi gán.
+
+\subsection{Nhiều người cùng role}
+Role Detail hiển thị danh sách thành viên. Có thể gán nhiều tài khoản vào cùng role mà không tạo role mới.
+
+\subsection{Permission matrix}
+\small
+\begin{longtable}{|P{0.30\textwidth}|P{0.12\textwidth}|P{0.12\textwidth}|P{0.12\textwidth}|P{0.12\textwidth}|}
+\hline
+\textbf{Module/Hành động} & \textbf{Content} & \textbf{User Support} & \textbf{Finance} & \textbf{Security} \\ \hline
+\endfirsthead
+\hline
+\textbf{Module/Hành động} & \textbf{Content} & \textbf{User Support} & \textbf{Finance} & \textbf{Security} \\ \hline
+\endhead
+Xem/Sửa đề & Có & Không & Không & Không \\ \hline
+Xem user cơ bản & Hạn chế & Có & Có giới hạn & Có giới hạn \\ \hline
+Khóa/mở user & Không & Theo quyền & Không & Theo quyền \\ \hline
+Xử lý ticket & Không & Có & Ticket tài chính & Ticket bảo mật \\ \hline
+Xem payment & Không & Hạn chế & Có & Hạn chế \\ \hline
+Refund & Không & Credit giới hạn & Có & Không \\ \hline
+Xem security event & Không & Hạn chế & Không & Có \\ \hline
+Tắt AI grading & Không & Không & Không & Chỉ khi được cấp permission \\ \hline
+Quản lý role/admin & Không & Không & Không & Không; chỉ Super Admin \\ \hline
+\end{longtable}
+\normalsize
+
+\begin{importantbox}
+Bảng trên chỉ là role mặc định. Quyền cuối cùng phải đến từ permission. Một người có nhiều role nhận hợp của các permission, trừ khi có quy tắc deny đặc biệt được thiết kế sau.
+\end{importantbox}
+
+\section{UX Writing}
+
+\subsection{Giọng điệu}
+Thân thiện, bình tĩnh, không phán xét, không quá trẻ con, không cường điệu AI và không đưa thuật ngữ kỹ thuật cho user.
+
+\subsection{Ví dụ}
+\begin{longtable}{|P{0.42\textwidth}|P{0.48\textwidth}|}
+\hline
+\textbf{Không nên} & \textbf{Nên dùng} \\ \hline
+\endfirsthead
+\hline
+\textbf{Không nên} & \textbf{Nên dùng} \\ \hline
+\endhead
+Bạn viết sai quá nhiều lỗi ngữ pháp. & Ngữ pháp là nhóm bạn nên ưu tiên trong bài tiếp theo. \\ \hline
+AI failed with status 429. & Hệ thống chấm bài đang tạm thời quá tải. Credit chưa bị sử dụng và BandUp sẽ thử lại tự động. \\ \hline
+Invalid input. & Vui lòng kiểm tra lại nội dung được đánh dấu. \\ \hline
+Payment failed. & BandUp chưa nhận được xác nhận thanh toán. Bạn có thể kiểm tra lại hoặc tạo yêu cầu hỗ trợ. \\ \hline
+\end{longtable}
+
+\subsection{Thuật ngữ thống nhất}
+Dùng: Đề bài, Bài viết, Chấm bài, Kết quả, Credit, Lỗi thường gặp, Tiến bộ, Làm lại đề. Không đổi qua lại giữa essay/submission/bài làm trong Learner App.
+
+\section{Accessibility cho Web MVP}
+Mục tiêu hướng đến WCAG 2.1 AA ở các màn hình chính:
+\begin{itemize}
+  \item Keyboard navigation và focus state rõ.
+  \item Label đầy đủ cho input.
+  \item Contrast phù hợp.
+  \item Không dùng màu làm tín hiệu duy nhất.
+  \item Alt text cho ảnh.
+  \item Error message liên kết input.
+  \item Button có tên rõ.
+  \item Chart có mô tả text.
+  \item Không dùng animation nhấp nháy hoặc timer gây áp lực không cần thiết.
+\end{itemize}
+
+\section{Trust, Privacy và AI Transparency}
+Disclaimer xuất hiện ở Landing Page, trước lần chấm đầu tiên, Result Page và Chính sách AI:
+\begin{copybox}
+Điểm và phản hồi do AI cung cấp chỉ mang tính ước lượng, phục vụ mục đích luyện tập và không phải kết quả IELTS chính thức.
+\end{copybox}
+
+Trước lần chấm đầu:
+\begin{copybox}
+Bài viết của bạn sẽ được xử lý bởi nhà cung cấp AI để tạo kết quả chấm và phản hồi.
+\end{copybox}
+
+Không lặp disclaimer quá dày làm gián đoạn trải nghiệm.
+
+\section{Analytics cho UI/UX}
+Các event tối thiểu:
+\begin{itemize}
+  \item Landing viewed; Google login clicked/completed/failed.
+  \item Onboarding started/completed/skipped.
+  \item Prompt library opened; prompt selected; random requested.
+  \item Writing started; autosave success/fail; submission attempted/accepted/rejected.
+  \item Result viewed; criterion expanded; mistake viewed; model essay viewed.
+  \item Redo started/completed.
+  \item Credit package viewed; checkout started; payment completed/failed.
+  \item Ticket created/resolved.
+  \item Account deletion started/completed.
+\end{itemize}
+Không đưa essay text vào analytics event.
+
+\section{Danh sách màn hình Web MVP}
+
+\subsection{Public và Authentication}
+\small
+\begin{longtable}{|P{0.14\textwidth}|P{0.31\textwidth}|P{0.45\textwidth}|}
+\hline
+\textbf{ID} & \textbf{Màn hình} & \textbf{Mục tiêu} \\ \hline
+\endfirsthead
+\hline
+\textbf{ID} & \textbf{Màn hình} & \textbf{Mục tiêu} \\ \hline
+\endhead
+PUB-01 & Landing Page & Giới thiệu giá trị và dẫn đến Google Login. \\ \hline
+PUB-02 & Pricing & So sánh gói credit và chính sách. \\ \hline
+PUB-03 & Help \& Legal & FAQ, thông báo, điều khoản, quyền riêng tư và hỗ trợ. \\ \hline
+AUTH-01 & Google Login & Đăng nhập một bước. \\ \hline
+AUTH-02 & Login Callback & Hoàn tất session BandUp. \\ \hline
+AUTH-03 & Login Error & Hướng dẫn xử lý lỗi đăng nhập. \\ \hline
+\end{longtable}
+
+\subsection{Learner App}
+\begin{longtable}{|P{0.14\textwidth}|P{0.31\textwidth}|P{0.45\textwidth}|}
+\hline
+\textbf{ID} & \textbf{Màn hình} & \textbf{Mục tiêu} \\ \hline
+\endfirsthead
+\hline
+\textbf{ID} & \textbf{Màn hình} & \textbf{Mục tiêu} \\ \hline
+\endhead
+USER-01 & Onboarding & Thiết lập band và mục tiêu. \\ \hline
+USER-02 & Dashboard & Tổng quan và CTA tiếp theo. \\ \hline
+USER-03 & Prompt Library & Tìm, lọc và chọn đề. \\ \hline
+USER-04 & Prompt Detail & Xem đề và lịch sử. \\ \hline
+USER-05 & Writing Room & Viết, autosave, timer và submit. \\ \hline
+USER-06 & Submit Confirmation & Xác nhận số từ, thời gian và credit. \\ \hline
+USER-07 & Submission Status & Theo dõi quá trình chấm. \\ \hline
+USER-08 & Result Page & Xem feedback có cấu trúc. \\ \hline
+USER-09 & Writing History & Xem và lọc bài cũ. \\ \hline
+USER-10 & Submission Detail & Xem bài và trạng thái chi tiết. \\ \hline
+USER-11 & Mistake Bank & Tổng hợp lỗi. \\ \hline
+USER-12 & Mistake Detail & Học từ lỗi cụ thể. \\ \hline
+USER-13 & Progress Dashboard & Xem xu hướng học tập. \\ \hline
+USER-14 & Redo Recommendations & Chọn đề nên làm lại. \\ \hline
+USER-15 & Redo Comparison & So sánh cũ/mới. \\ \hline
+USER-16 & Credit Wallet & Xem số dư và lịch sử. \\ \hline
+USER-17 & Credit Packages & Chọn gói mua. \\ \hline
+USER-18 & payOS Checkout & Thanh toán QR. \\ \hline
+USER-19 & Payment Result & Theo dõi Paid/Pending/Expired. \\ \hline
+USER-20 & Payment History & Xem giao dịch. \\ \hline
+USER-21 & Notification Center & Xem thông báo. \\ \hline
+USER-22 & Support Tickets & Danh sách ticket. \\ \hline
+USER-23 & Support Ticket Detail & Trao đổi và theo dõi xử lý. \\ \hline
+USER-24 & Profile Settings & Hồ sơ học tập. \\ \hline
+USER-25 & Privacy Settings & Chính sách dữ liệu. \\ \hline
+USER-26 & Delete Account & Xóa tài khoản có kiểm soát. \\ \hline
+\end{longtable}
+
+\subsection{Admin Portal}
+\begin{longtable}{|P{0.14\textwidth}|P{0.31\textwidth}|P{0.45\textwidth}|}
+\hline
+\textbf{ID} & \textbf{Màn hình} & \textbf{Mục tiêu} \\ \hline
+\endfirsthead
+\hline
+\textbf{ID} & \textbf{Màn hình} & \textbf{Mục tiêu} \\ \hline
+\endhead
+ADM-01 & Admin Dashboard & KPI và cảnh báo. \\ \hline
+ADM-02 & Prompt List & Quản lý danh sách đề. \\ \hline
+ADM-03 & Prompt Editor & Soạn và publish đề. \\ \hline
+ADM-04 & Model Essay List & Quản lý bài mẫu. \\ \hline
+ADM-05 & Model Essay Editor & Soạn/review bài mẫu. \\ \hline
+ADM-06 & Error Taxonomy List & Quản lý taxonomy. \\ \hline
+ADM-07 & Taxonomy Editor & Cập nhật mã và mô tả lỗi. \\ \hline
+ADM-08 & User List & Thống kê và lọc user. \\ \hline
+ADM-09 & User Detail & Activity, credit, payment, support. \\ \hline
+ADM-10 & Credit Management & Điều chỉnh và audit credit. \\ \hline
+ADM-11 & Payments & Danh sách payment. \\ \hline
+ADM-12 & Payment Detail & Webhook, credit, refund. \\ \hline
+ADM-13 & Revenue Dashboard & Doanh thu và chi phí. \\ \hline
+ADM-14 & AI Usage & Token, cost, latency. \\ \hline
+ADM-15 & Grading Failures & Theo dõi và xử lý job lỗi. \\ \hline
+ADM-16 & Support Queue & Phân công ticket. \\ \hline
+ADM-17 & Support Detail & Reply, re-grade, refund. \\ \hline
+ADM-18 & Security Events & Theo dõi sự kiện bảo mật. \\ \hline
+ADM-19 & Blocked Clients & Block/unblock và lý do. \\ \hline
+ADM-20 & App Settings & Cấu hình hệ thống. \\ \hline
+ADM-21 & Audit Logs & Truy vết admin action. \\ \hline
+ADM-22 & Admin Accounts & Quản lý tài khoản admin. \\ \hline
+ADM-23 & Roles \& Permissions & Gán nhiều role và permission matrix. \\ \hline
+\end{longtable}
+\normalsize
+
+\section{Các flow cần vẽ trong Figma}
+\begin{enumerate}
+  \item Google Login và callback.
+  \item First-time onboarding.
+  \item Chọn đề từ library.
+  \item Nhận đề ngẫu nhiên.
+  \item Viết, autosave và mất kết nối.
+  \item Pause/Resume.
+  \item Submit đủ từ.
+  \item Submit dưới 250 từ.
+  \item Không đủ credit.
+  \item Chấm thành công.
+  \item Retry và chấm thất bại.
+  \item Result exploration.
+  \item Báo cáo kết quả.
+  \item Redo Challenge.
+  \item Mua credit qua payOS.
+  \item Payment pending và payment chưa cộng credit.
+  \item Tạo và xử lý support ticket.
+  \item Admin refund/re-grade.
+  \item Xóa tài khoản.
+  \item Admin gán nhiều role.
+  \item Nhiều admin cùng một role.
+  \item Bật/tắt AI grading và maintenance mode.
+\end{enumerate}
+
+\section{UI Acceptance Checklist}
+Mỗi màn hình chỉ được xem là hoàn thành khi:
+\begin{itemize}
+  \item Có mục tiêu và primary action rõ.
+  \item Có desktop design ở kích thước mục tiêu.
+  \item Có loading, empty, error, success và disabled state.
+  \item Có validation và permission state.
+  \item Có copy chính thức.
+  \item Có accessibility notes.
+  \item Có analytics events.
+  \item Có liên kết tới user flow và PRD requirement.
+  \item Không có thông tin kỹ thuật không cần thiết hiển thị cho user.
+  \item Hành động nguy hiểm có confirmation và audit requirement.
+\end{itemize}
+
+\section{Ưu tiên triển khai UI}
+\small
+\begin{longtable}{|P{0.12\textwidth}|P{0.28\textwidth}|P{0.50\textwidth}|}
+\hline
+\textbf{Mức} & \textbf{Nhóm} & \textbf{Màn hình/Component} \\ \hline
+\endfirsthead
+\hline
+\textbf{Mức} & \textbf{Nhóm} & \textbf{Màn hình/Component} \\ \hline
+\endhead
+P0 & Core learner & Login, Onboarding, Dashboard, Prompt Library, Writing Room, Submit, Status, Result. \\ \hline
+P0 & Core system & Global states, Design System cơ bản, Permission-aware navigation. \\ \hline
+P0 & Core admin & Dashboard, Prompt, User, AI Failure, App Settings. \\ \hline
+P1 & Learning differentiation & History, Mistake Bank, Progress, Redo, Model Essay. \\ \hline
+P1 & Monetization/support & Wallet, packages, payOS, Payment History, Support Ticket. \\ \hline
+P1 & Admin operations & Finance, Support, Security, Audit, Role Management. \\ \hline
+P2 & Sau MVP & Mobile web optimization, mobile app, Teacher Classroom, community và advanced accessibility audit. \\ \hline
+\end{longtable}
+\normalsize
+
+\section{Ngoài phạm vi thiết kế hiện tại}
+\begin{itemize}
+  \item UI Android/iOS native hoặc cross-platform.
+  \item Bottom navigation cho mobile app.
+  \item Responsive specification đầy đủ cho từng màn hình nhỏ.
+  \item Teacher Classroom chi tiết.
+  \item Community/forum và gamification.
+  \item Speaking, Listening, Reading và AI Voice.
+\end{itemize}
+
+\section{Kết luận}
+UI/UX của BandUp phải xây dựng một vòng lặp học tập rõ ràng trên Desktop Web:
+\begin{flowbox}
+\flowstep{Hiểu sản phẩm}
+\flowarrow
+\flowstep{Thiết lập mục tiêu}
+\flowarrow
+\flowstep{Chọn đề và viết tập trung}
+\flowarrow
+\flowstep{Nhận feedback dễ hiểu}
+\flowarrow
+\flowstep{Lưu lỗi và thấy tiến bộ}
+\flowarrow
+\flowstep{Luyện tập tiếp}
+\end{flowbox}
+
+MVP không phân tán nguồn lực sang ứng dụng mobile. Website phải hoàn chỉnh, ổn định và có người dùng thật trước. Khi mở rộng, BandUp có thể xây mobile app dùng chung tài khoản, dữ liệu và backend, tập trung vào những trải nghiệm có giá trị trên điện thoại.
+
+Admin Portal cũng không được chia thành nhiều website hoặc dùng chung tài khoản. Một portal duy nhất, tài khoản cá nhân, nhiều role trên một người và nhiều người trong cùng một role là mô hình vừa phù hợp giai đoạn đầu vừa đủ để mở rộng đội ngũ.
+
+\vfill
+\begin{center}
+\sffamily\color{BandGray} KẾT THÚC TÀI LIỆU
+\end{center}
+
+\end{document}

@@ -1,0 +1,1953 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Noto Serif}
+  \setsansfont[]{Noto Sans}
+  \setmonofont[]{Noto Sans Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[top=2.2cm,bottom=2.2cm,left=2.25cm,right=2.25cm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{xcolor}
+\definecolor{BandBlue}{HTML}{17365D}
+\definecolor{BandMidBlue}{HTML}{1F4E78}
+\definecolor{BandLight}{HTML}{F3F7FA}
+\definecolor{BandGray}{HTML}{5F6B76}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\Large\bfseries\color{BandBlue}}{}{0pt}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{BandMidBlue}}{}{0pt}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{BandGray}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.35em}{0.55em}
+\titlespacing*{\subsection}{0pt}{1em}{0.4em}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small BandUp - Development Roadmap}
+\fancyhead[R]{\sffamily\small Phiên bản 1.0}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{15pt}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.42em}
+\renewcommand{\arraystretch}{1.18}
+\setlength{\tabcolsep}{4pt}
+\emergencystretch=2em
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={BandBlue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={BandBlue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.4cm}
+{\sffamily\fontsize{34}{40}\selectfont\bfseries\color{BandBlue} BANDUP\par}
+\vspace{0.55cm}
+{\sffamily\fontsize{22}{28}\selectfont\bfseries 05 - DEVELOPMENT ROADMAP\par}
+\vspace{0.25cm}
+{\sffamily\large Lộ trình phát triển sản phẩm BandUp\par}
+\vfill
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\sffamily\bfseries}r l}
+Phiên bản: & 1.0 \\
+Trạng thái: & Baseline \\
+Phạm vi: & Web MVP đến Public Launch \\
+Định hướng: & Solo developer / nhóm nhỏ
+\end{tabular}
+\end{center}
+\vspace{1.2cm}
+{\sffamily\itshape BandUp - AI Writing Coach cho IELTS Writing Task 2\par}
+\vspace*{1.1cm}
+\end{titlepage}
+
+\section{Thông tin tài liệu}\label{thuxf4ng-tin-tuxe0i-liux1ec7u}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Thuộc tính}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Nội dung}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Tên tài liệu & 05\_Development\_Roadmap \\
+Phiên bản & 1.0 \\
+Mục đích & Xác định thứ tự triển khai, phụ thuộc, đầu ra và tiêu chí
+hoàn thành cho từng giai đoạn phát triển BandUp. \\
+Đối tượng sử dụng & Product Owner, developer, tester, designer và người
+vận hành hệ thống. \\
+Tài liệu đầu vào & 01\_Product\_Overview, 02\_Product\_Requirements,
+03\_UI\_UX\_Design và 04\_System\_Design. \\
+Tài liệu liên quan sau này & Testing Plan, Deployment \& Operations,
+Release Notes và Incident Runbook. \\
+\end{longtable}
+
+\textbf{Tài liệu trả lời câu hỏi:} BandUp được xây dựng theo thứ tự nào,
+mỗi giai đoạn tạo ra kết quả gì, phụ thuộc vào phần nào và khi nào được
+phép chuyển sang giai đoạn tiếp theo?
+
+\tableofcontents
+\clearpage
+
+\section{1. Mục đích và phạm
+vi}\label{mux1ee5c-ux111uxedch-vuxe0-phux1ea1m-vi}
+
+\begin{itemize}
+\item
+  Xác định các phiên bản phát hành của BandUp.
+\item
+  Quy định thứ tự triển khai các module và dependency giữa chúng.
+\item
+  Mô tả phạm vi, đầu ra và tiêu chí hoàn thành của từng phase.
+\item
+  Đưa ra các release gate trước khi Closed Beta và Public MVP.
+\item
+  Ước lượng thời gian phù hợp cho solo developer hoặc nhóm nhỏ.
+\item
+  Tích hợp test, security, staging, deployment và vận hành vào roadmap.
+\item
+  Ngăn việc mở rộng chức năng ngoài MVP làm chậm luồng cốt lõi.
+\end{itemize}
+
+Tài liệu không thay thế cho PRD, UI/UX Specification, System Design hoặc
+Test Plan chi tiết. Roadmap dùng các tài liệu đó làm đầu vào và chuyển
+chúng thành trình tự phát triển có thể thực thi.
+
+\section{2. Nguyên tắc lập
+roadmap}\label{nguyuxean-tux1eafc-lux1eadp-roadmap}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Nguyên tắc}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Áp dụng}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Core flow trước & Ưu tiên hoàn thiện Google Login \(\rightarrow\) Chọn đề \(\rightarrow\) Viết bài \(\rightarrow\)
+Autosave \(\rightarrow\) Submit \(\rightarrow\) Reserve Credit \(\rightarrow\) Hangfire \(\rightarrow\) OpenAI \(\rightarrow\) Lưu kết quả \(\rightarrow\)
+Consume Credit \(\rightarrow\) Result Page. \\
+Vertical Slice & Mỗi giai đoạn phải tạo ra một luồng hoàn chỉnh từ UI,
+API, database đến kiểm thử; không xây toàn bộ tầng kỹ thuật rồi mới
+ghép. \\
+Fake implementation trước dịch vụ thật & Dùng fake grading, fake payment
+và local storage trước khi tích hợp OpenAI, payOS và object storage
+production. \\
+Không tối ưu quá sớm & Không đưa microservice, Kubernetes, Kafka, Redis
+bắt buộc, SignalR bắt buộc hoặc mobile app vào MVP. \\
+Security và test làm song song & Authorization, ownership, idempotency,
+transaction và validation được kiểm thử ngay tại phase chứa nghiệp vụ
+tương ứng. \\
+Web hoàn chỉnh trước mobile & MVP tập trung desktop web; mobile app chỉ
+xem xét sau khi web ổn định và có nhu cầu thực tế. \\
+Đo lường trước khi mở rộng & Quyết định scale, đổi model hoặc bổ sung
+dịch vụ phải dựa trên số liệu beta và production. \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Core vertical slice\\
+Google Login\\
+\(\rightarrow\) Prompt Library\\
+\(\rightarrow\) Writing Room\\
+\(\rightarrow\) Draft \& Autosave\\
+\(\rightarrow\) Submit \& Reserve Credit\\
+\(\rightarrow\) Hangfire Worker\\
+\(\rightarrow\) OpenAI Grading\\
+\(\rightarrow\) Result Page\strut
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+\section{3. Các cấp độ phát
+hành}\label{cuxe1c-cux1ea5p-ux111ux1ed9-phuxe1t-huxe0nh}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Mốc}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Đối tượng}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Mục tiêu}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Internal Alpha & Chỉ nhóm phát triển & Kiểm tra kiến trúc, dữ liệu và
+luồng nghiệp vụ; chưa thu tiền thật; có thể reset database. \\
+Closed Beta & 20-100 người được mời & Đo chất lượng AI, chi phí, trải
+nghiệm, payment, support và tỷ lệ quay lại. \\
+Public MVP & Đăng ký công khai & Core writing, OpenAI grading, Model
+Essay, Mistake Bank, Progress, Redo, Credit, payOS, Support và Admin
+Portal. \\
+Version 1.0 & Người dùng công khai ổn định & Tối ưu chất lượng, hiệu
+năng, analytics, admin workflow và chi phí sau dữ liệu MVP. \\
+\end{longtable}
+
+\section{4. Ước lượng tổng thời
+gian}\label{ux1b0ux1edbc-lux1b0ux1ee3ng-tux1ed5ng-thux1eddi-gian}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Cường độ phát triển}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Thời gian tham khảo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Ghi chú}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Full-time, đã quen stack & 16-22 tuần & Cần hạn chế thay đổi scope và
+tái sử dụng kinh nghiệm từ dự án chatbot trước. \\
+Part-time 20-25 giờ/tuần & 24-32 tuần & Phù hợp khi vừa học vừa phát
+triển sản phẩm. \\
+Part-time 10-15 giờ/tuần & 32-44 tuần & Cần chia milestone nhỏ để duy
+trì tiến độ và chất lượng. \\
+\end{longtable}
+
+\begin{itemize}
+\item
+  Ước lượng bao gồm phát triển, test, tài liệu, deploy và sửa lỗi cơ
+  bản.
+\item
+  Không coi ngày bắt đầu phase là deadline cứng nếu release gate trước
+  đó chưa đạt.
+\item
+  Ưu tiên tiêu chí hoàn thành và chất lượng core flow hơn việc chạy theo
+  lịch.
+\end{itemize}
+
+\section{5. Tổng quan các phase}\label{tux1ed5ng-quan-cuxe1c-phase}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Phase}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Nội dung}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Thời gian}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Kết quả chính}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & Chốt tài liệu và backlog & 3-5 ngày & Tài liệu baseline, backlog,
+ADR \\
+1 & Foundation và môi trường phát triển & 1 tuần & Frontend, API,
+Worker, DB, Docker, CI \\
+2 & Google Login, user và phân quyền & 1-2 tuần & Identity,
+cookie-session, role/permission \\
+3 & Writing Content và Basic Admin & 1-2 tuần & Prompt, Model Essay,
+taxonomy, Prompt Library \\
+4 & Writing Room, Draft và Autosave & 2 tuần & Editor, timer, autosave,
+fake flow \\
+5 & Submission và Credit Foundation & 1-2 tuần & State machine, ledger,
+reservation \\
+6 & AI Grading và Hangfire & 2-3 tuần & OpenAI, worker, structured
+output, retry \\
+7 & Result Page và Model Essay & 1-2 tuần & Báo cáo chấm bài hoàn
+chỉnh \\
+8 & History, Mistake Bank, Progress và Redo & 2-3 tuần & Khác biệt sản
+phẩm dài hạn \\
+9 & Payment payOS & 1-2 tuần & VietQR, webhook, cộng credit \\
+10 & Admin Portal hoàn chỉnh & 2 tuần & User, content, finance, AI,
+security \\
+11 & Support, Notification và Refund & 1-2 tuần & Ticket, notification,
+hoàn credit \\
+12 & Security, Privacy và Data Retention & 1-2 tuần & Hardening, legal
+UX, deletion, retention \\
+13 & Testing và AI Quality Evaluation & 2-3 tuần & Automated test,
+benchmark, load, security \\
+14 & VPS Deployment và Operations & 1-2 tuần & Staging, production,
+backup, monitoring \\
+15 & Closed Beta & 2-4 tuần & 20-100 user thật, đo và sửa \\
+16 & Public MVP Launch & Liên tục & Mở public, vận hành và tối ưu \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Phase dependency\\
+0 \(\rightarrow\) 1 \(\rightarrow\) 2 \(\rightarrow\) 3 \(\rightarrow\) 4 \(\rightarrow\) 5 \(\rightarrow\) 6 \(\rightarrow\) 7\\
+\(\downarrow\)\\
+8 \(\rightarrow\) 9 \(\rightarrow\) 10 \(\rightarrow\) 11\\
+\(\downarrow\)\\
+12 \(\rightarrow\) 13 \(\rightarrow\) 14 \(\rightarrow\) 15 \(\rightarrow\) 16\strut
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+\section{6. Phase 0 - Chốt tài liệu và
+backlog}\label{phase-0---chux1ed1t-tuxe0i-liux1ec7u-vuxe0-backlog}
+
+\textbf{Thời gian dự kiến:} 3-5 ngày
+
+\textbf{Mục tiêu:} Chuyển các tài liệu sản phẩm và kỹ thuật thành
+backlog có thể triển khai.
+
+\subsection{Công việc chính}\label{cuxf4ng-viux1ec7c-chuxednh}
+
+\begin{itemize}
+\item
+  Chốt Product Overview, PRD, UI/UX Design, System Design và roadmap.
+\item
+  Xác nhận stack: React + TypeScript + Vite, ASP.NET Core, PostgreSQL,
+  Hangfire, OpenAI, payOS và VPS + Docker Compose.
+\item
+  Chốt credit policy, retry policy, data retention, account deletion và
+  role/permission.
+\item
+  Tạo Epic, Feature, User Story, Technical Task và Test Task.
+\item
+  Gắn mức ưu tiên P0, P1, P2 và dependency.
+\item
+  Tạo ADR cho các quyết định kiến trúc chính.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra}
+
+\begin{itemize}
+\item
+  Bộ tài liệu baseline.
+\item
+  Product backlog trên GitHub Project hoặc công cụ tương đương.
+\item
+  Danh sách ADR ban đầu.
+\item
+  Danh sách release gate.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh}
+
+\begin{itemize}
+\item
+  Không còn quyết định lớn chưa rõ cho core MVP.
+\item
+  Mỗi tính năng MVP có requirement và acceptance criteria.
+\item
+  Tính năng ngoài MVP được đánh dấu rõ.
+\end{itemize}
+
+\section{7. Phase 1 - Foundation và môi trường phát
+triển}\label{phase-1---foundation-vuxe0-muxf4i-trux1b0ux1eddng-phuxe1t-triux1ec3n}
+
+\textbf{Thời gian dự kiến:} 1 tuần
+
+\textbf{Mục tiêu:} Tạo nền móng dự án có thể build, chạy, test và
+deploy.
+
+\subsection{Backend}\label{backend}
+
+\begin{itemize}
+\item
+  Tạo ASP.NET Core solution theo Modular Monolith.
+\item
+  Tạo API project và Worker project.
+\item
+  Cấu hình Entity Framework Core, migrations, validation, Problem
+  Details, OpenAPI, health checks và structured logging.
+\end{itemize}
+
+\subsection{Frontend}\label{frontend}
+
+\begin{itemize}
+\item
+  Tạo React + TypeScript + Vite.
+\item
+  Cấu hình routing, API client, TanStack Query, form validation và các
+  layout public/learner/admin.
+\item
+  Tạo design tokens và component cơ bản.
+\end{itemize}
+
+\subsection{Infrastructure}\label{infrastructure}
+
+\begin{itemize}
+\item
+  Docker Compose development với PostgreSQL.
+\item
+  Environment variables và local secrets.
+\item
+  Seed data cơ bản.
+\item
+  CI build, lint và test ban đầu.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c}
+
+\begin{itemize}
+\item
+  Unit test project chạy.
+\item
+  Integration test kết nối database.
+\item
+  Smoke test health endpoint.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-1}
+
+\begin{itemize}
+\item
+  Frontend, API và Worker chạy local.
+\item
+  Database migration chạy được.
+\item
+  Docker Compose và CI hoạt động.
+\item
+  README hướng dẫn khởi động dự án.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-1}
+
+\begin{itemize}
+\item
+  Developer mới clone repository có thể chạy hệ thống theo tài liệu.
+\item
+  Health check pass.
+\item
+  Không commit secret vào source code.
+\end{itemize}
+
+\section{8. Phase 2 - Google Login, user và phân
+quyền}\label{phase-2---google-login-user-vuxe0-phuxe2n-quyux1ec1n}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Đăng nhập Google, tạo local user, duy trì
+cookie-session và kiểm soát quyền.
+
+\subsection{Identity}\label{identity}
+
+\begin{itemize}
+\item
+  Google OIDC và callback.
+\item
+  Application cookie và logout.
+\item
+  Local Users, ExternalLogins và UserSessions.
+\item
+  Account status, revoke session và persist Data Protection keys.
+\end{itemize}
+
+\subsection{Authorization}\label{authorization}
+
+\begin{itemize}
+\item
+  Roles, Permissions, UserRoles và RolePermissions.
+\item
+  SUPER\_ADMIN bootstrap.
+\item
+  Policy-based authorization cho admin endpoint.
+\item
+  Một user có nhiều role; nhiều user có thể cùng role.
+\end{itemize}
+
+\subsection{Profile và Onboarding}\label{profile-vuxe0-onboarding}
+
+\begin{itemize}
+\item
+  User Profile, current band, target band, exam date và onboarding
+  status.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-1}
+
+\begin{itemize}
+\item
+  Login lần đầu và lần sau.
+\item
+  Tài khoản bị khóa.
+\item
+  Cookie hết hạn.
+\item
+  User truy cập admin.
+\item
+  Admin nhiều role.
+\item
+  Session revoke.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-2}
+
+\begin{itemize}
+\item
+  Google Login flow hoàn chỉnh.
+\item
+  Onboarding và Dashboard cơ bản.
+\item
+  Admin bootstrap và policy authorization.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-2}
+
+\begin{itemize}
+\item
+  User chỉ truy cập dữ liệu của mình.
+\item
+  Admin endpoint kiểm tra permission tại backend.
+\item
+  Restart container không làm mất toàn bộ session do key ring đã
+  persist.
+\end{itemize}
+
+\section{9. Phase 3 - Writing Content và Basic
+Admin}\label{phase-3---writing-content-vuxe0-basic-admin}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Admin quản lý nội dung; user xem, lọc, chọn hoặc
+random đề.
+
+\subsection{Writing Prompts}\label{writing-prompts}
+
+\begin{itemize}
+\item
+  CRUD, trạng thái Draft/Published/Inactive, số đề, question type,
+  topic, difficulty và tags.
+\item
+  Search, filter, publish và unpublish.
+\end{itemize}
+
+\subsection{Model Essays}\label{model-essays}
+
+\begin{itemize}
+\item
+  Band level, review status, source type, license note và publish
+  workflow.
+\end{itemize}
+
+\subsection{Error Taxonomy}\label{error-taxonomy}
+
+\begin{itemize}
+\item
+  Code, group, criterion, tên Việt/Anh, mô tả và active/inactive.
+\end{itemize}
+
+\subsection{Learner UI}\label{learner-ui}
+
+\begin{itemize}
+\item
+  Prompt Library dạng danh sách có đánh số.
+\item
+  Prompt Detail.
+\item
+  Random prompt và filter theo topic/type/difficulty.
+\item
+  Trạng thái đã làm/chưa làm.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-3}
+
+\begin{itemize}
+\item
+  Basic Admin Content UI.
+\item
+  Tối thiểu 20-30 đề seed hoặc nội dung test.
+\item
+  Prompt Library và Prompt Detail.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-3}
+
+\begin{itemize}
+\item
+  User chỉ thấy nội dung đã publish.
+\item
+  Model Essay không hiển thị trước submit.
+\item
+  Admin có thể tạo và publish đề mà không sửa database trực tiếp.
+\end{itemize}
+
+\section{10. Phase 4 - Writing Room, Draft và
+Autosave}\label{phase-4---writing-room-draft-vuxe0-autosave}
+
+\textbf{Thời gian dự kiến:} 2 tuần
+
+\textbf{Mục tiêu:} Người dùng viết bài an toàn trên desktop web mà chưa
+cần AI thật.
+
+\subsection{Writing Room}\label{writing-room}
+
+\begin{itemize}
+\item
+  Prompt panel, editor, timer, word count, autosave state, pause/resume
+  và submit.
+\item
+  Ưu tiên desktop web; mobile app không thuộc tiêu chí nghiệm thu.
+\end{itemize}
+
+\subsection{Draft}\label{draft}
+
+\begin{itemize}
+\item
+  Tạo và tiếp tục draft.
+\item
+  Autosave debounce.
+\item
+  Optimistic concurrency/version.
+\item
+  Local recovery khi mất mạng.
+\item
+  Exit warning.
+\end{itemize}
+
+\subsection{Business Rules}\label{business-rules}
+
+\begin{itemize}
+\item
+  Dưới 200 từ: không chấm full.
+\item
+  200-249 từ: cảnh báo.
+\item
+  250-350 từ: hợp lệ.
+\item
+  Trên 350 từ: chặn submit.
+\end{itemize}
+
+\subsection{Fake Flow}\label{fake-flow}
+
+\begin{itemize}
+\item
+  Fake submission \(\rightarrow\) status \(\rightarrow\) fake result để kiểm tra UX end-to-end.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-2}
+
+\begin{itemize}
+\item
+  Autosave.
+\item
+  Reload.
+\item
+  Mất mạng.
+\item
+  Hai tab.
+\item
+  Pause/resume.
+\item
+  Giới hạn từ.
+\item
+  Ownership draft.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-4}
+
+\begin{itemize}
+\item
+  Writing Room desktop hoàn chỉnh.
+\item
+  Draft API và autosave.
+\item
+  Fake submission/status/result flow.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-4}
+
+\begin{itemize}
+\item
+  User có thể viết bài mà không mất nội dung trong điều kiện bình
+  thường.
+\item
+  Status lưu hiển thị rõ.
+\item
+  Hai tab không âm thầm ghi đè nội dung.
+\end{itemize}
+
+\section{11. Phase 5 - Submission và Credit
+Foundation}\label{phase-5---submission-vuxe0-credit-foundation}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Xây dựng state machine và credit ledger trước khi gọi
+AI thật.
+
+\subsection{Credit}\label{credit}
+
+\begin{itemize}
+\item
+  CreditWallets, CreditTransactions và CreditReservations.
+\item
+  Available, Reserved, Purchased, Promotional và Admin Adjustment.
+\item
+  Ledger là nguồn kiểm tra thay đổi số dư.
+\end{itemize}
+
+\subsection{Submission}\label{submission}
+
+\begin{itemize}
+\item
+  Submission state machine.
+\item
+  Idempotency key.
+\item
+  Word count, account, rate limit, app setting và credit validation.
+\item
+  Reserve credit cùng transaction tạo submission.
+\end{itemize}
+
+\subsection{Fake Worker}\label{fake-worker}
+
+\begin{itemize}
+\item
+  QUEUED \(\rightarrow\) PROCESSING \(\rightarrow\) COMPLETED \(\rightarrow\) Consume Credit.
+\item
+  QUEUED \(\rightarrow\) PROCESSING \(\rightarrow\) FAILED \(\rightarrow\) Release Credit.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-3}
+
+\begin{itemize}
+\item
+  Một credit submit đồng thời.
+\item
+  Double-click.
+\item
+  Không đủ credit.
+\item
+  Consume/release.
+\item
+  Rollback.
+\item
+  Assessment trùng.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-5}
+
+\begin{itemize}
+\item
+  Credit ledger và reservation.
+\item
+  Submission state machine.
+\item
+  Fake background processing.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-5}
+
+\begin{itemize}
+\item
+  Credit không mất, trừ trùng hoặc cộng sai khi double-click/retry.
+\item
+  Tạo submission và reserve credit nhất quán.
+\end{itemize}
+
+\section{12. Phase 6 - AI Grading và
+Hangfire}\label{phase-6---ai-grading-vuxe0-hangfire}
+
+\textbf{Thời gian dự kiến:} 2-3 tuần
+
+\textbf{Mục tiêu:} Tích hợp OpenAI và xử lý grading bằng background
+worker tin cậy.
+
+\subsection{Hangfire}\label{hangfire}
+
+\begin{itemize}
+\item
+  Persistent storage.
+\item
+  Queue grading.
+\item
+  Worker process riêng trong production.
+\item
+  Dashboard được bảo vệ.
+\item
+  Concurrency cấu hình được; khởi đầu khoảng 3 AI job đồng thời.
+\item
+  Job argument chỉ truyền SubmissionId.
+\item
+  Recovery job cho submission bị kẹt.
+\end{itemize}
+
+\subsection{AI Grading}\label{ai-grading}
+
+\begin{itemize}
+\item
+  IAiGradingProvider và OpenAiGradingProvider.
+\item
+  Một model chính được cấu hình.
+\item
+  Prompt versioning.
+\item
+  Structured output và JSON schema.
+\item
+  Validate score 0-9 bước 0.5, đủ bốn tiêu chí, error taxonomy, độ dài
+  và array size.
+\item
+  AiModelCalls, token usage, latency và estimated cost.
+\end{itemize}
+
+\subsection{Retry và Reliability}\label{retry-vuxe0-reliability}
+
+\begin{itemize}
+\item
+  Tối đa 3 lần gọi AI tổng cộng.
+\item
+  Retry timeout, 429 và 5xx.
+\item
+  Không retry request sai, secret sai, budget exceeded hoặc business
+  validation lỗi.
+\item
+  Corrective retry có giới hạn cho structured output sai.
+\item
+  Idempotency và unique assessment per submission.
+\item
+  Circuit breaker, budget cap và kill switch.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-4}
+
+\begin{itemize}
+\item
+  Success.
+\item
+  Timeout.
+\item
+  429.
+\item
+  5xx.
+\item
+  JSON sai.
+\item
+  Score/error code sai.
+\item
+  Worker restart.
+\item
+  Job chạy lại.
+\item
+  Circuit breaker.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-6}
+
+\begin{itemize}
+\item
+  Hangfire Worker.
+\item
+  OpenAI grading pipeline.
+\item
+  Structured assessment data.
+\item
+  AI usage/cost logs.
+\item
+  Recovery và notification flow.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-6}
+
+\begin{itemize}
+\item
+  Luồng success consume credit và complete submission trong transaction.
+\item
+  Luồng failure release credit và thông báo user.
+\item
+  Worker/API restart không tạo assessment trùng.
+\end{itemize}
+
+\section{13. Phase 7 - Result Page và Model
+Essay}\label{phase-7---result-page-vuxe0-model-essay}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Biến structured result thành báo cáo dễ hiểu, an toàn
+và có giá trị học tập.
+
+\subsection{Result Page}\label{result-page}
+
+\begin{itemize}
+\item
+  Overall band, bốn tiêu chí, summary, strengths, weaknesses và top
+  score loss reasons.
+\item
+  Sentence corrections, vocabulary suggestions, errors và next practice
+  plan.
+\item
+  Disclaimer điểm AI là ước lượng.
+\item
+  Nút báo cáo kết quả không hợp lý.
+\end{itemize}
+
+\subsection{Model Essay}\label{model-essay}
+
+\begin{itemize}
+\item
+  Chỉ hiển thị bài mẫu đã review/publish sau khi user submit.
+\item
+  Hiển thị band level, commentary và useful phrases.
+\end{itemize}
+
+\subsection{UX}\label{ux}
+
+\begin{itemize}
+\item
+  Progressive disclosure: Tổng quan \(\rightarrow\) Ưu tiên \(\rightarrow\) Tiêu chí \(\rightarrow\) Câu sửa \(\rightarrow\) Từ
+  vựng \(\rightarrow\) Lỗi \(\rightarrow\) Bài mẫu \(\rightarrow\) Kế hoạch.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-5}
+
+\begin{itemize}
+\item
+  Result đầy đủ/rỗng một phần.
+\item
+  Dữ liệu dài.
+\item
+  XSS payload.
+\item
+  Ownership result.
+\item
+  Model Essay chưa review.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-7}
+
+\begin{itemize}
+\item
+  Result Page hoàn chỉnh.
+\item
+  Model Essay section.
+\item
+  Grading dispute entry point.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-7}
+
+\begin{itemize}
+\item
+  User hiểu điểm, lý do mất điểm, lỗi ưu tiên và bước luyện tiếp.
+\item
+  Không render raw HTML/script từ AI.
+\end{itemize}
+
+\section{14. Phase 8 - History, Mistake Bank, Progress và
+Redo}\label{phase-8---history-mistake-bank-progress-vuxe0-redo}
+
+\textbf{Thời gian dự kiến:} 2-3 tuần
+
+\textbf{Mục tiêu:} Tạo khác biệt dài hạn của BandUp so với công cụ chỉ
+chấm từng bài.
+
+\subsection{Writing History}\label{writing-history}
+
+\begin{itemize}
+\item
+  Danh sách, filter, pagination, status, draft/failed/completed và mở
+  lại result.
+\end{itemize}
+
+\subsection{Mistake Bank}\label{mistake-bank}
+
+\begin{itemize}
+\item
+  Error occurrence, group, code, severity, frequency, last seen, câu
+  gốc/câu sửa và bài liên quan.
+\end{itemize}
+
+\subsection{Progress}\label{progress}
+
+\begin{itemize}
+\item
+  Overall trend, bốn tiêu chí, error groups, word count, time spent và
+  practice frequency.
+\item
+  Insight dựa trên dữ liệu hiện có; không tạo kết luận giả khi dữ liệu
+  ít.
+\end{itemize}
+
+\subsection{Redo Challenge}\label{redo-challenge}
+
+\begin{itemize}
+\item
+  Eligibility, recommendation, original/redo submission, comparison và
+  lịch sử.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-6}
+
+\begin{itemize}
+\item
+  Empty state.
+\item
+  Một bài/nhiều bài.
+\item
+  Taxonomy thay đổi.
+\item
+  Ownership.
+\item
+  Redo comparison.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-8}
+
+\begin{itemize}
+\item
+  Writing History.
+\item
+  Mistake Bank.
+\item
+  Progress Dashboard.
+\item
+  Redo Recommendations và Comparison.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-8}
+
+\begin{itemize}
+\item
+  BandUp thể hiện được tiến bộ và lỗi lặp lại theo thời gian.
+\item
+  Redo tạo submission mới, không ghi đè bài cũ.
+\end{itemize}
+
+\section{15. Phase 9 - Payment payOS}\label{phase-9---payment-payos}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Cho phép user mua gói credit bằng VietQR và cộng
+credit tự động đúng một lần.
+
+\subsection{Payment}\label{payment}
+
+\begin{itemize}
+\item
+  Credit Packages và Payment Orders.
+\item
+  Gọi payOS để tạo checkout URL và QR.
+\item
+  Payment status và history.
+\item
+  Webhook signature verification.
+\item
+  Webhook event log và idempotency.
+\item
+  Credit grant sau webhook hợp lệ.
+\item
+  Expired/cancelled order và reconciliation job.
+\end{itemize}
+
+\subsection{UX}\label{ux-1}
+
+\begin{itemize}
+\item
+  Hiển thị số tiền, mã đơn, QR, thời gian hết hạn và hướng dẫn quét bằng
+  ứng dụng ngân hàng hỗ trợ VietQR.
+\item
+  Nút ``Tôi đã thanh toán nhưng chưa nhận credit'' tạo ticket có payment
+  reference.
+\end{itemize}
+
+\subsection{Kiểm thử bắt
+buộc}\label{kiux1ec3m-thux1eed-bux1eaft-buux1ed9c-7}
+
+\begin{itemize}
+\item
+  Success.
+\item
+  Webhook trùng/giả/chậm.
+\item
+  Return trước webhook.
+\item
+  Expired.
+\item
+  Reconciliation.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-9}
+
+\begin{itemize}
+\item
+  Credit package page.
+\item
+  payOS checkout.
+\item
+  Webhook handler.
+\item
+  Payment history.
+\item
+  Reconciliation job.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-9}
+
+\begin{itemize}
+\item
+  Một payment chỉ cộng credit đúng một lần.
+\item
+  Không cộng credit từ frontend, return URL hoặc ảnh chụp.
+\end{itemize}
+
+\section{16. Phase 10 - Admin Portal hoàn
+chỉnh}\label{phase-10---admin-portal-houxe0n-chux1ec9nh}
+
+\textbf{Thời gian dự kiến:} 2 tuần
+
+\textbf{Mục tiêu:} Vận hành BandUp mà không cần chỉnh database hoặc VPS
+thủ công cho nghiệp vụ thường ngày.
+
+\subsection{Dashboard}\label{dashboard}
+
+\begin{itemize}
+\item
+  User, active user, submission, AI success, queue, AI cost, payment,
+  revenue, ticket và security alert.
+\end{itemize}
+
+\subsection{User Management}\label{user-management}
+
+\begin{itemize}
+\item
+  Danh sách, trạng thái, role, activity, submission frequency, credit,
+  payment, suspend/reactivate và revoke session.
+\end{itemize}
+
+\subsection{Content \& Finance}\label{content-finance}
+
+\begin{itemize}
+\item
+  Prompt, Model Essay, taxonomy, payment orders, revenue, refund và
+  credit adjustment.
+\end{itemize}
+
+\subsection{AI, Security \& Settings}\label{ai-security-settings}
+
+\begin{itemize}
+\item
+  AI calls, token, cost, retry, failures, queue, security events,
+  blocked clients, audit logs.
+\item
+  Maintenance mode, AI grading, free grading, daily budget, worker
+  concurrency và credit cost.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-10}
+
+\begin{itemize}
+\item
+  Admin Dashboard và các module quản lý.
+\item
+  Permission-based menu và endpoint.
+\item
+  Admin audit logs.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-10}
+
+\begin{itemize}
+\item
+  Thao tác vận hành thường ngày không cần truy cập database trực tiếp.
+\item
+  Admin action nhạy cảm có reason, confirmation và audit.
+\end{itemize}
+
+\section{17. Phase 11 - Support, Notification và
+Refund}\label{phase-11---support-notification-vuxe0-refund}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Tạo trải nghiệm hỗ trợ rõ ràng khi grading, payment
+hoặc credit có vấn đề.
+
+\subsection{Support}\label{support}
+
+\begin{itemize}
+\item
+  Ticket categories, submission/payment/credit reference, messages,
+  attachments, assigned admin, status và resolution.
+\end{itemize}
+
+\subsection{Notification}\label{notification}
+
+\begin{itemize}
+\item
+  Grading completed/failed, credit released, payment completed, support
+  reply và system announcement.
+\end{itemize}
+
+\subsection{Refund/Resolution}\label{refundresolution}
+
+\begin{itemize}
+\item
+  Re-grade miễn phí, refund credit hoặc reject.
+\item
+  Admin reason và audit.
+\item
+  Không chỉnh balance trực tiếp.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-11}
+
+\begin{itemize}
+\item
+  Support Center.
+\item
+  Admin ticket queue.
+\item
+  In-app notifications.
+\item
+  Credit resolution workflow.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-11}
+
+\begin{itemize}
+\item
+  User báo lỗi ngay trong ứng dụng và không phải mô tả lại toàn bộ
+  resource.
+\item
+  Credit adjustment luôn qua ledger.
+\end{itemize}
+
+\section{18. Phase 12 - Security, Privacy và Data
+Retention}\label{phase-12---security-privacy-vuxe0-data-retention}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Hardening hệ thống trước khi dùng user thật và tiền
+thật.
+
+\subsection{Security}\label{security}
+
+\begin{itemize}
+\item
+  CSRF, XSS, CSP, ownership/IDOR, rate limit, secret protection, cookie
+  configuration, session revoke và permission review.
+\item
+  Attachment validation, webhook verification, audit, kill switch và
+  maintenance mode.
+\end{itemize}
+
+\subsection{Privacy \& Legal UX}\label{privacy-legal-ux}
+
+\begin{itemize}
+\item
+  Privacy notice, AI processing notice, Terms of Service, Payment
+  Policy, Refund Policy và Data Retention Policy.
+\end{itemize}
+
+\subsection{Retention \& Deletion}\label{retention-deletion}
+
+\begin{itemize}
+\item
+  Cleanup draft, log, raw AI response, support attachment và analytics
+  theo retention.
+\item
+  Account deletion: re-authentication, revoke session, xóa dữ liệu học
+  tập/object, anonymize payment record và deletion ledger.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-12}
+
+\begin{itemize}
+\item
+  Security checklist.
+\item
+  Legal/help pages.
+\item
+  Retention jobs.
+\item
+  Account deletion workflow.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-12}
+
+\begin{itemize}
+\item
+  Không còn lỗ hổng nghiêm trọng đã biết trước beta.
+\item
+  Delete account xóa dữ liệu có thể xóa và giữ tối thiểu dữ liệu bắt
+  buộc.
+\end{itemize}
+
+\section{19. Phase 13 - Testing và AI Quality
+Evaluation}\label{phase-13---testing-vuxe0-ai-quality-evaluation}
+
+\textbf{Thời gian dự kiến:} 2-3 tuần
+
+\textbf{Mục tiêu:} Đánh giá độ đúng nghiệp vụ, chất lượng AI, bảo mật và
+khả năng chịu tải trước deploy public.
+
+\subsection{Automated Testing}\label{automated-testing}
+
+\begin{itemize}
+\item
+  Unit test: credit, state machine, retry decision, permission, word
+  count và redo eligibility.
+\item
+  Integration test: database, submission+credit, grading transaction,
+  payOS webhook, account deletion và Hangfire storage.
+\item
+  End-to-end: login, onboarding, writing, submit, result, payment,
+  support và admin.
+\end{itemize}
+
+\subsection{AI Benchmark}\label{ai-benchmark}
+
+\begin{itemize}
+\item
+  Bộ bài nhiều band, loại đề, lỗi, độ dài, bài lạc đề và prompt
+  injection.
+\item
+  Đo sai lệch band, stability, JSON success, feedback relevance,
+  cost/essay, latency và taxonomy accuracy.
+\end{itemize}
+
+\subsection{Performance \& Security}\label{performance-security}
+
+\begin{itemize}
+\item
+  Mô phỏng user truy cập, autosave, submit, queue và worker concurrency.
+\item
+  Test IDOR, CSRF, XSS, webhook replay, credit race, admin escalation và
+  malicious attachment.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-13}
+
+\begin{itemize}
+\item
+  Test suite.
+\item
+  AI benchmark report.
+\item
+  Performance report.
+\item
+  Security findings và remediation.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-13}
+
+\begin{itemize}
+\item
+  Không còn bug P0.
+\item
+  Bug P1 có quyết định rõ.
+\item
+  Credit/payment/backup restore test đạt.
+\item
+  AI benchmark đạt ngưỡng phát hành.
+\end{itemize}
+
+\section{20. Phase 14 - VPS Deployment và
+Operations}\label{phase-14---vps-deployment-vuxe0-operations}
+
+\textbf{Thời gian dự kiến:} 1-2 tuần
+
+\textbf{Mục tiêu:} Đưa BandUp lên staging và production theo quy trình
+có thể vận hành và khôi phục.
+
+\subsection{Infrastructure}\label{infrastructure-1}
+
+\begin{itemize}
+\item
+  VPS, domain, DNS, HTTPS, Caddy, Docker Compose production, API,
+  Worker, PostgreSQL và persistent volumes.
+\item
+  Environment variables, secrets và ASP.NET Data Protection keys.
+\end{itemize}
+
+\subsection{Operations}\label{operations}
+
+\begin{itemize}
+\item
+  Database migrations, offsite backup, restore test, log rotation,
+  health checks, monitoring, alerts và firewall.
+\item
+  Bảo vệ Hangfire Dashboard.
+\end{itemize}
+
+\subsection{CI/CD}\label{cicd}
+
+\begin{itemize}
+\item
+  Build \(\rightarrow\) Test \(\rightarrow\) Lint \(\rightarrow\) Docker Build \(\rightarrow\) Deploy Staging \(\rightarrow\) Smoke Test \(\rightarrow\)
+  Manual Approval \(\rightarrow\) Deploy Production.
+\item
+  Rollback và release notes.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-14}
+
+\begin{itemize}
+\item
+  Development, Staging và Production.
+\item
+  Deployment pipeline.
+\item
+  Backup/restore.
+\item
+  Monitoring và runbook cơ bản.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-14}
+
+\begin{itemize}
+\item
+  Staging gần production.
+\item
+  Deploy lặp lại được.
+\item
+  Có rollback, backup, alert và incident checklist.
+\end{itemize}
+
+\section{21. Phase 15 - Closed Beta}\label{phase-15---closed-beta}
+
+\textbf{Thời gian dự kiến:} 2-4 tuần
+
+\textbf{Mục tiêu:} Kiểm chứng sản phẩm với 20-100 người dùng thật trong
+phạm vi kiểm soát.
+
+\subsection{Đo lường}\label{ux111o-lux1b0ux1eddng}
+
+\begin{itemize}
+\item
+  Login/onboarding success, writing start, submit, grading time/failure,
+  cost per essay, result view và retention.
+\item
+  Credit purchase, payment completion, support ticket, refund và bug
+  rate.
+\end{itemize}
+
+\subsection{Vận hành Beta}\label{vux1eadn-huxe0nh-beta}
+
+\begin{itemize}
+\item
+  Mời user \(\rightarrow\) theo dõi \(\rightarrow\) phỏng vấn/feedback\newline \(\rightarrow\) sửa bug \(\rightarrow\) điều chỉnh
+  UI/prompt/giá/concurrency.
+\item
+  Không tăng số user khi core flow của nhóm nhỏ chưa ổn.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-15}
+
+\begin{itemize}
+\item
+  Beta dashboard và báo cáo tuần.
+\item
+  Danh sách bug/feedback.
+\item
+  Các thay đổi prompt, UX và vận hành có kiểm soát.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-15}
+
+\begin{itemize}
+\item
+  Core flow ổn định.
+\item
+  Không lỗi mất credit.
+\item
+  Payment/support vận hành được.
+\item
+  AI cost trong giới hạn.
+\item
+  Không có sự cố bảo mật nghiêm trọng.
+\end{itemize}
+
+\section{22. Phase 16 - Public MVP
+Launch}\label{phase-16---public-mvp-launch}
+
+\textbf{Thời gian dự kiến:} Liên tục sau beta
+
+\textbf{Mục tiêu:} Mở đăng ký công khai và vận hành sản phẩm có kiểm
+soát.
+
+\subsection{Launch Checklist}\label{launch-checklist}
+
+\begin{itemize}
+\item
+  Terms/Privacy/Payment/Refund public.
+\item
+  Payment production và support email.
+\item
+  Backup/restore và monitoring.
+\item
+  Kill switch, daily budget cap và admin ticket workflow.
+\item
+  Content đủ dùng và AI benchmark được lưu.
+\end{itemize}
+
+\subsection{Sau Launch}\label{sau-launch}
+
+\begin{itemize}
+\item
+  Ưu tiên ổn định, sửa bug, theo dõi cost, conversion và retention.
+\item
+  Không thêm hàng loạt tính năng ngay sau launch.
+\end{itemize}
+
+\subsection{Đầu ra}\label{ux111ux1ea7u-ra-16}
+
+\begin{itemize}
+\item
+  Public MVP.
+\item
+  Operational dashboards.
+\item
+  Release notes và support workflow.
+\end{itemize}
+
+\subsection{Tiêu chí hoàn
+thành}\label{tiuxeau-chuxed-houxe0n-thuxe0nh-16}
+
+\begin{itemize}
+\item
+  Beta metrics đạt ngưỡng nội bộ.
+\item
+  Không bug P0.
+\item
+  Core flow, cost và support được kiểm soát.
+\end{itemize}
+
+\section{23. Ưu tiên P0, P1 và P2}\label{ux1b0u-tiuxean-p0-p1-vuxe0-p2}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Mức}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Ý nghĩa}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Nội dung}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P0 & Không có thì không thể phát hành & Google Login; authorization;
+Prompt Library; Writing Room; autosave; submission; credit; Hangfire;
+OpenAI grading; Result; payOS; basic admin; support; security; backup;
+monitoring. \\
+P1 & Tạo khác biệt và tăng khả năng vận hành & Mistake Bank; Progress;
+Redo; Model Essay; AI cost dashboard; payment reconciliation; in-app
+notification; user activity. \\
+P2 & Sau khi MVP ổn định & Email nâng cao; Phrase Bank; Flashcards;
+Teacher Classroom; Community; Mobile App; Gamification; multi-provider
+AI; advanced analytics. \\
+\end{longtable}
+
+\section{24. Cấu trúc backlog}\label{cux1ea5u-truxfac-backlog}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Epic\\
+\(\rightarrow\) Feature\\
+\(\rightarrow\) User Story\\
+\(\rightarrow\) Technical Task\\
+\(\rightarrow\) Test Task\strut
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Thuộc tính backlog}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Yêu cầu}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Requirement link & Liên kết FR/NFR/BR/AC từ PRD. \\
+UI link & Liên kết screen ID hoặc user flow từ UI/UX Design. \\
+System module & Module chịu trách nhiệm trong System Design. \\
+Priority & P0/P1/P2. \\
+Dependency & Task hoặc gate phải hoàn thành trước. \\
+Acceptance & Điều kiện nghiệm thu rõ ràng. \\
+Test & Unit, integration, E2E hoặc manual test cần thiết. \\
+\end{longtable}
+
+\section{25. Definition of Ready}\label{definition-of-ready}
+
+\begin{itemize}
+\item
+  Mục tiêu và giá trị của task rõ ràng.
+\item
+  Requirement và Acceptance Criteria đã xác định.
+\item
+  UI hoặc hành vi đã thống nhất.
+\item
+  Dependency đã hoàn thành hoặc có kế hoạch.
+\item
+  Không còn quyết định kỹ thuật lớn chưa chốt.
+\item
+  Có dữ liệu mẫu và cách kiểm thử.
+\item
+  Đã xác định permission, validation, error state và analytics event khi
+  phù hợp.
+\end{itemize}
+
+\section{26. Definition of Done}\label{definition-of-done}
+
+\begin{itemize}
+\item
+  Code đã viết và build thành công.
+\item
+  Migration và seed cần thiết đã có.
+\item
+  Validation, ownership và authorization đã có.
+\item
+  Unit/integration/E2E test phù hợp đã pass.
+\item
+  Loading, empty, error, success và permission state đã có.
+\item
+  Log/audit cần thiết đã có và không lộ dữ liệu nhạy cảm.
+\item
+  Tài liệu và API contract được cập nhật.
+\item
+  Chạy trên staging và đạt Acceptance Criteria.
+\item
+  Không còn bug P0/P1 chưa có quyết định.
+\end{itemize}
+
+\section{27. Chiến lược Git và
+CI}\label{chiux1ebfn-lux1b0ux1ee3c-git-vuxe0-ci}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+main\\
+feature/\textless feature-name\textgreater{}\\
+fix/\textless bug-name\textgreater{}\\
+\strut \\
+Issue \(\rightarrow\) Branch \(\rightarrow\) Code \(\rightarrow\) Local Test \(\rightarrow\) Commit \(\rightarrow\) Push\\
+\(\rightarrow\) Pull Request \(\rightarrow\) CI \(\rightarrow\) Self Review \(\rightarrow\) Merge\strut
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+\begin{itemize}
+\item
+  Không commit trực tiếp tính năng lớn vào main.
+\item
+  Ngay cả solo developer vẫn dùng Pull Request để tự review và chạy CI.
+\item
+  Commit nhỏ, có ý nghĩa và không chứa secret.
+\item
+  Mỗi release có tag và release notes.
+\end{itemize}
+
+\section{28. Release Gates}\label{release-gates}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Gate}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Điều kiện chính}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Gate 1 - Foundation Ready & Build, Docker, CI, database migration và
+health check hoạt động. \\
+Gate 2 - Core Writing Ready & Login, prompt, draft, autosave, fake
+submit và fake result hoạt động. \\
+Gate 3 - AI Ready & Hangfire, OpenAI, structured output, credit, retry
+và result thật ổn định. \\
+Gate 4 - Commerce Ready & Credit package, payOS, webhook idempotency,
+payment reconciliation và support. \\
+Gate 5 - Beta Ready & Admin, security, backup, monitoring, AI benchmark
+và legal pages. \\
+Gate 6 - Public Ready & Beta metrics đạt, không bug P0, cost và support
+được kiểm soát. \\
+\end{longtable}
+
+\textbf{Nguyên tắc: Nếu chưa qua Gate, không mở rộng sang mốc phát hành
+tiếp theo.}
+
+\section{29. Quản lý rủi ro trong
+roadmap}\label{quux1ea3n-luxfd-rux1ee7i-ro-trong-roadmap}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Rủi ro}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Phase xử lý}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Biện pháp chính}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+AI chấm không ổn định & 6, 13, Beta & Structured output, benchmark,
+prompt version, retry có giới hạn. \\
+Chi phí AI cao & 6, 10, Beta & Token/cost log, budget cap, concurrency
+và tối ưu prompt. \\
+Credit bị trừ sai & 5, 6 & Ledger, reservation, transaction,
+idempotency. \\
+Webhook payOS trùng/giả & 9 & Signature verification và webhook
+idempotency. \\
+User mất bài & 4 & Autosave, version, local recovery và exit warning. \\
+Hangfire job chạy trùng & 6 & Idempotent job, unique assessment và state
+checks. \\
+Admin vượt quyền & 2, 10, 12 & Policy, permission, audit và least
+privilege. \\
+VPS hỏng & 14 & Offsite backup, restore test, runbook và monitoring. \\
+User không quay lại & 15 & Measure retention, interviews và cải thiện
+core value. \\
+Scope phình to & Toàn bộ & P0/P1/P2, release gate và change control. \\
+Mobile làm chậm web & Toàn bộ & Mobile app nằm ngoài MVP. \\
+\end{longtable}
+
+\section{30. Công việc không thuộc
+MVP}\label{cuxf4ng-viux1ec7c-khuxf4ng-thuux1ed9c-mvp}
+
+\begin{itemize}
+\item
+  Mobile app native.
+\item
+  Teacher Classroom.
+\item
+  Mạng xã hội/cộng đồng đầy đủ.
+\item
+  Speaking AI, Listening và Reading.
+\item
+  Multi-provider AI routing.
+\item
+  Microservice, Kubernetes và Kafka.
+\item
+  Recommendation model nâng cao.
+\item
+  Gamification phức tạp.
+\item
+  AI avatar và marketplace.
+\end{itemize}
+
+\section{31. Roadmap sau MVP}\label{roadmap-sau-mvp}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Phiên bản}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Phạm vi đề xuất}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Version 1.1 & Cải thiện prompt, Result Page, Progress insight, email
+notification, content library và payment UX. \\
+Version 1.2 & Personal Phrase Bank, Flashcards, practice recommendation
+và export report. \\
+Version 2.0 & Teacher Classroom, assignment, teacher feedback, class
+analytics và teacher billing. \\
+Version 3.0 & Mobile app, push notification, mobile writing support,
+offline content và mobile payment UX. \\
+\end{longtable}
+
+\subsection{Điều kiện bắt đầu Mobile
+App}\label{ux111iux1ec1u-kiux1ec7n-bux1eaft-ux111ux1ea7u-mobile-app}
+
+\begin{itemize}
+\item
+  Web đã ổn định và core flow đạt chất lượng.
+\item
+  Có lượng user thường xuyên dùng điện thoại.
+\item
+  Dữ liệu cho thấy app tạo thêm giá trị rõ ràng.
+\item
+  API, authorization và data contracts đủ ổn định.
+\item
+  Có nguồn lực bảo trì riêng cho Android/iOS hoặc cross-platform.
+\end{itemize}
+
+\section{32. Kết luận và nguyên tắc điều hành
+roadmap}\label{kux1ebft-luux1eadn-vuxe0-nguyuxean-tux1eafc-ux111iux1ec1u-huxe0nh-roadmap}
+
+\textbf{Thứ tự chiến lược:} Foundation \(\rightarrow\) Identity \(\rightarrow\) Content \(\rightarrow\) Writing \(\rightarrow\)
+Credit \(\rightarrow\) AI \(\rightarrow\) Result \(\rightarrow\) Learning Loop \(\rightarrow\) Payment \(\rightarrow\) Admin/Support \(\rightarrow\)
+Security/Test \(\rightarrow\) Deployment \(\rightarrow\) Beta \(\rightarrow\) Public Launch.
+
+\begin{itemize}
+\item
+  Core writing flow phải hoạt động trước khi mở rộng dashboard và growth
+  feature.
+\item
+  Credit, payment và AI phải được thiết kế idempotent, có transaction và
+  audit.
+\item
+  Không bỏ qua security/test đến cuối dự án.
+\item
+  Không phát triển mobile app trước khi web hoàn chỉnh.
+\item
+  Mọi thay đổi scope lớn phải cập nhật PRD, System Design và roadmap.
+\item
+  Beta là giai đoạn đo lường và học hỏi; không phải lý do để phát hành
+  một core flow chưa dùng được.
+\item
+  Sau Public MVP, ưu tiên ổn định và tối ưu trước khi thêm tính năng
+  mới.
+\end{itemize}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mục tiêu cuối cùng của roadmap\\
+User viết bài\\
+\(\rightarrow\) Nhận feedback có cấu trúc\\
+\(\rightarrow\) Hiểu và lưu lỗi\\
+\(\rightarrow\) Theo dõi tiến bộ\\
+\(\rightarrow\) Luyện lại đúng trọng tâm\\
+\(\rightarrow\) Sử dụng sản phẩm an toàn, ổn định và có chi phí kiểm soát\strut
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+\textbf{KẾT THÚC TÀI LIỆU}
+
+\end{document}
