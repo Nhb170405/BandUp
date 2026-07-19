@@ -2,7 +2,7 @@
 
 - **Milestone ID:** M01
 - **Release:** Internal Alpha
-- **Status:** GATE PENDING
+- **Status:** COMPLETED
 - **Estimate:** 40–56h
 
 ## Purpose
@@ -214,7 +214,7 @@ Xem từng task và Docs/09_Open_Decisions.md. Không vượt gate khi còn BLOC
 - [x] M01-BE-001, M01-FE-001, M01-DB-001 hoàn tất.
 - [x] M01-OPS-001, M01-TEST-001, M01-OPS-002, M01-DOC-001 hoàn tất.
 - [x] Build, tests, migration, health, Compose và local CI-equivalent verification pass.
-- [ ] Acceptance Gate đạt; local gate pass nhưng hosted GitHub Actions chưa chạy vì thay đổi chưa được push/PR.
+- [x] Acceptance Gate đạt; local gate và hosted GitHub Actions run `29682097093` đều pass.
 
 ## Decision Log
 
@@ -223,6 +223,7 @@ Xem từng task và Docs/09_Open_Decisions.md. Không vượt gate khi còn BLOC
 - 18/07/2026 — ACCEPTED ADR-0001: .NET 8 feature-band roll-forward, five-assembly structure; Worker hoãn M06.
 - 18/07/2026 — ACCEPTED: pin đồng bộ EF Core/dotnet-ef và Npgsql 8.0.11; Vite 8.1.5, Vitest 4.1.10, TypeScript 5.9.3.
 - 18/07/2026 — ACCEPTED: Compose Web mặc định 5174, override bằng `WEB_PORT`; không can thiệp dịch vụ khác dùng 5173.
+- 19/07/2026 — ACCEPTED: GitHub Actions run `29682097093` pass toàn bộ job `verify`; M01 đạt Acceptance Gate và handoff sang M02.
 
 ## Surprises and Discoveries
 
@@ -240,9 +241,9 @@ Xem từng task và Docs/09_Open_Decisions.md. Không vượt gate khi còn BLOC
 
 ## Completion Summary
 
-Implementation completed 18/07/2026; milestone chưa đóng do hosted CI chưa chạy. Bảy M01 tasks DONE. Backend Release build đạt 0 warning/0 error; architecture tests 2/2 và API integration test 1/1 pass. Empty Foundation migration được tạo và áp dụng vào PostgreSQL 16. Frontend lint, component test 1/1, production build, npm audit 0 vulnerability và NuGet vulnerability scan sạch. Compose builds Web/API; PostgreSQL và API healthy; Web/live/ready smoke đều HTTP 200.
+Completed 19/07/2026. Bảy M01 tasks DONE. Backend Release build đạt 0 warning/0 error; architecture tests 2/2 và API integration test 1/1 pass. Empty Foundation migration được tạo và áp dụng vào PostgreSQL 16. Frontend lint, component test 1/1, production build, npm audit 0 vulnerability và NuGet vulnerability scan sạch. Compose builds Web/API; PostgreSQL và API healthy; Web/live/ready smoke đều HTTP 200.
 
-Hosted GitHub Actions cần commit/push/PR nên chưa chạy trong local session; workflow mirror các command local đã pass. Acceptance Gate chỉ được đóng sau một hosted run thành công.
+Hosted GitHub Actions [run 29682097093](https://github.com/Nhb170405/BandUp/actions/runs/29682097093) hoàn tất thành công ngày 19/07/2026, bao gồm restore, Release build, 3 backend tests, migration, frontend lint/test/build và Compose validation. Acceptance Gate đạt.
 
 ## Handoff to Next Milestone
 

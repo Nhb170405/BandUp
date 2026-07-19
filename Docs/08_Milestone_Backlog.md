@@ -1,6 +1,6 @@
 # BandUp — Milestone Backlog Registry
 
-Baseline: 18/07/2026. Registry tổng hợp; task detail và DoD nằm trong file milestone được link.
+Baseline: 18/07/2026. Cập nhật trạng thái: 19/07/2026 sau M01 hosted CI [run 29682097093](https://github.com/Nhb170405/BandUp/actions/runs/29682097093). Registry tổng hợp; task detail và DoD nằm trong file milestone được link.
 
 ## Status Model
 
