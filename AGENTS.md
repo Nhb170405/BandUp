@@ -51,8 +51,11 @@ File `.tex` là nguồn nội dung; PDF chỉ dùng đối chiếu bố cục. K
 
 ## Build và test hiện tại
 
-- TODO M01: repository chưa có application project hay lệnh build/test hợp lệ.
-- Không tự bịa lệnh. Cập nhật mục này khi M01 tạo solution/package scripts/Compose và CI đầu tiên.
+- Backend: `dotnet tool restore`, `dotnet restore BandUp.sln`, `dotnet build BandUp.sln -c Release --no-restore`, `dotnet test BandUp.sln -c Release --no-build`.
+- Frontend từ `apps/web`: `npm.cmd ci`, `npm.cmd run lint`, `npm.cmd test`, `npm.cmd run build`, `npm.cmd audit --audit-level=high`.
+- Compose: `docker compose --env-file .env -f deploy/compose.yml up -d --build`; Web mặc định 5174, API 8080.
+- Migration: đặt `ConnectionStrings__Database`, chạy `dotnet ef database update --project src/BandUp.Infrastructure --startup-project src/BandUp.Api --configuration Release`.
+- PowerShell có thể chặn `npm.ps1`; dùng `npm.cmd`, không đổi execution policy toàn hệ thống.
 
 ## Definition of Ready
 
@@ -71,3 +74,77 @@ File `.tex` là nguồn nội dung; PDF chỉ dùng đối chiếu bố cục. K
 ## Khi không chắc chắn
 
 Nêu rõ: nguồn và section đã đọc, điều chưa chắc, các lựa chọn, khuyến nghị, tác động và milestone bị block. Không âm thầm chọn phương án ảnh hưởng kiến trúc, schema tài chính, privacy/retention, security hoặc external contract. Quyết định mới phải được ghi vào `Docs/09_Open_Decisions.md` và ADR khi thích hợp.
+
+## Learning-First Implementation Policy
+
+This repository follows a guided manual implementation workflow.
+
+The human developer must implement core application logic manually.
+
+Codex must not fully implement core business logic unless explicitly
+authorized for a named task.
+
+### Human-owned code
+
+The human developer owns:
+
+- authentication and account-linking decisions;
+- authorization and ownership rules;
+- domain/business rules;
+- submission state transitions;
+- credit ledger, reserve, consume and release logic;
+- payment webhook verification and idempotency;
+- AI grading orchestration and output validation;
+- transaction boundaries;
+- concurrency handling;
+- account deletion and retention logic;
+- security-sensitive behavior;
+- core unit and integration test logic.
+
+For human-owned code, Codex may:
+
+- explain the flow;
+- provide pseudocode;
+- create interfaces and empty method skeletons;
+- create TODO markers;
+- create test names and empty test skeletons;
+- review human-written code;
+- run build/tests;
+- report defects and suggest changes.
+
+Codex must not:
+
+- fill TODO business logic automatically;
+- replace human-written core logic wholesale;
+- mark a task complete because scaffolding compiles;
+- silently change an architectural or business decision;
+- implement a later milestone.
+
+### Codex-owned code
+
+Codex may fully implement:
+
+- repository scaffolding;
+- formatting and linting configuration;
+- basic CI configuration;
+- repetitive presentation-only components;
+- documentation automation;
+- non-sensitive boilerplate explicitly marked CODEX_IMPLEMENTED.
+
+### Required stop points
+
+For every USER_IMPLEMENTED task, Codex must stop after scaffolding and say:
+
+`Scaffolding complete. Ready for manual implementation.`
+
+After manual implementation, Codex performs review before changing logic.
+
+### Completion rule
+
+A milestone is not complete until:
+
+- human-owned logic is manually implemented;
+- review findings are resolved;
+- required tests pass;
+- acceptance gates pass;
+- milestone documentation is updated.

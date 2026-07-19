@@ -1,10 +1,10 @@
 # BandUp — Project Status
 
-- **Current Milestone:** M00 — Planning Baseline
-- **Last Completed Milestone:** None
+- **Current Milestone:** M02 — Google Login and Authorization
+- **Last Completed Milestone:** M01 — Repository and Foundation
 - **Current Release Target:** Internal Alpha
-- **Current Branch:** docs/detailed-milestones
-- **Application Code Status:** Not started
+- **Current Branch:** main
+- **Application Code Status:** M01 foundation complete and verified; no business features implemented
 
 ## Current Blockers
 
@@ -25,9 +25,9 @@ OD-001 (M07), OD-002 (M07), OD-003 (M11), OD-005 (M14), OD-009 (M02), OD-010 (M0
 
 ## Next Recommended Action
 
-Review và approve toàn bộ milestone trước khi bắt đầu M01.
+Product Owner quyết định OD-009 và OD-010 trước khi bắt đầu task M02 đầu tiên; không triển khai Identity hoặc Google Login khi hai blocker còn mở.
 
 ## Status Update Rule
 
-Chỉ cập nhật Current/Last Completed sau khi Acceptance Gate được Product Owner/reviewer chấp nhận. M00 chưa completed; không task application nào được bắt đầu.
+Chỉ cập nhật Current/Last Completed sau Acceptance Gate. M01 đạt gate bằng local verification và hosted GitHub Actions [run 29682097093](https://github.com/Nhb170405/BandUp/actions/runs/29682097093).
 

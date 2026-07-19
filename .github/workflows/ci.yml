@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: bandup_ci
+          POSTGRES_USER: bandup
+          POSTGRES_PASSWORD: bandup_ci_only
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U bandup -d bandup_ci"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      ConnectionStrings__Database: Host=localhost;Port=5432;Database=bandup_ci;Username=bandup;Password=bandup_ci_only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 8.0.302 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: apps/web/package-lock.json }
+      - run: dotnet tool restore
+      - run: dotnet restore BandUp.sln
+      - run: dotnet build BandUp.sln -c Release --no-restore
+      - run: dotnet test BandUp.sln -c Release --no-build
+      - run: dotnet ef database update --project src/BandUp.Infrastructure --startup-project src/BandUp.Api --configuration Release --no-build
+      - run: npm ci
+        working-directory: apps/web
+      - run: npm run lint
+        working-directory: apps/web
+      - run: npm test
+        working-directory: apps/web
+      - run: npm run build
+        working-directory: apps/web
+      - run: docker compose --env-file .env.example -f deploy/compose.yml config
