@@ -2,7 +2,7 @@
 
 - **Milestone ID:** M00
 - **Release:** Internal Alpha
-- **Status:** PLANNED
+- **Status:** COMPLETED
 - **Estimate:** 16–24h
 
 ## Purpose
@@ -162,12 +162,12 @@ Xem từng task và Docs/09_Open_Decisions.md. Không vượt gate khi còn BLOC
 
 ## Progress Checklist
 
-- [ ] Entry Criteria verified.
-- [ ] Required BLOCKER closed hoặc có owner-approved disposition.
-- [ ] Tất cả task đạt Definition of Done.
-- [ ] Verification và traceability pass.
-- [ ] Acceptance Gate được Product Owner/reviewer chấp nhận.
-- [ ] Project Status và handoff được cập nhật.
+- [x] Entry Criteria verified.
+- [x] Open Decisions được phân loại và có milestone disposition.
+- [x] Tất cả M00 task đạt Definition of Done.
+- [x] Verification và traceability pass.
+- [x] Yêu cầu trực tiếp thực hiện M01 xác nhận owner approval cho M00.
+- [x] Project Status và handoff được cập nhật trong M01.
 
 ## Decision Log
 
@@ -179,7 +179,7 @@ None recorded — discovery ảnh hưởng architecture, money, privacy/security
 
 ## Completion Summary
 
-Not completed. Chỉ điền evidence, commit/PR, verified requirements, residual risks và accepted deviations sau gate.
+Completed. Bộ master plan, 21 milestone files, backlog registry, open decisions và project status đã merge vào `main`; owner request triển khai M01 là acceptance evidence.
 
 ## Handoff to Next Milestone
 

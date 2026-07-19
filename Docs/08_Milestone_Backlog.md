@@ -10,17 +10,17 @@ PLANNED → READY → IN PROGRESS → BLOCKED hoặc DONE. M00 giữ PLANNED cho
 
 | Task ID | Title | Milestone | Direct Dependency | Estimate | Status | Traceability |
 |---|---|---|---|---:|---|---|
-| M00-DOC-001 | Inventory nguồn | [M00](milestones/M00_Planning_Baseline.md) | None | 4h | PLANNED | all IDs |
-| M00-DOC-002 | Analysis A–L | [M00](milestones/M00_Planning_Baseline.md) | 001 | 6h | PLANNED | all |
-| M00-DOC-003 | Milestone/trace | [M00](milestones/M00_Planning_Baseline.md) | 001–002 | 6h | PLANNED | all P0/P1/P2 |
-| M00-DOC-004 | Backlog/agent rules | [M00](milestones/M00_Planning_Baseline.md) | 003 | 4h | PLANNED | Roadmap §24–28 |
-| M01-BE-001 | Minimal solution | [M01](milestones/M01_Repository_Foundation.md) | M00 | 8h | PLANNED | NFR-MAINT-*, FR-COMPAT-* |
-| M01-FE-001 | Web shell | [M01](milestones/M01_Repository_Foundation.md) | M00 | 8h | PLANNED | NFR-UX/COMPAT-*, UI §Component/Global states |
-| M01-DB-001 | PostgreSQL bootstrap | [M01](milestones/M01_Repository_Foundation.md) | BE-001 | 6h | PLANNED | NFR-REL/MAINT-* |
-| M01-OPS-001 | Local Compose | [M01](milestones/M01_Repository_Foundation.md) | BE/FE/DB | 8h | PLANNED | System §Topology; Ops §Environments |
-| M01-TEST-001 | Test harness | [M01](milestones/M01_Repository_Foundation.md) | BE/FE/DB | 6h | PLANNED | Roadmap Gate 1 |
-| M01-OPS-002 | CI baseline | [M01](milestones/M01_Repository_Foundation.md) | TEST-001 | 6h | PLANNED | NFR-MAINT-* |
-| M01-DOC-001 | Commands/ADR | [M01](milestones/M01_Repository_Foundation.md) | all M01 | 4h | PLANNED | System §Decisions |
+| M00-DOC-001 | Inventory nguồn | [M00](milestones/M00_Planning_Baseline.md) | None | 4h | DONE | all IDs |
+| M00-DOC-002 | Analysis A–L | [M00](milestones/M00_Planning_Baseline.md) | 001 | 6h | DONE | all |
+| M00-DOC-003 | Milestone/trace | [M00](milestones/M00_Planning_Baseline.md) | 001–002 | 6h | DONE | all P0/P1/P2 |
+| M00-DOC-004 | Backlog/agent rules | [M00](milestones/M00_Planning_Baseline.md) | 003 | 4h | DONE | Roadmap §24–28 |
+| M01-BE-001 | Minimal solution | [M01](milestones/M01_Repository_Foundation.md) | M00 | 8h | DONE | NFR-MAINT-*, FR-COMPAT-* |
+| M01-FE-001 | Web shell | [M01](milestones/M01_Repository_Foundation.md) | M00 | 8h | DONE | NFR-UX/COMPAT-*, UI §Component/Global states |
+| M01-DB-001 | PostgreSQL bootstrap | [M01](milestones/M01_Repository_Foundation.md) | BE-001 | 6h | DONE | NFR-REL/MAINT-* |
+| M01-OPS-001 | Local Compose | [M01](milestones/M01_Repository_Foundation.md) | BE/FE/DB | 8h | DONE | System §Topology; Ops §Environments |
+| M01-TEST-001 | Test harness | [M01](milestones/M01_Repository_Foundation.md) | BE/FE/DB | 6h | DONE | Roadmap Gate 1 |
+| M01-OPS-002 | CI baseline | [M01](milestones/M01_Repository_Foundation.md) | TEST-001 | 6h | DONE | NFR-MAINT-* |
+| M01-DOC-001 | Commands/ADR | [M01](milestones/M01_Repository_Foundation.md) | all M01 | 4h | DONE | System §Decisions |
 | M02-DB-001 | Identity schema | [M02](milestones/M02_Google_Login_Authorization.md) | M01-DB | 8h | PLANNED | FR-AUTH-003/005/009..015 |
 | M02-BE-001 | OIDC login | [M02](milestones/M02_Google_Login_Authorization.md) | DB-001, OD-009 | 8h | PLANNED | FR-AUTH-001..005/016; AC-AUTH-001/002; US-002; AUTH-01/02 |
 | M02-SEC-001 | Cookie/session/CSRF | [M02](milestones/M02_Google_Login_Authorization.md) | BE-001, OD-010 | 8h | PLANNED | FR-AUTH-006..008; NFR-SEC-* |
